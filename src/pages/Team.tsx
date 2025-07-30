@@ -14,13 +14,11 @@ const Team = () => {
       email: "alex@robotics.edu",
     },
     {
-      name: "Maya Patel",
-      role: "Software Lead",
+      name: "Shay Kalisher",
+      role: "Captain",
       image: "https://images.unsplash.com/photo-1494790108755-2616b612b647?w=300&h=300&fit=crop&crop=face",
       bio: "Computer Science major specializing in machine learning and computer vision.",
-      github: "https://github.com",
-      linkedin: "https://linkedin.com",
-      email: "maya@robotics.edu",
+      
     },
     {
       name: "Jordan Williams",

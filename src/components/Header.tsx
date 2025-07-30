@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Bot } from "lucide-react";
+import logoPng from '@/assets/PrimaryLogo.png';
+
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -26,11 +28,11 @@ const Header = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3 group">
-            <div className="bg-gradient-primary p-2 rounded-lg group-hover:shadow-glow transition-all duration-300">
-              <Bot className="h-8 w-8 text-primary-foreground" />
+            <div>
+              <img src={logoPng} alt="Primo4586 logo" className="h-20 w-15" />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-foreground">RoboTeam</h1>
+              <h1 className="text-xl font-bold text-foreground">Primo4586</h1>
               <p className="text-xs text-muted-foreground">Innovation in Motion</p>
             </div>
           </Link>

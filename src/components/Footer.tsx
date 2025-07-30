@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Bot, Github, Instagram, Twitter, Youtube, Mail, MapPin, Phone } from "lucide-react";
+import logoPng from '@/assets/PrimaryLogo.png';
+
 
 const Footer = () => {
   const socialLinks = [
@@ -30,11 +32,11 @@ const Footer = () => {
           {/* Brand Section */}
           <div className="space-y-4">
             <div className="flex items-center space-x-3">
-              <div className="bg-gradient-primary p-2 rounded-lg">
-                <Bot className="h-6 w-6 text-primary-foreground" />
-              </div>
               <div>
-                <h3 className="text-lg font-bold text-foreground">RoboTeam</h3>
+              <img src={logoPng} alt="Primo4586 logo" className="h-14 w-21" />
+            </div>
+              <div>
+                <h3 className="text-lg font-bold text-foreground">Primo4586</h3>
                 <p className="text-sm text-muted-foreground">Innovation in Motion</p>
               </div>
             </div>
@@ -121,7 +123,7 @@ const Footer = () => {
         {/* Bottom Section */}
         <div className="border-t border-border mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-muted-foreground text-sm">
-            © 2024 RoboTeam. All rights reserved.
+            © 2024 Primo4586. All rights reserved.
           </p>
           <p className="text-muted-foreground text-sm mt-2 md:mt-0">
             Built with passion for robotics and innovation.

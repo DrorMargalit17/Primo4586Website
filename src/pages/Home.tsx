@@ -34,7 +34,7 @@ const Home = () => {
         <div className="container mx-auto text-center">
           <div className="animate-slide-in">
             <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent">
-              Welcome to RoboTeam
+              Welcome to Primo4586
             </h1>
             <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
               Where innovation meets engineering. We design, build, and program

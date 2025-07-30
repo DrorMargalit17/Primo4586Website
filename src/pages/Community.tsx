@@ -52,7 +52,7 @@ const Community = () => {
     {
       date: "June 5, 2024",
       title: "Summer Camp Kickoff",
-      location: "RoboTeam Lab",
+      location: "Primo4586 Lab",
       description: "Launch of our annual summer robotics camp for middle school students.",
     },
   ];

@@ -40,7 +40,7 @@ const About = () => {
       <section className="bg-gradient-hero py-20 px-6">
         <div className="container mx-auto text-center">
           <h1 className="text-5xl md:text-6xl font-bold mb-6 text-foreground">
-            About <span className="bg-gradient-primary bg-clip-text text-transparent">RoboTeam</span>
+            About <span className="bg-gradient-primary bg-clip-text text-transparent">Primo4586</span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             We are a passionate group of students, mentors, and innovators
@@ -81,7 +81,7 @@ const About = () => {
             </h2>
             <div className="space-y-4 text-muted-foreground leading-relaxed">
               <p>
-                Founded in 2018, RoboTeam began as a small group of students
+                Founded in 2018, Primo4586 began as a small group of students
                 passionate about robotics and engineering. What started in a
                 garage has grown into a competitive team with state-of-the-art
                 facilities and cutting-edge technology.
