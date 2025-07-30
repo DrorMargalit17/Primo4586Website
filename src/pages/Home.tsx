@@ -1,9 +1,16 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import { Link } from "react-router-dom";
 import { ArrowRight, Zap, Users, Trophy, Rocket } from "lucide-react";
+import Autoplay from "embla-carousel-autoplay";
+import team1 from "@/assets/team-1.jpg";
+import team2 from "@/assets/team-2.jpg";
+import team3 from "@/assets/team-3.jpg";
 
 const Home = () => {
+  const teamImages = [team1, team2, team3];
+  
   const features = [
     {
       icon: Zap,
@@ -31,24 +38,54 @@ const Home = () => {
     <div className="space-y-20">
       {/* Hero Section */}
       <section className="bg-gradient-hero py-20 px-6">
-        <div className="container mx-auto text-center">
-          <div className="animate-slide-in">
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent">
-              Welcome to Primo4586
-            </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-              Where innovation meets engineering. We design, build, and program
-              autonomous robots that push the boundaries of what's possible.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button variant="hero" size="lg" asChild>
-                <Link to="/about">
-                  Discover Our Mission <ArrowRight className="ml-2" />
-                </Link>
-              </Button>
-              <Button variant="outline" size="lg" asChild>
-                <Link to="/robot">See Our Robot</Link>
-              </Button>
+        <div className="container mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Left Content */}
+            <div className="text-center lg:text-left animate-slide-in">
+              <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent">
+                Welcome to Primo4586
+              </h1>
+              <p className="text-xl md:text-2xl text-muted-foreground mb-8">
+                Where innovation meets engineering. We design, build, and program
+                autonomous robots that push the boundaries of what's possible.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                <Button variant="hero" size="lg" asChild>
+                  <Link to="/about">
+                    Discover Our Mission <ArrowRight className="ml-2" />
+                  </Link>
+                </Button>
+                <Button variant="outline" size="lg" asChild>
+                  <Link to="/robot">See Our Robot</Link>
+                </Button>
+              </div>
+            </div>
+
+            {/* Right Carousel */}
+            <div className="animate-fade-in">
+              <Carousel
+                plugins={[
+                  Autoplay({
+                    delay: 4000,
+                  }),
+                ]}
+                className="w-full max-w-lg mx-auto"
+              >
+                <CarouselContent>
+                  {teamImages.map((image, index) => (
+                    <CarouselItem key={index}>
+                      <div className="relative overflow-hidden rounded-xl">
+                        <img
+                          src={image}
+                          alt={`Team ${index + 1}`}
+                          className="w-full h-80 md:h-96 object-cover transition-transform duration-500 hover:scale-105"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
+                      </div>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+              </Carousel>
             </div>
           </div>
         </div>
