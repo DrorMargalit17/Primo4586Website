@@ -64,11 +64,10 @@ const Home = () => {
             {/* Right Carousel */}
             <div className="animate-fade-in">
               <Carousel
-                plugins={[
-                  Autoplay({
-                    delay: 4000,
-                  }),
-                ]}
+                opts={{
+                  align: "start",
+                  loop: true,
+                }}
                 className="w-full max-w-lg mx-auto"
               >
                 <CarouselContent>
