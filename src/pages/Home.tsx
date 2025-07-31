@@ -111,7 +111,7 @@ const Home = () => {
           </p>
         </div>
 
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <div className="relative">
             <Card className="p-8 md:p-12 bg-gradient-surface border-border text-center h-[400px] flex flex-col justify-center">
               <div className="bg-gradient-primary p-4 rounded-xl w-fit mx-auto mb-6 shadow-accent-glow transition-all duration-500">
