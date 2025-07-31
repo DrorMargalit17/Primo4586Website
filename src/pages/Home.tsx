@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import { Link } from "react-router-dom";
-import { ArrowRight, Zap, Users, Trophy, Rocket, Lightbulb } from "lucide-react";
+import { ArrowRight, Handshake, Briefcase, HeartHandshake, Target, Sparkles } from "lucide-react";
 import { useEffect, useState } from "react";
 import team1 from "@/assets/team-1.jpg";
 import team2 from "@/assets/team-2.jpg";
@@ -14,29 +14,29 @@ const Home = () => {
   
   const features = [
     {
-      icon: Zap,
-      title: "Innovation",
-      description: "Cutting-edge robotics technology and creative solutions",
+      icon: Handshake,
+      title: "Family Spirit",
+      description: "'Primo is a family' is more than just a slogan — it’s a core value that guides everything we do. It's reflected in our Shabbat gatherings, team bonding activities, and the overall atmosphere.Our family extends across generations — from founding mentors and alumni who continue to support us, to current members, parents, and the surrounding community. The deep-rooted connections we've built within our team, school, and city are what make us a true family. We also nurture the future through programs like FLL and school involvement, constantly expanding our family circle.",
     },
     {
-      icon: Users,
-      title: "Teamwork",
-      description: "Collaborative environment fostering growth and learning",
+      icon: Briefcase,
+      title: "Professionalism",
+      description: "Professionalism is a key value in Primo, essential to achieving excellence as a team. Our committed mentors pass on real-world knowledge, and veteran members train others during the season and in summer courses. This culture of learning ensures that every member gains strong technical skills and can work independently, which directly contributes to our success.",
     },
     {
-      icon: Trophy,
-      title: "Excellence",
-      description: "Competitive achievements and technical expertise",
+      icon: HeartHandshake,
+      title: "Gracious Professionalism",
+      description: "We emphasize kindness and respect, both within the team and beyond. Internally, every member is treated with equal respect, regardless of role or experience. Externally, we maintain friendly and professional relationships with other teams in our city and beyond, always offering support and collaboration.",
     },
     {
-      icon: Rocket,
-      title: "Future",
-      description: "Preparing students for tomorrow's technological challenges",
+      icon: Target,
+      title: "Sense of Mission",
+      description: "Our team operates with a strong sense of purpose — to contribute to our community, our country, and the global FIRST community. We proudly represent STEAM values and believe deeply in the impact of our work.",
     },
     {
-      icon: Lightbulb,
-      title: "Learning",
-      description: "Continuous education and skill development in STEM fields",
+      icon: Sparkles,
+      title: "Initiative",
+      description: "Primo empowers its members to take initiative, encouraging them to develop and lead their own projects. This fosters creativity, responsibility, and leadership, giving members the chance to influence the team's growth and face real challenges head-on.",
     },
   ];
 

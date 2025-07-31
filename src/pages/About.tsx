@@ -81,21 +81,15 @@ const About = () => {
             </h2>
             <div className="space-y-4 text-muted-foreground leading-relaxed">
               <p>
-                Founded in 2018, Primo4586 began as a small group of students
-                passionate about robotics and engineering. What started in a
-                garage has grown into a competitive team with state-of-the-art
-                facilities and cutting-edge technology.
+                Primo 4586 was founded 11 years ago, in 2012, at the initiative of 4 motivated FLL “Boeing 727” alumni who wanted to establish an 
+                FRC at the school based on the values ​​they received from FLL, such as family 
+                spirit, spreading the worlds of science and technology in the community, and more!
               </p>
               <p>
-                Our journey has been marked by continuous learning, innovation,
-                and community engagement. From our first competition to our
-                recent achievements, we've consistently pushed the boundaries
-                of what's possible in robotics.
-              </p>
-              <p>
-                Today, we're proud to be a diverse team of engineers, programmers,
-                designers, and strategists working together to create robots that
-                not only compete but also contribute to solving real-world problems.
+                And after struggling for a long time to open an FRC group,
+                in their year of 12th grade they managed to open the group 
+                while meeting the condition that the group would be 50% girls
+                ,a condition that still guides us today, and the group had 70% female captains
               </p>
             </div>
           </div>

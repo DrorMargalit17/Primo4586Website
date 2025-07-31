@@ -38,7 +38,7 @@ const Contact = () => {
     {
       icon: MapPin,
       title: "Visit Us",
-      details: ["123 Innovation Drive", "Tech Valley, CA 94000", "Building B, Room 201"],
+      details: ["Modi'in", "ironiB High School", "WorkShop Building"],
     },
     {
       icon: Phone,
@@ -187,7 +187,16 @@ const Contact = () => {
                 Find Our Lab
               </h3>
               <p className="text-muted-foreground">
-                Interactive map coming soon
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3387.3176625667547!2d35.01662162607991!3d31.897965328392658!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1502cdc07d7f13d1%3A0x9065ae1e6d545b1a!2sPrimo%204586!5e0!3m2!1siw!2sil!4v1753943033667!5m2!1siw!2sil"
+                  width="1200"
+                  height="400"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Primo 4586 Location"
+                />
               </p>
             </div>
           </div>
