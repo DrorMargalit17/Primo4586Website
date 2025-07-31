@@ -137,8 +137,9 @@ const Sponsors = () => {
                         className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                        <div className="bg-white/90 backdrop-blur-sm rounded-lg p-4 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                          <ExternalLink className="h-6 w-6 text-gray-800" />
+                        <div className="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                          <p className="text-gray-800 font-semibold text-lg">{sponsor.name}</p>
+                          <p className="text-gray-600 text-sm">{sponsor.partnership}</p>
                         </div>
                       </div>
                     </div>
