@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Cpu, Zap, Eye, Cog } from "lucide-react";
 
+
 const Robot = () => {
   const specifications = [
     { label: "Height", value: "36 inches" },
@@ -51,11 +52,11 @@ const Robot = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <h1 className="text-5xl md:text-6xl font-bold mb-6 text-foreground">
-                Meet <span className="bg-gradient-primary bg-clip-text text-transparent">APEX-R1</span>
+                Meet <span className="bg-gradient-primary bg-clip-text text-transparent">SPARROW</span>
               </h1>
               <p className="text-xl text-muted-foreground mb-8">
                 Our latest autonomous robot designed for precision, efficiency, and
-                adaptability. APEX-R1 represents the culmination of years of
+                adaptability. Sparrow represents the culmination of years of
                 engineering excellence and innovation.
               </p>
               <div className="flex flex-wrap gap-2 mb-8">
@@ -67,8 +68,8 @@ const Robot = () => {
             <div className="relative">
               <div className="bg-gradient-surface rounded-2xl p-8 border border-border">
                 <img
-                  src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&h=400&fit=crop"
-                  alt="APEX-R1 Robot"
+                  src="src/assets/team-4.jpg"
+                  alt="Sparrow Robot"
                   className="w-full h-auto rounded-lg shadow-elevated"
                 />
                 <div className="absolute inset-0 bg-gradient-primary opacity-10 rounded-2xl"></div>
@@ -109,7 +110,7 @@ const Robot = () => {
             Key Features
           </h2>
           <p className="text-xl text-muted-foreground">
-            Advanced capabilities that set APEX-R1 apart
+            Advanced capabilities that set Sparrow apart
           </p>
         </div>
 
@@ -142,7 +143,7 @@ const Robot = () => {
             Robot Gallery
           </h2>
           <p className="text-xl text-muted-foreground">
-            See APEX-R1 in action and development
+            See Sparrow in action and development
           </p>
         </div>
 
