@@ -3,8 +3,12 @@ import { Button } from "@/components/ui/button";
 import { Calendar, Users } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import primoFly1 from "@/assets/community/primoFly/primoFly1.jpg";
-import primoFly4 from "@/assets/community/primoFly/primoFly4.jpg";
-import primoFly5 from "@/assets/community/primoFly/primoFly5.jpg";
+import primoFly2 from "@/assets/community/primoFly/primoFly4.jpg";
+import primoFly3 from "@/assets/community/primoFly/primoFly5.jpg";
+import primoSenior1 from "@/assets/community/primoSenior/primoSenior_1.png";
+import primoSenior2 from "@/assets/community/primoSenior/primoSenior_2.png";
+import primoSenior3 from "@/assets/community/primoSenior/primoSenior_3.png";
+
 
 
 const AutoCarousel = ({ images }) => {
@@ -78,16 +82,13 @@ const communityActivities = [
     title: "Science With PrimoFly",
     description:
       "An engaging day of hands-on robotics learning for local high school students. Participants built simple robots and learned the basics of electronics and programming.",
-    images: [primoFly1, primoFly4, primoFly5],
+    images: [primoFly1, primoFly2, primoFly3],
   },
   {
-    title: "STEM Fair at City Hall",
+    title: "Primo Senior",
     description:
       "We hosted interactive booths and showcased our robots at the city's STEM fair, drawing hundreds of visitors and spreading STEM awareness.",
-    images: [
-      "src/assets/community/primoFly1.jpg",
-      "src/assets/community/primoFly4.jpg",
-    ],
+      images: [primoSenior1, primoSenior2, primoSenior3],
   },
   {
     title: "Charity Robot Show",
