@@ -3,12 +3,13 @@ import { Card } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import { Link } from "react-router-dom";
 import { ArrowRight, Zap, Users, Trophy, Rocket } from "lucide-react";
-import Autoplay from "embla-carousel-autoplay";
+import { useEffect, useState } from "react";
 import team1 from "@/assets/team-1.jpg";
 import team2 from "@/assets/team-2.jpg";
 import team3 from "@/assets/team-3.jpg";
 
 const Home = () => {
+  const [currentValueIndex, setCurrentValueIndex] = useState(0);
   const teamImages = [team1, team2, team3];
   
   const features = [
@@ -33,6 +34,15 @@ const Home = () => {
       description: "Preparing students for tomorrow's technological challenges",
     },
   ];
+
+  // Auto-cycle through core values every 10 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentValueIndex((prev) => (prev + 1) % features.length);
+    }, 10000);
+
+    return () => clearInterval(interval);
+  }, [features.length]);
 
   return (
     <div className="space-y-20">
@@ -90,32 +100,50 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Features Section */}
+      {/* Core Values Carousel Section */}
       <section className="container mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-foreground mb-4">
-            What Drives Us
+            Our Core Values
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Our core values shape everything we do, from design to competition
+            The principles that guide everything we do, from design to competition
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {features.map((feature, index) => (
-            <Card
-              key={index}
-              className="p-6 bg-gradient-surface border-border hover:border-primary/50 transition-all duration-300 hover:shadow-glow group"
-            >
-              <div className="bg-gradient-primary p-3 rounded-lg w-fit mb-4 group-hover:shadow-accent-glow transition-all duration-300">
-                <feature.icon className="h-6 w-6 text-primary-foreground" />
+        <div className="max-w-4xl mx-auto">
+          <div className="relative">
+            <Card className="p-8 md:p-12 bg-gradient-surface border-border text-center min-h-[300px] flex flex-col justify-center">
+              <div className="bg-gradient-primary p-4 rounded-xl w-fit mx-auto mb-6 shadow-accent-glow transition-all duration-500">
+                {(() => {
+                  const IconComponent = features[currentValueIndex].icon;
+                  return <IconComponent className="h-8 w-8 text-primary-foreground" />;
+                })()}
               </div>
-              <h3 className="text-xl font-semibold text-foreground mb-2">
-                {feature.title}
+              <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-4 transition-all duration-500">
+                {features[currentValueIndex].title}
               </h3>
-              <p className="text-muted-foreground">{feature.description}</p>
+              <p className="text-lg text-muted-foreground leading-relaxed transition-all duration-500">
+                {features[currentValueIndex].description}
+              </p>
             </Card>
-          ))}
+            
+            {/* Navigation dots */}
+            <div className="flex justify-center mt-6 space-x-2">
+              {features.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentValueIndex(index)}
+                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                    index === currentValueIndex
+                      ? 'bg-primary shadow-glow'
+                      : 'bg-muted hover:bg-muted-foreground/50'
+                  }`}
+                  aria-label={`Go to value ${index + 1}`}
+                />
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
