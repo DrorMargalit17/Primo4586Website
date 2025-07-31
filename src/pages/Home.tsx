@@ -4,10 +4,10 @@ import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carouse
 import { Link } from "react-router-dom";
 import { ArrowRight, Handshake, Briefcase, HeartHandshake, Target, Sparkles } from "lucide-react";
 import { useEffect, useState } from "react";
-import team1 from "@/assets/team-1.jpg";
-import team2 from "@/assets/team-2.jpg";
-import team3 from "@/assets/team-3.jpg";
-import team4 from "@/assets/team-4.jpg";
+import team1 from "@/assets/HomePage/team-1.jpg";
+import team2 from "@/assets/HomePage/team-2.jpg";
+import team3 from "@/assets/HomePage/team-3.jpg";
+import team4 from "@/assets/HomePage/team-4.jpg";
 
 const Home = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);

@@ -2,9 +2,9 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Calendar, Users } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
-import primoFly1 from "@/assets/community/primoFly1.jpg";
-import primoFly4 from "@/assets/community/primoFly4.jpg";
-import primoFly5 from "@/assets/community/primoFly5.jpg";
+import primoFly1 from "@/assets/community/primoFly/primoFly1.jpg";
+import primoFly4 from "@/assets/community/primoFly/primoFly4.jpg";
+import primoFly5 from "@/assets/community/primoFly/primoFly5.jpg";
 
 
 const AutoCarousel = ({ images }) => {
@@ -75,7 +75,7 @@ const AutoCarousel = ({ images }) => {
 
 const communityActivities = [
   {
-    title: "Robotics Workshop at Ironi B",
+    title: "Science With PrimoFly",
     description:
       "An engaging day of hands-on robotics learning for local high school students. Participants built simple robots and learned the basics of electronics and programming.",
     images: [primoFly1, primoFly4, primoFly5],
@@ -102,9 +102,9 @@ const communityActivities = [
 
 const events = [
   {
-    date: "March 15, 2024",
-    title: "Spring STEM Fair",
-    location: "Metro Community Center",
+    date: "August 10, 2025",
+    title: "Spark Day",
+    location: "Modi'in Israel",
     description: "Interactive robotics demonstrations and hands-on activities for families.",
   },
   {

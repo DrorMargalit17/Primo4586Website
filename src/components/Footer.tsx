@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Bot, Github, Instagram, Twitter, Youtube, Mail, MapPin, Phone, Facebook } from "lucide-react";
+import { Bot, Github, Instagram, Twitter, Youtube, Mail, MapPin, Phone, Facebook} from "lucide-react";
 import logoPng from '@/assets/PrimaryLogo.png';
 
 
