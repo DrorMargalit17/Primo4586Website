@@ -1,143 +1,191 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Calendar, Users, Award, Heart } from "lucide-react";
+import { Calendar, Users } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
 
-const Community = () => {
-  const initiatives = [
-    {
-      icon: Users,
-      title: "STEM Workshops",
-      description: "Free robotics workshops for local schools and community centers, inspiring the next generation of engineers.",
-      impact: "500+ students reached",
-    },
-    {
-      icon: Award,
-      title: "Mentorship Program",
-      description: "One-on-one mentoring for aspiring robotics enthusiasts, providing guidance and technical support.",
-      impact: "50+ mentees guided",
-    },
-    {
-      icon: Heart,
-      title: "Charity Competitions",
-      description: "Organizing fundraising events where robots perform demonstrations to support local charities.",
-      impact: "$25,000+ raised",
-    },
-    {
-      icon: Calendar,
-      title: "Open Days",
-      description: "Monthly public demonstrations where community members can see our robots in action and ask questions.",
-      impact: "200+ visitors monthly",
-    },
-  ];
+const AutoCarousel = ({ images }) => {
+  const [currentImg, setCurrentImg] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
+  const containerRef = useRef(null);
+  const intervalId = useRef(null);
 
-  const events = [
-    {
-      date: "March 15, 2024",
-      title: "Spring STEM Fair",
-      location: "Metro Community Center",
-      description: "Interactive robotics demonstrations and hands-on activities for families.",
-    },
-    {
-      date: "April 22, 2024",
-      title: "Earth Day Tech Challenge",
-      location: "City Park",
-      description: "Showcasing sustainable robotics solutions for environmental challenges.",
-    },
-    {
-      date: "May 10, 2024",
-      title: "Regional Competition",
-      location: "University Campus",
-      description: "Public competition where community members can cheer on our team.",
-    },
-    {
-      date: "June 5, 2024",
-      title: "Summer Camp Kickoff",
-      location: "Primo4586 Lab",
-      description: "Launch of our annual summer robotics camp for middle school students.",
-    },
-  ];
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.intersectionRatio >= 0.7);
+      },
+      {
+        threshold: [0, 0.7, 1],
+      }
+    );
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => {
+      if (containerRef.current) {
+        observer.unobserve(containerRef.current);
+      }
+      observer.disconnect();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isVisible) {
+      intervalId.current = setInterval(() => {
+        setCurrentImg((prev) => (prev === images.length - 1 ? 0 : prev + 1));
+      }, 3000);
+    } else {
+      if (intervalId.current) {
+        clearInterval(intervalId.current);
+        intervalId.current = null;
+      }
+    }
+
+    return () => {
+      if (intervalId.current) {
+        clearInterval(intervalId.current);
+      }
+    };
+  }, [isVisible, images.length]);
 
   return (
-    <div className="space-y-20">
+    <div
+      ref={containerRef}
+      className="relative overflow-hidden rounded-lg w-full h-full max-h-[300px]"
+    >
+      {images.map((src, idx) => (
+        <img
+          key={idx}
+          src={src}
+          alt={`Image ${idx + 1}`}
+          className={`w-full h-full object-cover rounded-lg absolute top-0 left-0 transition-opacity duration-1000 ${
+            idx === currentImg ? "opacity-100 z-10" : "opacity-0 z-0"
+          }`}
+          style={{ maxHeight: 300 }}
+        />
+      ))}
+    </div>
+  );
+};
+
+const communityActivities = [
+  {
+    title: "Robotics Workshop at Ironi B",
+    description:
+      "An engaging day of hands-on robotics learning for local high school students. Participants built simple robots and learned the basics of electronics and programming.",
+    images: [
+      "src/assets/community/primoFly1.jpg",
+      "src/assets/community/primoFly4.jpg",
+      "src/assets/community/primoFly5.jpg",
+    ],
+  },
+  {
+    title: "STEM Fair at City Hall",
+    description:
+      "We hosted interactive booths and showcased our robots at the city's STEM fair, drawing hundreds of visitors and spreading STEM awareness.",
+    images: [
+      "src/assets/community/primoFly1.jpg",
+      "src/assets/community/primoFly4.jpg",
+    ],
+  },
+  {
+    title: "Charity Robot Show",
+    description:
+      "A public robotics demonstration to raise funds for local children's hospitals. Our robots performed fun tasks and entertained the audience.",
+    images: [
+      "/images/community/charity1.jpg",
+      "/images/community/charity2.jpg",
+    ],
+  },
+];
+
+const events = [
+  {
+    date: "March 15, 2024",
+    title: "Spring STEM Fair",
+    location: "Metro Community Center",
+    description: "Interactive robotics demonstrations and hands-on activities for families.",
+  },
+  {
+    date: "April 22, 2024",
+    title: "Earth Day Tech Challenge",
+    location: "City Park",
+    description: "Showcasing sustainable robotics solutions for environmental challenges.",
+  },
+  {
+    date: "May 10, 2024",
+    title: "Regional Competition",
+    location: "University Campus",
+    description: "Public competition where community members can cheer on our team.",
+  },
+  {
+    date: "June 5, 2024",
+    title: "Summer Camp Kickoff",
+    location: "Primo4586 Lab",
+    description: "Launch of our annual summer robotics camp for middle school students.",
+  },
+];
+
+const Community = () => {
+  return (
+    <div className="space-y-20 px-6 container mx-auto">
       {/* Hero Section */}
-      <section className="bg-gradient-hero py-20 px-6">
-        <div className="container mx-auto text-center">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 text-foreground">
-            Community <span className="bg-gradient-primary bg-clip-text text-transparent">Impact</span>
-          </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            We believe in giving back to our community by sharing our passion for
-            robotics and inspiring others to explore STEM fields through hands-on
-            learning and mentorship.
-          </p>
-        </div>
+      <section className="bg-gradient-hero py-20 text-center">
+        <h1 className="text-5xl md:text-6xl font-bold mb-6 text-foreground">
+          Community <span className="bg-gradient-primary bg-clip-text text-transparent">Impact</span>
+        </h1>
+        <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          We believe in giving back to our community by sharing our passion for
+          robotics and inspiring others to explore STEM fields through hands-on
+          learning and mentorship.
+        </p>
       </section>
 
-      {/* Initiatives */}
-      <section className="container mx-auto px-6">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-foreground mb-4">
-            Our Initiatives
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Meaningful programs that make a difference in our community
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {initiatives.map((initiative, index) => (
-            <Card
-              key={index}
-              className="p-8 bg-gradient-surface border-border hover:border-primary/50 transition-all duration-300 hover:shadow-glow"
-            >
-              <div className="flex items-start space-x-6">
-                <div className="bg-gradient-primary p-4 rounded-lg">
-                  <initiative.icon className="h-8 w-8 text-primary-foreground" />
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-2xl font-bold text-foreground mb-3">
-                    {initiative.title}
-                  </h3>
-                  <p className="text-muted-foreground mb-4 leading-relaxed">
-                    {initiative.description}
-                  </p>
-                  <div className="bg-accent/20 text-accent-foreground px-4 py-2 rounded-lg inline-block font-medium">
-                    {initiative.impact}
-                  </div>
-                </div>
-              </div>
-            </Card>
-          ))}
-        </div>
+      {/* New Section: Title and Description for Community Activities */}
+      <section className="text-center max-w-3xl mx-auto space-y-4">
+        <h2 className="text-4xl font-bold text-foreground">Community Activities</h2>
+        <p className="text-lg text-muted-foreground">
+          Discover the various ways we engage with and inspire our community through hands-on robotics events and workshops.
+        </p>
       </section>
+
+      {/* Community Activities (wrapped in its own scrollable container) */}
+      <div className="max-h-screen overflow-y-auto space-y-8">
+        {communityActivities.map((activity, index) => (
+          <Card
+            key={index}
+            className="grid grid-cols-2 gap-6 items-center p-6 relative overflow-hidden"
+            style={{ height: 320 }}
+          >
+            <div className="flex flex-col justify-center h-full">
+              <h3 className="text-3xl font-bold text-foreground mb-4">{activity.title}</h3>
+              <p className="text-muted-foreground text-lg leading-relaxed">{activity.description}</p>
+            </div>
+            <AutoCarousel images={activity.images} />
+          </Card>
+        ))}
+      </div>
 
       {/* Upcoming Events */}
-      <section className="container mx-auto px-6">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-foreground mb-4">
-            Upcoming Events
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Join us at these exciting community events
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <section>
+        <h2 className="text-4xl font-bold text-foreground mb-8 text-center">Upcoming Events</h2>
+        <div className="grid gap-8 md:grid-cols-2">
           {events.map((event, index) => (
             <Card
               key={index}
-              className="p-6 bg-gradient-surface border-border hover:border-primary/50 transition-all duration-300 hover:shadow-glow"
+              className="p-6 border-border bg-gradient-surface hover:border-primary/50 transition-all duration-300 hover:shadow-glow"
             >
-              <div className="mb-4">
-                <div className="bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm font-medium inline-block mb-2">
-                  {event.date}
-                </div>
-                <h3 className="text-xl font-bold text-foreground mb-2">
-                  {event.title}
-                </h3>
-                <p className="text-accent font-medium mb-3">{event.location}</p>
-                <p className="text-muted-foreground">{event.description}</p>
+              <div className="flex items-center mb-4 text-muted-foreground">
+                <Calendar className="w-5 h-5 mr-2" />
+                <span>{event.date}</span>
               </div>
+              <h3 className="text-2xl font-bold text-foreground mb-2">{event.title}</h3>
+              <div className="flex items-center mb-2 text-muted-foreground">
+                <Users className="w-5 h-5 mr-2" />
+                <span>{event.location}</span>
+              </div>
+              <p className="text-muted-foreground">{event.description}</p>
             </Card>
           ))}
         </div>
@@ -176,7 +224,7 @@ const Community = () => {
       </section>
 
       {/* Get Involved CTA */}
-      <section className="container mx-auto px-6 text-center">
+      <section className="container mx-auto px-6 text-center pb-16">
         <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
           Get Involved
         </h2>
