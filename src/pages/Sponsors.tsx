@@ -1,7 +1,15 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ExternalLink } from "lucide-react";
-import logoPng from '@/assets/sponsors/codeValue.png';
+import logoCodeValue from "@/assets/sponsors/codeValue.png";
+import logoChemograf from "@/assets/sponsors/Chemograf.png";
+import logoPlaskolite from "@/assets/sponsors/plaskolite.png";
+import logoWeissGroup from "@/assets/sponsors/Weiss_Group.png";
+import logoArgentools from "@/assets/sponsors/Argentols.png";
+import logoKursia from "@/assets/sponsors/Kursia.png";
+import logoIroniB from "@/assets/sponsors/ironiB.png";
+import logoModiin from "@/assets/sponsors/modiin.png";
+
 
 
 const Sponsors = () => {
@@ -9,7 +17,7 @@ const Sponsors = () => {
     {
       id: 1,
       name: "CodeValue",
-      logo: "src/assets/sponsors/codeValue.png",
+      logo: logoCodeValue,
       website: "https://www.codevalue.com/",
       description: "CodeValue is a leading software development company, specializing in advanced technological solutions and driving innovation across organizations. Since 2025, they have been one of our main sponsors, providing essential financial support as well as top-tier professional and technological guidance.",
       
@@ -18,7 +26,7 @@ const Sponsors = () => {
     {
       id: 2,
       name: "CHEMOGRAF",
-      logo: "src/assets/sponsors/Chemograf.png",
+      logo: logoChemograf,
       website: "https://chemograf.com/?lang=he",
       description: "Chemograf is a pioneering company in the field of chemical technologies and advanced materials. Since 2024, they have been a key sponsor of ours, offering vital funding and expert knowledge to support our initiatives and growth.",
       
@@ -27,7 +35,7 @@ const Sponsors = () => {
     {
       id: 3,
       name: "PLASKOLITE",
-      logo: "src/assets/sponsors/plaskolite.png",
+      logo: logoPlaskolite,
       website: "https://plaskolite.com/",
       description: "Plaskolite is a leading manufacturer specializing in innovative plastic solutions and engineered acrylic products. Since 2025, they have been a valued sponsor of ours, providing crucial financial support and technical expertise to help advance our projects.",
       
@@ -36,7 +44,7 @@ const Sponsors = () => {
     {
       id: 4,
       name: "WEISS GROUP",
-      logo: "src/assets/sponsors/Weiss_Group.png",
+      logo: logoWeissGroup,
       website: "https://weissgroup.co.il/en/",
       description: "Weiss Group is a distinguished company specializing in high-precision industrial equipment and automation solutions. Since 2025, they have been a proud sponsor of ours, contributing essential funding and expert technical support to drive our success.",
       
@@ -45,7 +53,7 @@ const Sponsors = () => {
     {
       id: 5,
       name: "Argentools",
-      logo: "src/assets/sponsors/Argentols.png",
+      logo: logoArgentools,
       website: "https://www.argentools.co.il/",
       description: "Argentools is a dynamic company specializing in advanced tooling solutions and precision engineering services. Since 2025, they have been a key sponsor of ours, offering vital financial backing and expert industry knowledge to support our development.",
       
@@ -54,7 +62,7 @@ const Sponsors = () => {
     {
       id: 6,
       name: "Kursia",
-      logo: "src/assets/sponsors/Kursia.png",
+      logo: logoKursia,
       website: "https://modiinapp.com/he/page/7500/%D7%A7%D7%95%D7%A8%D7%A1%D7%99%D7%94-%D7%91%D7%99%D7%AA-%D7%A9%D7%9C-%D7%98%D7%A2%D7%9E%D7%99%D7%9D",
       description: "Kursia is a renowned establishment in Modi’in, Israel, offering a diverse range of culinary experiences with a focus on high-quality, flavorful dishes. Since 2025, they have been a valued sponsor of ours, providing essential support and contributing to the success of our initiatives.",
       since: "2025",
@@ -62,7 +70,7 @@ const Sponsors = () => {
     {
       id: 7,
       name: "Ironi B",
-      logo: "src/assets/sponsors/ironiB.png",
+      logo: logoIroniB,
       website: "https://ironibetrabin.mashov.info/",
       description: "Ironi B is our local high school, providing quality education and fostering growth in academics, arts, and community engagement. It plays a central role in shaping the future of its students and the wider community.",
       since: "2012",
@@ -70,7 +78,7 @@ const Sponsors = () => {
     {
       id: 8,
       name: "Modi'in City",
-      logo: "src/assets/sponsors/modiin.png",
+      logo: logoModiin,
       website: "https://www.modiin.muni.il/ModiinWebSite/MainPage.aspx",
       description: "Modi’in City is our vibrant hometown, known for its modern infrastructure, rich history, and dynamic community life. It serves as a center for culture, education, and innovation in the region, offering a high quality of life to its residents.",
       
