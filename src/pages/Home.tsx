@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import { Link } from "react-router-dom";
-import { ArrowRight, Zap, Users, Trophy, Rocket } from "lucide-react";
+import { ArrowRight, Zap, Users, Trophy, Rocket, Lightbulb } from "lucide-react";
 import { useEffect, useState } from "react";
 import team1 from "@/assets/team-1.jpg";
 import team2 from "@/assets/team-2.jpg";
@@ -32,6 +32,11 @@ const Home = () => {
       icon: Rocket,
       title: "Future",
       description: "Preparing students for tomorrow's technological challenges",
+    },
+    {
+      icon: Lightbulb,
+      title: "Learning",
+      description: "Continuous education and skill development in STEM fields",
     },
   ];
 
