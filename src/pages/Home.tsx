@@ -7,10 +7,12 @@ import { useEffect, useState } from "react";
 import team1 from "@/assets/team-1.jpg";
 import team2 from "@/assets/team-2.jpg";
 import team3 from "@/assets/team-3.jpg";
+import team4 from "@/assets/team-4.png"
+
 
 const Home = () => {
-  const [currentValueIndex, setCurrentValueIndex] = useState(0);
-  const teamImages = [team1, team2, team3];
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const teamImages = [team1, team2, team3, team4];
   
   const features = [
     {
@@ -43,8 +45,8 @@ const Home = () => {
   // Auto-cycle through core values every 10 seconds
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentValueIndex((prev) => (prev + 1) % features.length);
-    }, 10000);
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % teamImages.length);
+    }, 3000);
 
     return () => clearInterval(interval);
   }, [features.length]);
@@ -121,15 +123,15 @@ const Home = () => {
             <Card className="p-8 md:p-12 bg-gradient-surface border-border text-center h-[400px] flex flex-col justify-center">
               <div className="bg-gradient-primary p-4 rounded-xl w-fit mx-auto mb-6 shadow-accent-glow transition-all duration-500">
                 {(() => {
-                  const IconComponent = features[currentValueIndex].icon;
+                  const IconComponent = features[currentImageIndex].icon;
                   return <IconComponent className="h-8 w-8 text-primary-foreground" />;
                 })()}
               </div>
               <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-4 transition-all duration-500">
-                {features[currentValueIndex].title}
+                {features[currentImageIndex].title}
               </h3>
               <p className="text-lg text-muted-foreground leading-relaxed transition-all duration-500">
-                {features[currentValueIndex].description}
+                {features[currentImageIndex].description}
               </p>
             </Card>
             
@@ -138,9 +140,9 @@ const Home = () => {
               {features.map((_, index) => (
                 <button
                   key={index}
-                  onClick={() => setCurrentValueIndex(index)}
+                  onClick={() => setCurrentImageIndex(index)}
                   className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                    index === currentValueIndex
+                    index === currentImageIndex
                       ? 'bg-primary shadow-glow'
                       : 'bg-muted hover:bg-muted-foreground/50'
                   }`}
