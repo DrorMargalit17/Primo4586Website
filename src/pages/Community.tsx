@@ -2,6 +2,8 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Calendar, Users } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
+import primoFly1 from "@/assets/community/primoFly1.jpg";
+
 
 const AutoCarousel = ({ images }) => {
   const [currentImg, setCurrentImg] = useState(0);
