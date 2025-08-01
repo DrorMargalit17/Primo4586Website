@@ -2,9 +2,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Cpu, Zap, Eye, Cog } from "lucide-react";
-import sparrow from "@/assets/team-4.jpg";
-
-
+import sparrow from "@/assets/HomePage/team-4.jpg";
 
 const Robot = () => {
   const specifications = [
@@ -77,7 +75,7 @@ const Robot = () => {
             <div className="relative">
               <div className="bg-gradient-surface rounded-2xl p-8 border border-border">
                 <img
-                  src="src/assets/team-4.jpg"
+                  src={sparrow}
                   alt="Sparrow Robot"
                   className="w-full h-auto rounded-lg shadow-elevated"
                 />
@@ -116,7 +114,7 @@ const Robot = () => {
             Built with cutting-edge technology and precision engineering
           </p>
         </div>
-        
+
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
           {specifications.map((spec, index) => (
             <Card
