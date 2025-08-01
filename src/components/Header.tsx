@@ -13,9 +13,9 @@ const Header = () => {
   const navItems = [
     { name: "Home", path: "/" },
     { name: "About", path: "/about" },
-    { name: "Team & Mentors", path: "/team" },
+    { name: "Team", path: "/team" },
     { name: "Community", path: "/community" },
-    { name: "FLL Mentorship", path: "/fll-mentorship" },
+    { name: "FLL", path: "/fll-mentorship" },
     { name: "Resources", path: "/resources" },
     { name: "Sponsors", path: "/sponsors" },
     { name: "Contact", path: "/contact" },
