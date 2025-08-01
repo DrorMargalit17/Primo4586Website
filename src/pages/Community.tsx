@@ -5,9 +5,9 @@ import { useState, useEffect, useRef } from "react";
 import primoFly1 from "@/assets/community/primoFly/primoFly1.jpg";
 import primoFly2 from "@/assets/community/primoFly/primoFly4.jpg";
 import primoFly3 from "@/assets/community/primoFly/primoFly5.jpg";
-//import primoSenior1 from "@/assets/community/primoSenior/primoSenior_1.png";
-//import primoSenior2 from "@/assets/community/primoSenior/primoSenior_2.png";
-//import primoSenior3 from "@/assets/community/primoSenior/primoSenior_3.png";
+import primoSenior1 from "@/assets/community/PrimoSenior/primoSenior_1.png";
+import primoSenior2 from "@/assets/community/PrimoSenior/primoSenior_2.png";
+import primoSenior3 from "@/assets/community/PrimoSenior/primoSenior_3.png";
 
 
 
@@ -88,7 +88,7 @@ const communityActivities = [
     title: "Primo Senior",
     description:
       "We hosted interactive booths and showcased our robots at the city's STEM fair, drawing hundreds of visitors and spreading STEM awareness.",
-      //images: [primoSenior1, primoSenior2, primoSenior3],
+      images: [primoSenior1, primoSenior2, primoSenior3],
   },
   {
     title: "Charity Robot Show",
