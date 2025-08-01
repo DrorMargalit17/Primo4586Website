@@ -125,6 +125,31 @@ const Team = () => {
       image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&h=300&fit=crop&crop=face",
       since: "2018",
     },
+    {
+      name: "Yadin Kovel",
+      role: "General Mentor",
+      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&h=300&fit=crop&crop=face",
+      since: "2018",
+    },
+    {
+      name: "Shalev Neuman",
+      role: "General Mentor",
+      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&h=300&fit=crop&crop=face",
+      since: "2018",
+    },
+    {
+      name: "Tom Kazakevich",
+      role: "General Mentor",
+      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&h=300&fit=crop&crop=face",
+      since: "2018",
+    },
+    {
+      name: "Rotem Zippori",
+      role: "General Mentor",
+      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&h=300&fit=crop&crop=face",
+      since: "2018",
+    },
+
   ];
 
   useEffect(() => {
