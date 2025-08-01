@@ -28,7 +28,7 @@ const Team = () => {
   const teamCaptains = [
     {
       name: "Maya Goz",
-      role: "Co. Captain",
+      role: "Co. Captain & Community TeamLeader",
       image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
       teams: ["community", "media", "design", "resources"],
     },
