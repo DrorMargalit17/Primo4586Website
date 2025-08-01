@@ -179,26 +179,27 @@ const Contact = () => {
 
       {/* Map Section */}
       <section className="container mx-auto px-6">
-        <Card className="overflow-hidden border-border">
-          <div className="h-96 bg-gradient-surface flex items-center justify-center">
-            <div className="text-center">
-              <MapPin className="h-16 w-16 text-primary mx-auto mb-4" />
-              <h3 className="text-2xl font-bold text-foreground mb-2">
-                Find Our Lab
-              </h3>
-              <p className="text-muted-foreground">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3387.3176625667547!2d35.01662162607991!3d31.897965328392658!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1502cdc07d7f13d1%3A0x9065ae1e6d545b1a!2sPrimo%204586!5e0!3m2!1siw!2sil!4v1753943033667!5m2!1siw!2sil"
-                  width="1200"
-                  height="400"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Primo 4586 Location"
-                />
-              </p>
-            </div>
+        <div className="text-center mb-8">
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+            Find Our Lab
+          </h2>
+          <p className="text-xl text-muted-foreground">
+            Visit us at our workshop in Modi'in, Israel
+          </p>
+        </div>
+        <Card className="overflow-hidden border-border shadow-glow">
+          <div className="relative">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3387.3176625667547!2d35.01662162607991!3d31.897965328392658!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1502cdc07d7f13d1%3A0x9065ae1e6d545b1a!2sPrimo%204586!5e0!3m2!1siw!2sil!4v1753943033667!5m2!1siw!2sil"
+              width="100%"
+              height="450"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Primo 4586 Location"
+              className="w-full"
+            />
           </div>
         </Card>
       </section>

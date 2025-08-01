@@ -200,6 +200,9 @@ const Resources = () => {
           </a>
         </Button>
       </section>
+      
+      {/* Extra spacing before footer */}
+      <div className="py-12"></div>
     </div>
   );
 };

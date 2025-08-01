@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Bot, Github, Instagram, Twitter, Youtube, Mail, MapPin, Phone, Facebook} from "lucide-react";
+import { Bot, Github, Instagram, Youtube, Mail, MapPin, Phone, Facebook} from "lucide-react";
+import { TikTokIcon } from "@/components/ui/tiktok-icon";
 import logoPng from '@/assets/PrimaryLogo.png';
 
 
@@ -8,7 +9,7 @@ const Footer = () => {
   const socialLinks = [
     { icon: Facebook, href: "https://www.facebook.com/people/Primo-4586/100064748286068/#", label: "FaceBook" },
     { icon: Instagram, href: "https://www.instagram.com/primo_4586/", label: "Instagram" },
-    { icon: Twitter, href: "https://www.tiktok.com/@primo4586", label: "Twitter" },
+    { icon: TikTokIcon, href: "https://www.tiktok.com/@primo4586", label: "TikTok" },
     { icon: Youtube, href: "https://www.youtube.com/@Primo_4586", label: "YouTube" },
   ];
 

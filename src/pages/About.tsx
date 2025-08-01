@@ -72,6 +72,56 @@ const About = () => {
         </div>
       </section>
 
+      {/* What is FRC Section */}
+      <section className="container mx-auto px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <h2 className="text-4xl font-bold text-foreground mb-6">
+              What is FRC?
+            </h2>
+            <div className="space-y-4 text-muted-foreground leading-relaxed">
+              <p>
+                FIRST Robotics Competition (FRC) is an international high school robotics competition where teams 
+                of students design, build, and program robots to compete in an alliance format against other teams.
+              </p>
+              <p>
+                Founded by Dean Kamen in 1989, FRC combines the excitement of sport with the rigors of science and technology. 
+                Teams have six weeks to build a robot that can perform specific tasks in a game that changes every year.
+              </p>
+              <p>
+                More than just building robots, FRC teaches students valuable life skills including problem-solving, 
+                teamwork, and leadership while inspiring them to pursue careers in STEM fields.
+              </p>
+            </div>
+          </div>
+          <div className="relative">
+            <Card className="p-8 bg-gradient-surface border-border">
+              <h3 className="text-2xl font-bold text-foreground mb-4">
+                FRC by the Numbers
+              </h3>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="text-center">
+                  <p className="text-3xl font-bold text-primary">3,000+</p>
+                  <p className="text-sm text-muted-foreground">Teams Worldwide</p>
+                </div>
+                <div className="text-center">
+                  <p className="text-3xl font-bold text-primary">80,000+</p>
+                  <p className="text-sm text-muted-foreground">Student Participants</p>
+                </div>
+                <div className="text-center">
+                  <p className="text-3xl font-bold text-primary">6</p>
+                  <p className="text-sm text-muted-foreground">Week Build Season</p>
+                </div>
+                <div className="text-center">
+                  <p className="text-3xl font-bold text-primary">30+</p>
+                  <p className="text-sm text-muted-foreground">Countries</p>
+                </div>
+              </div>
+            </Card>
+          </div>
+        </div>
+      </section>
+
       {/* Story Section */}
       <section className="container mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
