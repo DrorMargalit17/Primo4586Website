@@ -19,23 +19,23 @@ const Robot = () => {
   const features = [
     {
       icon: Cpu,
-      title: "Advanced AI Processing",
-      description: "Real-time decision making with machine learning algorithms for optimal performance in dynamic environments.",
+      title: "Mechanical Design",
+      description: "Advanced drivetrain and manipulator systems engineered for reliability and performance in competitive scenarios.",
     },
     {
       icon: Eye,
-      title: "Computer Vision",
-      description: "Multiple cameras and sensors provide 360° awareness with object detection and tracking capabilities.",
+      title: "Electronics",
+      description: "Sophisticated sensor arrays and control systems providing precise feedback and autonomous capabilities.",
     },
     {
       icon: Zap,
-      title: "Precision Control",
-      description: "High-precision actuators and feedback systems ensure accurate movements and task execution.",
+      title: "Software",
+      description: "Intelligent programming with autonomous routines and responsive driver control for optimal game strategy.",
     },
     {
       icon: Cog,
-      title: "Modular Design",
-      description: "Easily configurable components allow rapid adaptation for different competition challenges.",
+      title: "Drafting/Blueprints",
+      description: "Comprehensive CAD documentation and technical drawings enabling precise manufacturing and assembly.",
     },
   ];
 
@@ -53,6 +53,13 @@ const Robot = () => {
         <div className="container mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
+              <div className="mb-6">
+                <img
+                  src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=200&h=100&fit=crop"
+                  alt="2025 Season Logo"
+                  className="h-16 w-auto"
+                />
+              </div>
               <h1 className="text-5xl md:text-6xl font-bold mb-6 text-foreground">
                 Meet <span className="bg-gradient-primary bg-clip-text text-transparent">SPARROW</span>
               </h1>
@@ -78,6 +85,24 @@ const Robot = () => {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Videos Section */}
+      <section className="container mx-auto px-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <Card className="p-6 bg-gradient-surface border-border hover:border-primary/50 transition-all duration-300">
+            <h3 className="text-xl font-bold text-foreground mb-4">Season Challenge</h3>
+            <div className="aspect-video bg-muted rounded-lg flex items-center justify-center">
+              <p className="text-muted-foreground">2025 Challenge Video</p>
+            </div>
+          </Card>
+          <Card className="p-6 bg-gradient-surface border-border hover:border-primary/50 transition-all duration-300">
+            <h3 className="text-xl font-bold text-foreground mb-4">Robot Reveal</h3>
+            <div className="aspect-video bg-muted rounded-lg flex items-center justify-center">
+              <p className="text-muted-foreground">Sparrow Reveal Video</p>
+            </div>
+          </Card>
         </div>
       </section>
 

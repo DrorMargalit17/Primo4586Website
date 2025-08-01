@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Bot } from "lucide-react";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { Menu, X, ChevronDown } from "lucide-react";
 import logoPng from '@/assets/PrimaryLogo.png';
 
 
@@ -12,12 +13,18 @@ const Header = () => {
   const navItems = [
     { name: "Home", path: "/" },
     { name: "About", path: "/about" },
-    { name: "Team", path: "/team" },
-    { name: "Robot", path: "/robot" },
+    { name: "Team & Mentors", path: "/team" },
     { name: "Community", path: "/community" },
+    { name: "FLL Mentorship", path: "/fll-mentorship" },
     { name: "Resources", path: "/resources" },
     { name: "Sponsors", path: "/sponsors" },
     { name: "Contact", path: "/contact" },
+  ];
+
+  const robotYears = [
+    { name: "2025", path: "/robot" },
+    { name: "2024", path: "/robot/2024" },
+    { name: "2023", path: "/robot/2023" },
   ];
 
   const isActive = (path: string) => location.pathname === path;
@@ -52,6 +59,27 @@ const Header = () => {
                 {item.name}
               </Link>
             ))}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="ghost"
+                  className={`px-4 py-2 rounded-lg transition-all duration-300 ${
+                    location.pathname.startsWith("/robot")
+                      ? "bg-primary text-primary-foreground shadow-glow"
+                      : "text-muted-foreground hover:text-foreground hover:bg-surface-elevated"
+                  }`}
+                >
+                  Robot <ChevronDown className="ml-1 h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                {robotYears.map((robot) => (
+                  <DropdownMenuItem key={robot.path} asChild>
+                    <Link to={robot.path}>{robot.name}</Link>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
           </nav>
 
           {/* Mobile Menu Button */}
