@@ -2,38 +2,14 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Cpu, Zap, Eye, Cog } from "lucide-react";
+import SeasonLogo from "@/assets/Robot/Crescendo_FRC_Logo.png";
 
 const Robot2024 = () => {
-  const specifications = [
-    { label: "Height", value: "32 inches" },
-    { label: "Weight", value: "115 lbs" },
-    { label: "Max Speed", value: "10 ft/s" },
-    { label: "Battery Life", value: "2 hours" },
-    { label: "Sensors", value: "12+ integrated" },
-    { label: "Processing Power", value: "ARM Cortex-A72" },
-  ];
-
-  const features = [
-    {
-      icon: Cpu,
-      title: "Mechanical Design",
-      description: "Robust drivetrain and manipulator systems designed for the 2024 game challenges with enhanced durability.",
-    },
-    {
-      icon: Eye,
-      title: "Electronics",
-      description: "Advanced sensor integration with improved wiring management and component protection systems.",
-    },
-    {
-      icon: Zap,
-      title: "Software",
-      description: "Autonomous routines optimized for 2024 game scoring with enhanced driver control systems.",
-    },
-    {
-      icon: Cog,
-      title: "Drafting/Blueprints",
-      description: "Comprehensive CAD documentation with detailed assembly instructions and modification guides.",
-    },
+  const systems = [
+    { label: "Swerve", value: "Swerve MK4I traffic vehicle" },
+    { label: "Intake", value: "Consists of 4 axles & timing belts" },
+    { label: "Shooter", value: "Consists of 2 axles & 8 timing wheels" },
+    { label: "Climb", value: "Consists of 2 aluminum hooks" },
   ];
 
   const achievements = [
@@ -52,30 +28,30 @@ const Robot2024 = () => {
             <div>
               <div className="mb-6">
                 <img
-                  src="https://images.unsplash.com/photo-1518717758536-85ae29035b6d?w=200&h=100&fit=crop"
+                  src={SeasonLogo}
                   alt="2024 Season Logo"
                   className="h-16 w-auto"
                 />
               </div>
               <h1 className="text-5xl md:text-6xl font-bold mb-6 text-foreground">
-                Meet <span className="bg-gradient-primary bg-clip-text text-transparent">PHOENIX</span>
+                Meet <span className="bg-gradient-primary bg-clip-text text-transparent">Punk</span>
               </h1>
               <p className="text-xl text-muted-foreground mb-8">
                 Our 2024 competition robot designed for strategic gameplay and 
-                reliable performance. Phoenix showcased our team's growth in 
+                reliable performance. Punk showcased our team's growth in 
                 engineering and competitive strategy.
               </p>
               <div className="flex flex-wrap gap-2 mb-8">
                 <Badge className="bg-primary text-primary-foreground">2024 Season</Badge>
-                <Badge className="bg-accent text-accent-foreground">Strategic Design</Badge>
-                <Badge className="bg-success text-white">Proven Performance</Badge>
+                <Badge className="bg-accent text-accent-foreground">Autonomus</Badge>
+                <Badge className="bg-success text-white">Disassembled</Badge>
               </div>
             </div>
             <div className="relative">
               <div className="bg-gradient-surface rounded-2xl p-8 border border-border">
                 <img
                   src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=500&h=400&fit=crop"
-                  alt="Phoenix Robot 2024"
+                  alt="Punk Robot 2024"
                   className="w-full h-auto rounded-lg shadow-elevated"
                 />
                 <div className="absolute inset-0 bg-gradient-primary opacity-10 rounded-2xl"></div>
@@ -85,89 +61,97 @@ const Robot2024 = () => {
         </div>
       </section>
 
+      {/* Info & Achievements Section */}
+      <section className="container mx-auto px-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <div>
+            <h2 className="text-4xl font-bold text-foreground mb-4">About Our Robot</h2>
+            <p className="text-xl text-muted-foreground">
+              PUNK was built to tackle the unique challenges of the 2025 season with unmatched precision and power. 
+              Designed with robust engineering and intelligent programming, it excels in autonomy, agility, and teamwork integration.
+              From complex tasks to collaborative field maneuvers, SPARROW is the result of countless hours of design, testing, and refinement.
+            </p>
+          </div>
+          <div>
+            <h2 className="text-4xl font-bold text-foreground mb-4">Season Achievements</h2>
+            <div className="grid grid-cols-1 gap-4">
+              {achievements.map((achievement, index) => (
+                <Card
+                  key={index}
+                  className="p-4 bg-gradient-surface border-border hover:border-primary/50 transition-all duration-300"
+                >
+                  <p className="font-medium text-foreground">{achievement}</p>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Robot Systems Section */}
+      <section className="container mx-auto px-6">
+        <div className="text-center mb-12">
+          <h2 className="text-4xl font-bold text-foreground mb-4">
+            Robot Systems
+          </h2>
+          <p className="text-xl text-muted-foreground">
+            Explore the integrated subsystems powering SPARROW
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {systems.map((system, index) => (
+            <Card
+              key={index}
+              className="p-6 bg-gradient-surface border-border hover:border-primary/50 transition-all duration-300 text-center"
+            >
+              <h3 className="text-md text-muted-foreground mb-2">{system.label}</h3>
+              <p className="text-base font-medium text-foreground">{system.value}</p>
+            </Card>
+          ))}
+        </div>
+      </section>
+
       {/* Videos Section */}
       <section className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <Card className="p-6 bg-gradient-surface border-border hover:border-primary/50 transition-all duration-300">
             <h3 className="text-xl font-bold text-foreground mb-4">Season Challenge</h3>
-            <div className="aspect-video bg-muted rounded-lg flex items-center justify-center">
-              <p className="text-muted-foreground">2024 Challenge Video</p>
+            <div className="aspect-video bg-muted rounded-lg overflow-hidden">
+              <iframe
+                src="https://www.youtube.com/embed/9keeDyFxzY4?t=1"
+                title="2024 Season Challenge"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="w-full h-full"
+              ></iframe>
             </div>
           </Card>
           <Card className="p-6 bg-gradient-surface border-border hover:border-primary/50 transition-all duration-300">
             <h3 className="text-xl font-bold text-foreground mb-4">Robot Reveal</h3>
-            <div className="aspect-video bg-muted rounded-lg flex items-center justify-center">
-              <p className="text-muted-foreground">Phoenix Reveal Video</p>
+            <div className="aspect-video bg-muted rounded-lg overflow-hidden">
+              <iframe
+                src="https://www.youtube.com/embed/JaSdbmQUUUQ"
+                title="Robot Reveal"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="w-full h-full"
+              ></iframe>
             </div>
           </Card>
         </div>
       </section>
 
-      {/* Specifications */}
-      <section className="container mx-auto px-6">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-foreground mb-4">
-            Technical Specifications
-          </h2>
-          <p className="text-xl text-muted-foreground">
-            Built with lessons learned and improved engineering practices
-          </p>
-        </div>
-        
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-          {specifications.map((spec, index) => (
-            <Card
-              key={index}
-              className="p-6 bg-gradient-surface border-border hover:border-primary/50 transition-all duration-300 text-center"
-            >
-              <h3 className="text-sm text-muted-foreground mb-2">{spec.label}</h3>
-              <p className="text-2xl font-bold text-foreground">{spec.value}</p>
-            </Card>
-          ))}
-        </div>
-      </section>
-
-      {/* Key Features */}
-      <section className="container mx-auto px-6">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-foreground mb-4">
-            Design Aspects
-          </h2>
-          <p className="text-xl text-muted-foreground">
-            Engineering excellence across all aspects of robot development
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {features.map((feature, index) => (
-            <Card
-              key={index}
-              className="p-8 bg-gradient-surface border-border hover:border-primary/50 transition-all duration-300 hover:shadow-glow"
-            >
-              <div className="flex items-start space-x-4">
-                <div className="bg-gradient-primary p-3 rounded-lg">
-                  <feature.icon className="h-6 w-6 text-primary-foreground" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-foreground mb-3">
-                    {feature.title}
-                  </h3>
-                  <p className="text-muted-foreground">{feature.description}</p>
-                </div>
-              </div>
-            </Card>
-          ))}
-        </div>
-      </section>
-
       {/* Gallery Section */}
-      <section className="container mx-auto px-6">
+      <section className="container mx-auto px-6 mb-10">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-foreground mb-4">
             Robot Gallery
           </h2>
           <p className="text-xl text-muted-foreground">
-            Phoenix in action during the 2024 season
+            Punk in action during the 2024 season
           </p>
         </div>
 
@@ -191,30 +175,6 @@ const Robot2024 = () => {
               />
             </Card>
           ))}
-        </div>
-      </section>
-
-      {/* Achievements */}
-      <section className="bg-surface py-16 px-6">
-        <div className="container mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-8">
-            2024 Season Achievements
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            {achievements.map((achievement, index) => (
-              <Card
-                key={index}
-                className="p-6 bg-gradient-surface border-border hover:border-primary/50 transition-all duration-300"
-              >
-                <p className="font-medium text-foreground">{achievement}</p>
-              </Card>
-            ))}
-          </div>
-          <Button variant="hero" size="lg" asChild>
-            <a href="mailto:info@robotics.edu">
-              Learn More About Phoenix
-            </a>
-          </Button>
         </div>
       </section>
     </div>

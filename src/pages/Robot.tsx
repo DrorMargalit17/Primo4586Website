@@ -3,45 +3,20 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Cpu, Zap, Eye, Cog } from "lucide-react";
 import sparrow from "@/assets/HomePage/team-4.jpg";
+import SeasonLogo from "@/assets/Robot/Reefscape_FRC_Logo.png";
+
 
 const Robot = () => {
-  const specifications = [
-    { label: "Height", value: "36 inches" },
-    { label: "Weight", value: "125 lbs" },
-    { label: "Max Speed", value: "12 ft/s" },
-    { label: "Battery Life", value: "2.5 hours" },
-    { label: "Sensors", value: "15+ integrated" },
-    { label: "Processing Power", value: "ARM Cortex-A78" },
-  ];
-
-  const features = [
-    {
-      icon: Cpu,
-      title: "Mechanical Design",
-      description: "Advanced drivetrain and manipulator systems engineered for reliability and performance in competitive scenarios.",
-    },
-    {
-      icon: Eye,
-      title: "Electronics",
-      description: "Sophisticated sensor arrays and control systems providing precise feedback and autonomous capabilities.",
-    },
-    {
-      icon: Zap,
-      title: "Software",
-      description: "Intelligent programming with autonomous routines and responsive driver control for optimal game strategy.",
-    },
-    {
-      icon: Cog,
-      title: "Drafting/Blueprints",
-      description: "Comprehensive CAD documentation and technical drawings enabling precise manufacturing and assembly.",
-    },
+  const systems = [
+    { label: "Swerve", value: "Swerve MK4N traffic vehicle" },
+    { label: "Elevator", value: "Consists of 3 floors & built of aluminum" },
+    { label: "Feeder and outtake", value: "Made of polycabronte, two axles & compliant wheels" },
+    { label: "Algae Gripper", value: "TMade of polycarbonate & compliant wheels" },
   ];
 
   const achievements = [
-    "Regional Championship Winner 2023",
-    "Innovation in Design Award",
-    "Autonomous Navigation Excellence",
-    "Best Technical Documentation",
+    "District #2 Winners",
+    "Gracious Professionalism Award - GP",
   ];
 
   return (
@@ -53,9 +28,9 @@ const Robot = () => {
             <div>
               <div className="mb-6">
                 <img
-                  src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=200&h=100&fit=crop"
+                  src={SeasonLogo}
                   alt="2025 Season Logo"
-                  className="h-16 w-auto"
+                  className="h-20 w-auto"
                 />
               </div>
               <h1 className="text-5xl md:text-6xl font-bold mb-6 text-foreground">
@@ -68,8 +43,7 @@ const Robot = () => {
               </p>
               <div className="flex flex-wrap gap-2 mb-8">
                 <Badge className="bg-primary text-primary-foreground">Autonomous</Badge>
-                <Badge className="bg-accent text-accent-foreground">AI-Powered</Badge>
-                <Badge className="bg-success text-white">Competition Ready</Badge>
+                <Badge className="bg-accent text-accent-foreground">Competition Ready</Badge>
               </div>
             </div>
             <div className="relative">
@@ -86,83 +60,91 @@ const Robot = () => {
         </div>
       </section>
 
+      {/* Info & Achievements Section */}
+      <section className="container mx-auto px-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <div>
+            <h2 className="text-4xl font-bold text-foreground mb-4">About Our Robot</h2>
+            <p className="text-xl text-muted-foreground">
+              SPARROW was built to tackle the unique challenges of the 2025 season with unmatched precision and power. 
+              Designed with robust engineering and intelligent programming, it excels in autonomy, agility, and teamwork integration.
+              From complex tasks to collaborative field maneuvers, SPARROW is the result of countless hours of design, testing, and refinement.
+            </p>
+          </div>
+          <div>
+            <h2 className="text-4xl font-bold text-foreground mb-4">Season Achievements</h2>
+            <div className="grid grid-cols-1 gap-4">
+              {achievements.map((achievement, index) => (
+                <Card
+                  key={index}
+                  className="p-4 bg-gradient-surface border-border hover:border-primary/50 transition-all duration-300"
+                >
+                  <p className="font-medium text-foreground">{achievement}</p>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Robot Systems Section */}
+      <section className="container mx-auto px-6">
+        <div className="text-center mb-12">
+          <h2 className="text-4xl font-bold text-foreground mb-4">
+            Robot Systems
+          </h2>
+          <p className="text-xl text-muted-foreground">
+            Explore the integrated subsystems powering SPARROW
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {systems.map((system, index) => (
+            <Card
+              key={index}
+              className="p-6 bg-gradient-surface border-border hover:border-primary/50 transition-all duration-300 text-center"
+            >
+              <h3 className="text-md text-muted-foreground mb-2">{system.label}</h3>
+              <p className="text-base font-medium text-foreground">{system.value}</p>
+            </Card>
+          ))}
+        </div>
+      </section>
+
       {/* Videos Section */}
       <section className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <Card className="p-6 bg-gradient-surface border-border hover:border-primary/50 transition-all duration-300">
             <h3 className="text-xl font-bold text-foreground mb-4">Season Challenge</h3>
-            <div className="aspect-video bg-muted rounded-lg flex items-center justify-center">
-              <p className="text-muted-foreground">2025 Challenge Video</p>
+            <div className="aspect-video bg-muted rounded-lg overflow-hidden">
+              <iframe
+                src="https://www.youtube.com/embed/YWbxcjlY9JY"
+                title="2025 Season Challenge"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="w-full h-full"
+              ></iframe>
             </div>
           </Card>
           <Card className="p-6 bg-gradient-surface border-border hover:border-primary/50 transition-all duration-300">
             <h3 className="text-xl font-bold text-foreground mb-4">Robot Reveal</h3>
-            <div className="aspect-video bg-muted rounded-lg flex items-center justify-center">
-              <p className="text-muted-foreground">Sparrow Reveal Video</p>
+            <div className="aspect-video bg-muted rounded-lg overflow-hidden">
+              <iframe
+                src="https://www.youtube.com/embed/7z1XOWeTpB4"
+                title="Robot Reveal"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="w-full h-full"
+              ></iframe>
             </div>
           </Card>
         </div>
       </section>
 
-      {/* Specifications */}
-      <section className="container mx-auto px-6">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-foreground mb-4">
-            Technical Specifications
-          </h2>
-          <p className="text-xl text-muted-foreground">
-            Built with cutting-edge technology and precision engineering
-          </p>
-        </div>
-
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-          {specifications.map((spec, index) => (
-            <Card
-              key={index}
-              className="p-6 bg-gradient-surface border-border hover:border-primary/50 transition-all duration-300 text-center"
-            >
-              <h3 className="text-sm text-muted-foreground mb-2">{spec.label}</h3>
-              <p className="text-2xl font-bold text-foreground">{spec.value}</p>
-            </Card>
-          ))}
-        </div>
-      </section>
-
-      {/* Features */}
-      <section className="container mx-auto px-6">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-foreground mb-4">
-            Key Features
-          </h2>
-          <p className="text-xl text-muted-foreground">
-            Advanced capabilities that set Sparrow apart
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {features.map((feature, index) => (
-            <Card
-              key={index}
-              className="p-8 bg-gradient-surface border-border hover:border-primary/50 transition-all duration-300 hover:shadow-glow"
-            >
-              <div className="flex items-start space-x-4">
-                <div className="bg-gradient-primary p-3 rounded-lg">
-                  <feature.icon className="h-6 w-6 text-primary-foreground" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-foreground mb-3">
-                    {feature.title}
-                  </h3>
-                  <p className="text-muted-foreground">{feature.description}</p>
-                </div>
-              </div>
-            </Card>
-          ))}
-        </div>
-      </section>
-
       {/* Gallery Section */}
-      <section className="container mx-auto px-6">
+      <section className="container mx-auto px-6 pb-10">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-foreground mb-4">
             Robot Gallery
@@ -192,30 +174,6 @@ const Robot = () => {
               />
             </Card>
           ))}
-        </div>
-      </section>
-
-      {/* Achievements */}
-      <section className="bg-surface py-16 px-6">
-        <div className="container mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-8">
-            Competition Achievements
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            {achievements.map((achievement, index) => (
-              <Card
-                key={index}
-                className="p-6 bg-gradient-surface border-border hover:border-primary/50 transition-all duration-300"
-              >
-                <p className="font-medium text-foreground">{achievement}</p>
-              </Card>
-            ))}
-          </div>
-          <Button variant="hero" size="lg" asChild>
-            <a href="mailto:info@robotics.edu">
-              Learn More About Our Technology
-            </a>
-          </Button>
         </div>
       </section>
     </div>
