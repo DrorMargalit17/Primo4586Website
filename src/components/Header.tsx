@@ -5,7 +5,6 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { Menu, X, ChevronDown } from "lucide-react";
 import logoPng from '@/assets/PrimaryLogo.png';
 
-
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
@@ -14,6 +13,7 @@ const Header = () => {
     { name: "Home", path: "/" },
     { name: "About", path: "/about" },
     { name: "Team", path: "/team" },
+    { name: "Robot", isDropdown: true }, // placeholder for dropdown
     { name: "Community", path: "/community" },
     { name: "FLL", path: "/fll-mentorship" },
     { name: "Resources", path: "/resources" },
@@ -46,40 +46,47 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-1">
-            {navItems.map((item) => (
-              <Link
-                key={item.path}
-                to={item.path}
-                className={`px-4 py-2 rounded-lg transition-all duration-300 ${
-                  isActive(item.path)
-                    ? "bg-primary text-primary-foreground shadow-glow"
-                    : "text-muted-foreground hover:text-foreground hover:bg-surface-elevated"
-                }`}
-              >
-                {item.name}
-              </Link>
-            ))}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="ghost"
+            {navItems.map((item) => {
+              if (item.isDropdown) {
+                return (
+                  <DropdownMenu key="robot">
+                    <DropdownMenuTrigger asChild>
+                      <Button
+                        variant="ghost"
+                        className={`px-4 py-2 rounded-lg transition-all duration-300 ${
+                          location.pathname.startsWith("/robot")
+                            ? "bg-primary text-primary-foreground shadow-glow"
+                            : "text-muted-foreground hover:text-foreground hover:bg-surface-elevated"
+                        }`}
+                      >
+                        Robot <ChevronDown className="ml-1 h-4 w-4" />
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                      {robotYears.map((robot) => (
+                        <DropdownMenuItem key={robot.path} asChild>
+                          <Link to={robot.path}>{robot.name}</Link>
+                        </DropdownMenuItem>
+                      ))}
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                );
+              }
+
+              return (
+                <Link
+                  key={item.path}
+                  to={item.path}
                   className={`px-4 py-2 rounded-lg transition-all duration-300 ${
-                    location.pathname.startsWith("/robot")
+                    isActive(item.path)
                       ? "bg-primary text-primary-foreground shadow-glow"
                       : "text-muted-foreground hover:text-foreground hover:bg-surface-elevated"
                   }`}
                 >
-                  Robot <ChevronDown className="ml-1 h-4 w-4" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                {robotYears.map((robot) => (
-                  <DropdownMenuItem key={robot.path} asChild>
-                    <Link to={robot.path}>{robot.name}</Link>
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
+                  {item.name}
+                </Link>
+              );
+            })}
           </nav>
 
           {/* Mobile Menu Button */}
@@ -97,20 +104,46 @@ const Header = () => {
         {isMenuOpen && (
           <nav className="lg:hidden mt-4 pb-4 border-t border-border pt-4">
             <div className="flex flex-col space-y-2">
-              {navItems.map((item) => (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  className={`px-4 py-3 rounded-lg transition-all duration-300 ${
-                    isActive(item.path)
-                      ? "bg-primary text-primary-foreground shadow-glow"
-                      : "text-muted-foreground hover:text-foreground hover:bg-surface-elevated"
-                  }`}
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {item.name}
-                </Link>
-              ))}
+              {navItems.map((item) => {
+                if (item.isDropdown) {
+                  return (
+                    <div key="robot-mobile" className="px-4">
+                      <p className="text-muted-foreground mb-1">Robot</p>
+                      <div className="pl-2 space-y-1">
+                        {robotYears.map((robot) => (
+                          <Link
+                            key={robot.path}
+                            to={robot.path}
+                            className={`block px-3 py-2 rounded-md transition-all duration-300 ${
+                              isActive(robot.path)
+                                ? "bg-primary text-primary-foreground shadow-glow"
+                                : "text-muted-foreground hover:text-foreground hover:bg-surface-elevated"
+                            }`}
+                            onClick={() => setIsMenuOpen(false)}
+                          >
+                            {robot.name}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  );
+                }
+
+                return (
+                  <Link
+                    key={item.path}
+                    to={item.path}
+                    className={`px-4 py-3 rounded-lg transition-all duration-300 ${
+                      isActive(item.path)
+                        ? "bg-primary text-primary-foreground shadow-glow"
+                        : "text-muted-foreground hover:text-foreground hover:bg-surface-elevated"
+                    }`}
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {item.name}
+                  </Link>
+                );
+              })}
             </div>
           </nav>
         )}
