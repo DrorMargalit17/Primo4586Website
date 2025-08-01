@@ -22,9 +22,9 @@ const Header = () => {
   ];
 
   const robotYears = [
-    { name: "2025", path: "/robot" },
-    { name: "2024", path: "/robot/2024" },
-    { name: "2023", path: "/robot/2023" },
+    { name: "2025 REEFSCAPE", path: "/robot" },
+    { name: "2024 CRESCENDO", path: "/robot/2024" },
+    { name: "2023 CHARGED UP", path: "/robot/2023" },
   ];
 
   const isActive = (path: string) => location.pathname === path;
