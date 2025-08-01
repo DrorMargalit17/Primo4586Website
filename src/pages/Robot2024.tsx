@@ -2,6 +2,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Cpu, Zap, Eye, Cog } from "lucide-react";
+import Punk from "@/assets/Robot/2024Robot.jpeg";
 import SeasonLogo from "@/assets/Robot/Crescendo_FRC_Logo.png";
 
 const Robot2024 = () => {
@@ -13,10 +14,8 @@ const Robot2024 = () => {
   ];
 
   const achievements = [
-    "Regional Finalist 2024",
-    "Engineering Excellence Award",
-    "Autonomous Performance Recognition",
-    "Team Spirit Award",
+    "District #2 - Captain of Alliance 4",
+    "Off Season - 2nd Pick of Alliance 3",
   ];
 
   return (
@@ -50,7 +49,7 @@ const Robot2024 = () => {
             <div className="relative">
               <div className="bg-gradient-surface rounded-2xl p-8 border border-border">
                 <img
-                  src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=500&h=400&fit=crop"
+                  src={Punk}
                   alt="Punk Robot 2024"
                   className="w-full h-auto rounded-lg shadow-elevated"
                 />

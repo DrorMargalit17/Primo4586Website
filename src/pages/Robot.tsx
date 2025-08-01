@@ -16,7 +16,9 @@ const Robot = () => {
 
   const achievements = [
     "District #2 Winners",
-    "Gracious Professionalism Award - GP",
+    "Gracious Professionalism Award",
+    "District #2 - 2nd Pick of Alliance 1",
+    "District #4 - 2nd Pick of Alliance 4"
   ];
 
   return (
