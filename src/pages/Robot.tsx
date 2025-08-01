@@ -2,7 +2,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Cpu, Zap, Eye, Cog } from "lucide-react";
-import sparrow from "@/assets/HomePage/team-4.jpg";
+import sparrow from "@/assets/Robot/2025Robot.jpg";
 import SeasonLogo from "@/assets/Robot/Reefscape_FRC_Logo.png";
 
 
