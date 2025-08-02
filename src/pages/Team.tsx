@@ -258,11 +258,11 @@ const Team = () => {
           Team Leads
         </h2>
         <div className="flex justify-center">
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6 max-w-[1000px] w-full">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-[1100px] w-full justify-items-center">
             {teamLeads.map((member, index) => (
               <Card
                 key={index}
-                className="relative p-6 bg-gradient-surface border-border hover:border-primary/50 transition-all duration-300 hover:shadow-glow group min-h-[260px]"
+                className="relative p-6 bg-gradient-surface border-border hover:border-primary/50 transition-all duration-300 hover:shadow-glow group min-h-[280px] w-full max-w-[250px]"
             >
               <div className="text-center">
                 <div className="relative mb-4">
