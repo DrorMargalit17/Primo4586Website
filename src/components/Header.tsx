@@ -23,7 +23,6 @@ const Header = () => {
   const robotYears = [
     { name: "2025 REEFSCAPE", path: "/robot" },
     { name: "2024 CRESCENDO", path: "/robot2024" },
-    { name: "2023 ARCHIVE", path: "/robot2023" },
   ];
 
   const communityItems = [
