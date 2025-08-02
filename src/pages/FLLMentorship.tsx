@@ -6,61 +6,49 @@ import { Trophy, Award, Star, Users, Target, Lightbulb } from "lucide-react";
 const FLLMentorship = () => {
   const fllTeams = [
     {
-      name: "FLL Champions",
+      name: "Boeing 727",
       description: "Our flagship FLL team competing in regional and state championships with a focus on robot design and core values.",
       achievements: [
-        { icon: Trophy, text: "Regional Champions 2023", type: "gold" },
-        { icon: Award, text: "Core Values Award", type: "blue" },
-        { icon: Star, text: "Innovation Award", type: "purple" }
+        { icon: Trophy, text: "Qualified For Nation Competition", type: "gold" },
+        { icon: Award, text: "First Place Robot Design", type: "blue" },
       ],
       image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=400&h=250&fit=crop"
     },
     {
-      name: "FLL Innovators", 
+      name: "Toxic Pandas 506", 
       description: "A creative team focused on innovative solutions and community impact through FIRST LEGO League challenges.",
       achievements: [
-        { icon: Lightbulb, text: "Innovation Project Winner", type: "yellow" },
-        { icon: Users, text: "Teamwork Excellence", type: "green" },
-        { icon: Target, text: "Mission Accuracy Award", type: "red" }
+        { icon: Lightbulb, text: "Qualified For Nation Competition", type: "gold" },
+        { icon: Users, text: "Core Values First Place", type: "green" },
       ],
       image: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=250&fit=crop"
-    },
-    {
-      name: "FLL Rising Stars",
-      description: "Our developing team where young engineers learn robotics fundamentals and FIRST values in a supportive environment.",
-      achievements: [
-        { icon: Star, text: "Rising Team Award", type: "purple" },
-        { icon: Users, text: "Community Impact", type: "green" },
-        { icon: Award, text: "Judges Award", type: "blue" }
-      ],
-      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=250&fit=crop"
     }
   ];
 
   const fllMentors = [
     {
-      name: "Jennifer Martinez",
+      name: "Shay Kalisher",
       role: "Lead FLL Mentor",
       image: "https://images.unsplash.com/photo-1494790108755-2616b612b647?w=300&h=300&fit=crop&crop=face",
-      since: "2016"
+      since: "2023"
     },
     {
-      name: "Robert Chen",
+      name: "Ariel Ivri",
       role: "Technical Mentor",
       image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face",
-      since: "2018"
+      since: "2023"
     },
     {
-      name: "Maria Rodriguez",
+      name: "Dror Margalit",
       role: "Core Values Mentor",
       image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&h=300&fit=crop&crop=face",
-      since: "2019"
+      since: "2024"
     },
     {
-      name: "David Kim",
+      name: "Ofir Shafran",
       role: "Project Mentor",
       image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-      since: "2020"
+      since: "2024"
     }
   ];
 
@@ -107,12 +95,16 @@ const FLLMentorship = () => {
             Our FLL Teams
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Three dynamic teams competing in FIRST LEGO League, each bringing 
+            Dynamic teams competing in FIRST LEGO League, each bringing 
             unique strengths and perspectives to robotics challenges.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className={`grid grid-cols-1 gap-8
+          ${fllTeams.length === 1 ? 'sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1' : ''}
+          ${fllTeams.length === 2 ? 'sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2' : ''}
+          ${fllTeams.length > 2 ? 'sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3' : ''}
+        `}>
           {fllTeams.map((team, index) => (
             <Card key={index} className="overflow-hidden bg-gradient-surface border-border hover:border-primary/50 transition-all duration-300 hover:shadow-glow group">
               <div className="relative">
