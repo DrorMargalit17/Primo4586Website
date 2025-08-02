@@ -2,6 +2,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Calendar, Users } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
+import UpcomingEvents from "@/components/UpcomingEvents";
 import primoFly1 from "@/assets/community/primoFly/primoFly1.jpg";
 import primoFly2 from "@/assets/community/primoFly/primoFly4.jpg";
 import primoFly3 from "@/assets/community/primoFly/primoFly5.jpg";
@@ -101,32 +102,6 @@ const communityActivities = [
   },
 ];
 
-const events = [
-  {
-    date: "August 10, 2025",
-    title: "Spark Day",
-    location: "Modi'in Israel",
-    description: "Interactive robotics demonstrations and hands-on activities for families.",
-  },
-  {
-    date: "April 22, 2024",
-    title: "Earth Day Tech Challenge",
-    location: "City Park",
-    description: "Showcasing sustainable robotics solutions for environmental challenges.",
-  },
-  {
-    date: "May 10, 2024",
-    title: "Regional Competition",
-    location: "University Campus",
-    description: "Public competition where community members can cheer on our team.",
-  },
-  {
-    date: "June 5, 2024",
-    title: "Summer Camp Kickoff",
-    location: "Primo4586 Lab",
-    description: "Launch of our annual summer robotics camp for middle school students.",
-  },
-];
 
 const Community = () => {
   return (
@@ -168,29 +143,8 @@ const Community = () => {
         ))}
       </div>
 
-      {/* Upcoming Events */}
-      <section>
-        <h2 className="text-4xl font-bold text-foreground mb-8 text-center">Upcoming Events</h2>
-        <div className="grid gap-8 md:grid-cols-2">
-          {events.map((event, index) => (
-            <Card
-              key={index}
-              className="p-6 border-border bg-gradient-surface hover:border-primary/50 transition-all duration-300 hover:shadow-glow"
-            >
-              <div className="flex items-center mb-4 text-muted-foreground">
-                <Calendar className="w-5 h-5 mr-2" />
-                <span>{event.date}</span>
-              </div>
-              <h3 className="text-2xl font-bold text-foreground mb-2">{event.title}</h3>
-              <div className="flex items-center mb-2 text-muted-foreground">
-                <Users className="w-5 h-5 mr-2" />
-                <span>{event.location}</span>
-              </div>
-              <p className="text-muted-foreground">{event.description}</p>
-            </Card>
-          ))}
-        </div>
-      </section>
+      {/* Upcoming Events with Google Calendar Integration */}
+      <UpcomingEvents />
 
       {/* Impact Stats */}
       <section className="bg-surface py-16 px-6">

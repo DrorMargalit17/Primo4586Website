@@ -257,18 +257,19 @@ const Team = () => {
         <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-8 text-center">
           Team Leads
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
-          {teamLeads.map((member, index) => (
-            <Card
-              key={index}
-              className="relative p-6 bg-gradient-surface border-border hover:border-primary/50 transition-all duration-300 hover:shadow-glow group min-h-[240px]"
+        <div className="flex justify-center">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6 max-w-[1000px] w-full">
+            {teamLeads.map((member, index) => (
+              <Card
+                key={index}
+                className="relative p-6 bg-gradient-surface border-border hover:border-primary/50 transition-all duration-300 hover:shadow-glow group min-h-[260px]"
             >
               <div className="text-center">
                 <div className="relative mb-4">
                   <img
                     src={member.image}
                     alt={member.name}
-                    className="w-24 h-24 rounded-full mx-auto object-cover border-4 border-primary/20 group-hover:border-primary/50 transition-all duration-300"
+                    className="w-28 h-28 rounded-full mx-auto object-cover border-4 border-primary/20 group-hover:border-primary/50 transition-all duration-300"
                   />
                 </div>
 
@@ -314,8 +315,9 @@ const Team = () => {
                   </div>
                 )}
               </div>
-            </Card>
-          ))}
+              </Card>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -325,18 +327,18 @@ const Team = () => {
           Team Members
         </h2>
         <div className="flex justify-center">
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-6 max-w-[1100px] w-full">
+          <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-4 max-w-[1000px] w-full">
             {teamMembers.map((member, index) => (
               <Card
                 key={index}
-                className="relative p-4 bg-gradient-surface border-border hover:border-primary/50 transition-all duration-300 hover:shadow-glow group min-h-[200px]"
+                className="relative p-3 bg-gradient-surface border-border hover:border-primary/50 transition-all duration-300 hover:shadow-glow group min-h-[180px]"
               >
                 <div className="text-center">
                   <div className="relative mb-2">
                     <img
                       src={member.image}
                       alt={member.name}
-                      className="w-20 h-20 rounded-full mx-auto object-cover border-4 border-primary/20 group-hover:border-primary/50 transition-all duration-300"
+                      className="w-16 h-16 rounded-full mx-auto object-cover border-4 border-primary/20 group-hover:border-primary/50 transition-all duration-300"
                     />
                   </div>
 

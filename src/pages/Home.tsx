@@ -4,6 +4,7 @@ import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carouse
 import { Link } from "react-router-dom";
 import { ArrowRight, Handshake, Briefcase, HeartHandshake, Target, Sparkles } from "lucide-react";
 import { useEffect, useState } from "react";
+import UpcomingEvents from "@/components/UpcomingEvents";
 
 import team1 from "@/assets/HomePage/team_1.jpg";
 import team2 from "@/assets/HomePage/team_2.jpg";
@@ -149,6 +150,11 @@ const Home = () => {
             </div>
           </div>
         </div>
+      </section>
+
+      {/* Upcoming Events Section */}
+      <section className="container mx-auto px-6">
+        <UpcomingEvents />
       </section>
 
       {/* CTA Section */}

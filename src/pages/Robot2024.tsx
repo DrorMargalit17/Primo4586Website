@@ -144,7 +144,7 @@ const Robot2024 = () => {
       </section>
 
       {/* Gallery Section */}
-      <section className="container mx-auto px-6 mb-10">
+      <section className="container mx-auto px-6 pb-20">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-foreground mb-4">
             Robot Gallery
