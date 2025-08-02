@@ -48,7 +48,7 @@ const Contact = () => {
     {
       icon: Mail,
       title: "Email Us",
-      details: ["info@robotics.edu", "team@robotics.edu", "partnerships@robotics.edu"],
+      details: ["info@robotics.edu", "4586media@gmail.com", "partnerships@robotics.edu"],
     },
     {
       icon: Clock,
