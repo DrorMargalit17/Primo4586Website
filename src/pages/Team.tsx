@@ -65,7 +65,7 @@ const Team = () => {
     { name: "Adam Dashevsky", role: "Human Player", image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=300&fit=crop&crop=face", teams: ["mechanics"] },
     { name: "Ziv Avivi", role: "Programmer", image: "https://images.unsplash.com/photo-1507591064344-4c6ce005b128?w=300&h=300&fit=crop&crop=face", teams: ["software"] },
     { name: "Noga Zechmeister", role: "Robot operator", image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=300&h=300&fit=crop&crop=face", teams: ["strategy", "DriveTeam"] },
-    { name: "Amir Blinda", role: "FLL Operator", image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=300&h=300&fit=crop&crop=face", team: ["fll"] },
+    { name: "Amir Blinda", role: "FLL Operator", image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=300&h=300&fit=crop&crop=face", teams: ["fll"] },
     { name: "Abigal Ketzel", role: "", image: "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=300&h=300&fit=crop&crop=face", teams: [] },
     { name: "Alon Pankin", role: "Ramle Vibes", image: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=300&h=300&fit=crop&crop=face", teams: ["Media"] },
     { name: "Osher Shkard", role: "", image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face", teams: [] },
