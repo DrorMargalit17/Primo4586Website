@@ -11,13 +11,23 @@ import team2 from "@/assets/HomePage/team_2.jpg";
 import team3 from "@/assets/HomePage/team_3.jpg";
 import team4 from "@/assets/HomePage/team_4.jpg";
 import team5 from "@/assets/HomePage/team_5.jpg";
+import team6 from "@/assets/HomePage/team_6.jpg";
+import team7 from "@/assets/HomePage/team_7.jpg";
+import team8 from "@/assets/HomePage/team_8.jpg";
+import team9 from "@/assets/HomePage/team_9.jpg";
+import team10 from "@/assets/HomePage/team_10.jpg";
+import team11 from "@/assets/HomePage/team_11.jpg";
+import team12 from "@/assets/HomePage/team_12.jpg";
+import team13 from "@/assets/HomePage/team_13.jpg";
+import team14 from "@/assets/HomePage/team_14.jpg";
+import team15 from "@/assets/HomePage/team_15.jpg";
 
 
 
 
 import { Handshake, Briefcase, HeartHandshake, Target, Sparkles } from "lucide-react";
 
-const teamImages = [team1, team2, team3, team4, team5];
+const teamImages = [team1, team2, team3, team4, team5, team6,team7,team8,team9,team10,team11,team12,team13,team14,team15];
 
 const features = [
   {
