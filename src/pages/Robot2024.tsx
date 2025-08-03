@@ -68,7 +68,7 @@ const Robot2024 = () => {
             <p className="text-xl text-muted-foreground">
               PUNK was built to tackle the unique challenges of the 2025 season with unmatched precision and power. 
               Designed with robust engineering and intelligent programming, it excels in autonomy, agility, and teamwork integration.
-              From complex tasks to collaborative field maneuvers, SPARROW is the result of countless hours of design, testing, and refinement.
+              From complex tasks to collaborative field maneuvers, PUNK is the result of countless hours of design, testing, and refinement.
             </p>
           </div>
           <div>
@@ -94,7 +94,7 @@ const Robot2024 = () => {
             Robot Systems
           </h2>
           <p className="text-xl text-muted-foreground">
-            Explore the integrated subsystems powering SPARROW
+            Explore the integrated subsystems powering PUNK
           </p>
         </div>
 
