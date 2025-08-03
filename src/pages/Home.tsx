@@ -1,9 +1,9 @@
-import { Button } from "@/components/ui/button";
+import { useEffect, useState, useRef } from "react";
 import { Card } from "@/components/ui/card";
-import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
+import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Handshake, Briefcase, HeartHandshake, Target, Sparkles } from "lucide-react";
-import { useEffect, useState } from "react";
+
 import UpcomingEvents from "@/components/UpcomingEvents";
 
 import team1 from "@/assets/HomePage/team_1.jpg";
@@ -12,58 +12,218 @@ import team3 from "@/assets/HomePage/team_3.jpg";
 import team4 from "@/assets/HomePage/team_4.jpg";
 import team5 from "@/assets/HomePage/team_5.jpg";
 
+import { Handshake, Briefcase, HeartHandshake, Target, Sparkles } from "lucide-react";
 
+const teamImages = [team1, team2, team3, team4, team5];
 
-const Home = () => {
+const features = [
+  {
+    icon: Handshake,
+    title: "Family Spirit",
+    description:
+      "'Primo is a family' is more than just a slogan — it’s a core value that guides everything we do. It's reflected in our Shabbat gatherings, team bonding activities, and the overall atmosphere.Our family extends across generations — from founding mentors and alumni who continue to support us, to current members, parents, and the surrounding community. The deep-rooted connections we've built within our team, school, and city are what make us a true family. We also nurture the future through programs like FLL and school involvement, constantly expanding our family circle.",
+  },
+  {
+    icon: Briefcase,
+    title: "Professionalism",
+    description:
+      "Professionalism is a key value in Primo, essential to achieving excellence as a team. Our committed mentors pass on real-world knowledge, and veteran members train others during the season and in summer courses. This culture of learning ensures that every member gains strong technical skills and can work independently, which directly contributes to our success.",
+  },
+  {
+    icon: HeartHandshake,
+    title: "Gracious Professionalism",
+    description:
+      "We emphasize kindness and respect, both within the team and beyond. Internally, every member is treated with equal respect, regardless of role or experience. Externally, we maintain friendly and professional relationships with other teams in our city and beyond, always offering support and collaboration.",
+  },
+  {
+    icon: Target,
+    title: "Sense of Mission",
+    description:
+      "Our team operates with a strong sense of purpose — to contribute to our community, our country, and the global FIRST community. We proudly represent STEAM values and believe deeply in the impact of our work.",
+  },
+  {
+    icon: Sparkles,
+    title: "Initiative",
+    description:
+      "Primo empowers its members to take initiative, encouraging them to develop and lead their own projects. This fosters creativity, responsibility, and leadership, giving members the chance to influence the team's growth and face real challenges head-on.",
+  },
+];
+
+/**
+ * ImageCarousel component
+ * - Displays team images in an auto-rotating carousel every 4 seconds with smooth fade transition.
+ */
+const ImageCarousel = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [fade, setFade] = useState(true);
-  const teamImages = [team1, team2, team3, team4, team5];
-
-  const features = [
-    {
-      icon: Handshake,
-      title: "Family Spirit",
-      description:
-        "'Primo is a family' is more than just a slogan — it’s a core value that guides everything we do. It's reflected in our Shabbat gatherings, team bonding activities, and the overall atmosphere.Our family extends across generations — from founding mentors and alumni who continue to support us, to current members, parents, and the surrounding community. The deep-rooted connections we've built within our team, school, and city are what make us a true family. We also nurture the future through programs like FLL and school involvement, constantly expanding our family circle.",
-    },
-    {
-      icon: Briefcase,
-      title: "Professionalism",
-      description:
-        "Professionalism is a key value in Primo, essential to achieving excellence as a team. Our committed mentors pass on real-world knowledge, and veteran members train others during the season and in summer courses. This culture of learning ensures that every member gains strong technical skills and can work independently, which directly contributes to our success.",
-    },
-    {
-      icon: HeartHandshake,
-      title: "Gracious Professionalism",
-      description:
-        "We emphasize kindness and respect, both within the team and beyond. Internally, every member is treated with equal respect, regardless of role or experience. Externally, we maintain friendly and professional relationships with other teams in our city and beyond, always offering support and collaboration.",
-    },
-    {
-      icon: Target,
-      title: "Sense of Mission",
-      description:
-        "Our team operates with a strong sense of purpose — to contribute to our community, our country, and the global FIRST community. We proudly represent STEAM values and believe deeply in the impact of our work.",
-    },
-    {
-      icon: Sparkles,
-      title: "Initiative",
-      description:
-        "Primo empowers its members to take initiative, encouraging them to develop and lead their own projects. This fosters creativity, responsibility, and leadership, giving members the chance to influence the team's growth and face real challenges head-on.",
-    },
-  ];
+  const timeoutRef = useRef(null);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setFade(false);
-      setTimeout(() => {
-        setCurrentImageIndex((prevIndex) => (prevIndex + 1) % teamImages.length);
-        setFade(true);
-      }, 500); // duration of fade out
-    }, 3000);
+      setFade(false); // start fade out
+      timeoutRef.current = setTimeout(() => {
+        setCurrentImageIndex((prev) => (prev + 1) % teamImages.length);
+        setFade(true); // fade in new image
+      }, 300); // fade duration
+    }, 4000);
 
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+      clearTimeout(timeoutRef.current);
+    };
   }, []);
 
+  return (
+    <div className="w-full max-w-lg mx-auto relative overflow-hidden rounded-xl h-80 md:h-96">
+      {teamImages.map((src, idx) => (
+        <img
+          key={idx}
+          src={src}
+          alt={`Team ${idx + 1}`}
+          className={`w-full h-full object-cover rounded-xl absolute top-0 left-0 transition-opacity duration-500 ${
+            idx === currentImageIndex && fade ? "opacity-100 z-10" : "opacity-0 z-0"
+          }`}
+        />
+      ))}
+      <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
+    </div>
+  );
+};
+
+/**
+ * CoreValuePopup component
+ * - Displays a modal popup with detailed information about a selected core value.
+ * - Clicking outside the popup closes it.
+ * - Content is fully centered.
+ */
+const CoreValuePopup = ({ feature, onClose }) => {
+  const popupRef = useRef(null);
+
+  useEffect(() => {
+    function handleOutsideClick(event) {
+      if (popupRef.current && !popupRef.current.contains(event.target)) {
+        onClose();
+      }
+    }
+    document.addEventListener("mousedown", handleOutsideClick);
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, [onClose]);
+
+  const IconComponent = feature.icon;
+
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+      <div
+        ref={popupRef}
+        className="bg-surface rounded-lg p-8 max-w-xl w-full shadow-xl flex flex-col items-center text-center"
+      >
+        <div className="bg-gradient-primary p-4 rounded-xl w-fit mb-6 shadow-accent-glow">
+          <IconComponent className="h-10 w-10 text-primary-foreground mx-auto" />
+        </div>
+        <h3 className="text-2xl font-bold text-foreground mb-4">{feature.title}</h3>
+        <p className="text-lg text-muted-foreground leading-relaxed">{feature.description}</p>
+      </div>
+    </div>
+  );
+};
+
+/**
+ * CoreValuesCarousel component
+ * - Displays core values with auto-rotation every 15 seconds.
+ * - Allows manual selection of a value which pauses auto-rotation and shows a popup.
+ * - Entire card area is clickable to open popup.
+ * - Pagination dots switch value without opening popup.
+ * - NO blue glowing outline on hover over entire card (removed).
+ */
+const CoreValuesCarousel = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const intervalRef = useRef(null);
+
+  // Auto-rotation effect with 15 seconds interval
+  useEffect(() => {
+    if (!isPopupOpen) {
+      intervalRef.current = setInterval(() => {
+        setCurrentIndex((prev) => (prev + 1) % features.length);
+      }, 15000);
+    }
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, [isPopupOpen]);
+
+  // Open popup and pause rotation
+  const openPopup = (index) => {
+    setCurrentIndex(index);
+    setIsPopupOpen(true);
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+  };
+
+  // Close popup and resume rotation
+  const closePopup = () => {
+    setIsPopupOpen(false);
+  };
+
+  const IconComponent = features[currentIndex].icon;
+
+  return (
+    <div className="max-w-6xl mx-auto relative">
+      <Card
+        className="p-8 md:p-12 bg-gradient-surface border-border text-center h-[400px] flex flex-col justify-center cursor-pointer select-none"
+        onClick={() => openPopup(currentIndex)}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") openPopup(currentIndex);
+        }}
+        aria-label={`Open details for ${features[currentIndex].title}`}
+      >
+        <div className="bg-gradient-primary p-4 rounded-xl w-fit mx-auto mb-6 shadow-accent-glow transition-all duration-500">
+          <IconComponent className="h-8 w-8 text-primary-foreground" />
+        </div>
+        <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-4 transition-all duration-500">
+          {features[currentIndex].title}
+        </h3>
+        <p className="text-lg text-muted-foreground leading-relaxed transition-all duration-500">
+          {features[currentIndex].description}
+        </p>
+
+        <div className="flex justify-center mt-6 space-x-2">
+          {features.map((_, idx) => (
+            <button
+              key={idx}
+              onClick={(e) => {
+                e.stopPropagation(); // prevent parent card click
+                setCurrentIndex(idx);
+              }}
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                idx === currentIndex
+                  ? "bg-primary shadow-glow"
+                  : "bg-muted hover:bg-muted-foreground/50"
+              }`}
+              aria-label={`Go to value ${idx + 1}`}
+              disabled={isPopupOpen}
+              type="button"
+            />
+          ))}
+        </div>
+      </Card>
+
+      {isPopupOpen && (
+        <CoreValuePopup feature={features[currentIndex]} onClose={closePopup} />
+      )}
+    </div>
+  );
+};
+
+const Home = () => {
   return (
     <div className="space-y-20">
       {/* Hero Section */}
@@ -91,24 +251,13 @@ const Home = () => {
               </div>
             </div>
 
-            {/* Right Carousel (Manual with auto-rotation) */}
-            <div className="animate-fade-in">
-              <div className="w-full max-w-lg mx-auto relative overflow-hidden rounded-xl">
-                <img
-                  src={teamImages[currentImageIndex]}
-                  alt={`Team ${currentImageIndex + 1}`}
-                  className={`w-full h-80 md:h-96 object-cover transition-opacity duration-500 ${
-                    fade ? "opacity-100" : "opacity-0"
-                  }`}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
-              </div>
-            </div>
+            {/* Right Image Carousel */}
+            <ImageCarousel />
           </div>
         </div>
       </section>
 
-      {/* Core Values Carousel Section */}
+      {/* Core Values Section */}
       <section className="container mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-foreground mb-4">Our Core Values</h2>
@@ -117,39 +266,7 @@ const Home = () => {
           </p>
         </div>
 
-        <div className="max-w-6xl mx-auto">
-          <div className="relative">
-            <Card className="p-8 md:p-12 bg-gradient-surface border-border text-center h-[400px] flex flex-col justify-center">
-              <div className="bg-gradient-primary p-4 rounded-xl w-fit mx-auto mb-6 shadow-accent-glow transition-all duration-500">
-                {(() => {
-                  const IconComponent = features[currentImageIndex].icon;
-                  return <IconComponent className="h-8 w-8 text-primary-foreground" />;
-                })()}
-              </div>
-              <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-4 transition-all duration-500">
-                {features[currentImageIndex].title}
-              </h3>
-              <p className="text-lg text-muted-foreground leading-relaxed transition-all duration-500">
-                {features[currentImageIndex].description}
-              </p>
-            </Card>
-
-            <div className="flex justify-center mt-6 space-x-2">
-              {features.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentImageIndex(index)}
-                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                    index === currentImageIndex
-                      ? "bg-primary shadow-glow"
-                      : "bg-muted hover:bg-muted-foreground/50"
-                  }`}
-                  aria-label={`Go to value ${index + 1}`}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
+        <CoreValuesCarousel />
       </section>
 
       {/* Upcoming Events Section */}
