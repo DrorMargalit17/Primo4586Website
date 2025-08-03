@@ -111,7 +111,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center space-x-3 text-muted-foreground">
                 <Phone className="h-4 w-4" />
-                <span className="text-sm">+1 (555) 123-4567</span>
+                <span className="text-sm">+972-58-727-4170</span>
               </div>
               <div className="flex items-center space-x-3 text-muted-foreground">
                 <MapPin className="h-4 w-4" />
