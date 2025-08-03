@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Mail, MapPin, Phone, Facebook, Instagram, Youtube } from "lucide-react";
+import { Mail, MapPin, Phone, Facebook, Instagram, Youtube} from "lucide-react";
 import { TikTokIcon } from "@/components/ui/tiktok-icon";
 import logoPng from '@/assets/PrimaryLogo.png';
 
