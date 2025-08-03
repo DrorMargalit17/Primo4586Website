@@ -86,6 +86,9 @@ const Team = () => {
     { name: "Noam Shtein", role: "", image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&h=300&fit=crop&crop=face", teams: [] },
     { name: "Mor Gaz", role: "", image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=300&h=300&fit=crop&crop=face", teams: [] },
     { name: "Yotam Cohen", role: "", image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=300&h=300&fit=crop&crop=face", teams: [] },
+    { name: "Noa Hillel", role: "", image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=300&h=300&fit=crop&crop=face", teams: [] },
+    { name: "Liran Friedman", role: "", image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=300&h=300&fit=crop&crop=face", teams: [] },
+
   ];
 
   const mentors = [
@@ -149,7 +152,12 @@ const Team = () => {
       image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&h=300&fit=crop&crop=face",
       since: "2018",
     },
-
+    {
+      name: "Yair Zadok",
+      role: "Main Mentor",
+      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&h=300&fit=crop&crop=face",
+      since: "2024",
+    },
   ];
 
   useEffect(() => {
