@@ -400,7 +400,7 @@ const Team = () => {
       </section>
 
       {/* Mentors */}
-      <section className="container mx-auto px-6 mb-20">
+      <section className="container mx-auto px-6 mb-32">
         <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-8 text-center">
           Mentors
         </h2>
