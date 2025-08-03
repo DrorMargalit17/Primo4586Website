@@ -1,6 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Link } from "react-router-dom";
 import { Trophy, Award, Star, Users, Target, Lightbulb } from "lucide-react";
 
 const FLLMentorship = () => {
@@ -219,16 +220,15 @@ const FLLMentorship = () => {
       <section className="bg-surface py-16 px-6">
         <div className="container mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Join Our FLL Program
+            Learn to Become a Mentor
           </h2>
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Interested in mentoring or learning more about our FLL teams? 
-            We welcome passionate individuals who want to inspire the next generation.
+            Interested in guiding and inspiring younger students? Join us to develop your mentorship skills and make a difference!
           </p>
           <Button variant="hero" size="lg" asChild>
-            <a href="mailto:fll@robotics.edu">
-              Get Involved
-            </a>
+            <Link to="/contact">
+              Contact Us
+            </Link>
           </Button>
         </div>
       </section>
