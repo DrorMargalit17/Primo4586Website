@@ -16,6 +16,7 @@ import Resources from "./pages/Resources";
 import Sponsors from "./pages/Sponsors";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import AdminPanel from "./pages/AdminPanel";  // הוספתי פה את הייבוא של דף הניהול
 
 const queryClient = new QueryClient();
 
@@ -48,6 +49,7 @@ const App = () => (
             <Route path="/resources" element={<Resources />} />
             <Route path="/sponsors" element={<Sponsors />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/admin" element={<AdminPanel />} /> {/* הוספתי את הנתיב של דף הניהול */}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Layout>

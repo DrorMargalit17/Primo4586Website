@@ -12,6 +12,9 @@ import team3 from "@/assets/HomePage/team_3.jpg";
 import team4 from "@/assets/HomePage/team_4.jpg";
 import team5 from "@/assets/HomePage/team_5.jpg";
 
+
+
+
 import { Handshake, Briefcase, HeartHandshake, Target, Sparkles } from "lucide-react";
 
 const teamImages = [team1, team2, team3, team4, team5];

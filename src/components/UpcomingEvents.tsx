@@ -1,66 +1,27 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { db } from "@/firebase";
+import {
+  collection,
+  onSnapshot,
+  orderBy,
+  query,
+  Timestamp,
+} from "firebase/firestore";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Calendar, MapPin, Clock, Plus } from "lucide-react";
 
-/**
- * Interface representing the structure of an event.
- */
 interface Event {
   id: string;
   title: string;
-  date: string;
+  date: Timestamp;
   time: string;
   location: string;
   description: string;
-  googleCalendarId?: string;
 }
 
-/**
- * Static list of upcoming events.
- */
-const events: Event[] = [
-  {
-    id: "1",
-    title: "Spark Day",
-    date: "2025-08-10",
-    time: "16:30 - 20:00 PM",
-    location: "Modi'in Israel",
-    description: "Interactive robotics demonstrations and hands-on activities for families.",
-  },
-  {
-    id: "2",
-    title: "Regional Competition",
-    date: "2025-05-15",
-    time: "9:00 AM",
-    location: "University Campus",
-    description: "Public competition where community members can cheer on our team.",
-  },
-  {
-    id: "3",
-    title: "Summer Camp Kickoff",
-    date: "2025-06-05",
-    time: "2:00 PM",
-    location: "Primo4586 Lab",
-    description: "Launch of our annual summer robotics camp for middle school students.",
-  },
-  {
-    id: "4",
-    title: "Tech Showcase",
-    date: "2025-07-20",
-    time: "6:00 PM",
-    location: "Community Center",
-    description: "Showcase of our latest robotics innovations and student projects.",
-  },
-];
-
-/**
- * Formats a given date string to a readable format.
- * @param dateString The date string to format.
- * @returns Formatted date.
- */
-const formatDate = (dateString: string) => {
-  const date = new Date(dateString);
+const formatDate = (timestamp: Timestamp) => {
+  const date = timestamp.toDate();
   return date.toLocaleDateString("en-US", {
     weekday: "short",
     month: "short",
@@ -69,69 +30,52 @@ const formatDate = (dateString: string) => {
   });
 };
 
-/**
- * Opens a Google Calendar link to add the given event.
- * @param event The event to add to the calendar.
- */
 const addToGoogleCalendar = (event: Event) => {
-  const startDate = new Date(`${event.date}T${convertTo24Hour(event.time)}`);
-  const endDate = new Date(startDate.getTime() + 2 * 60 * 60 * 1000); // default duration: 2 hours
+  // המרת תאריך ושעה ל־Date אחד
+  const [hour, minute] = event.time.split(":").map(Number);
+  const startDate = event.date.toDate();
+  startDate.setHours(hour, minute);
+
+  const endDate = new Date(startDate.getTime() + 2 * 60 * 60 * 1000); // 2 שעות
+
+  const formatDateForGoogle = (date: Date) =>
+    date
+      .toISOString()
+      .replace(/[-:]/g, "")
+      .split(".")[0] + "Z";
 
   const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
     event.title
-  )}&dates=${startDate
-    .toISOString()
-    .replace(/[-:]/g, "")
-    .split(".")[0]}Z/${endDate
-    .toISOString()
-    .replace(/[-:]/g, "")
-    .split(".")[0]}Z&details=${encodeURIComponent(
-    event.description
-  )}&location=${encodeURIComponent(event.location)}`;
+  )}&dates=${formatDateForGoogle(startDate)}/${formatDateForGoogle(
+    endDate
+  )}&details=${encodeURIComponent(event.description)}&location=${encodeURIComponent(
+    event.location
+  )}`;
 
   window.open(googleCalendarUrl, "_blank");
 };
 
-/**
- * Converts a 12-hour time string to 24-hour format.
- * @param time12h Time string in 12-hour format.
- * @returns Time string in 24-hour format.
- */
-const convertTo24Hour = (time12h: string) => {
-  const [time, modifier] = time12h.split(" ");
-  let [hours, minutes] = time.split(":");
-
-  if (!modifier || !minutes) return "00:00:00";
-
-  if (hours === "12") {
-    hours = "00";
-  }
-  if (modifier === "PM") {
-    hours = (parseInt(hours, 10) + 12).toString();
-  }
-
-  return `${hours.padStart(2, "0")}:${minutes.padStart(2, "0")}:00`;
-};
-
-/**
- * Props for the UpcomingEvents component.
- */
 interface UpcomingEventsProps {
   showTitle?: boolean;
   className?: string;
 }
 
-/**
- * UpcomingEvents component displays a list of upcoming events with an optional title section.
- * @param showTitle Whether to show the section title.
- * @param className Optional additional class names for styling.
- * @returns JSX.Element
- */
 const UpcomingEvents = ({ showTitle = true, className = "" }: UpcomingEventsProps) => {
-  // Pre-sorted events once on load to avoid re-sorting on each render
-  const [sortedEvents] = useState(() =>
-    [...events].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
-  );
+  const [events, setEvents] = useState<Event[]>([]);
+
+  useEffect(() => {
+    const eventsRef = collection(db, "events");
+    const q = query(eventsRef, orderBy("date", "asc"));
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const eventsData = snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...(doc.data() as Omit<Event, "id">),
+      }));
+      setEvents(eventsData);
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   return (
     <section className={className}>
@@ -145,7 +89,7 @@ const UpcomingEvents = ({ showTitle = true, className = "" }: UpcomingEventsProp
       )}
 
       <div className="grid gap-6 md:grid-cols-2">
-        {sortedEvents.map((event) => (
+        {events.map(event => (
           <Card
             key={event.id}
             className="p-6 border-border bg-gradient-surface hover:border-primary/50 transition-all duration-300 hover:shadow-glow"
