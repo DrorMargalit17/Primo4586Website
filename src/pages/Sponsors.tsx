@@ -187,7 +187,7 @@ const Sponsors = () => {
                 innovators. Let's build the future together.
               </p>
               <Button variant="hero" size="lg" asChild>
-                <a href="mailto:partnerships@robotics.edu">
+                <a href="mailto:4586Media@gmail.com">
                   Become a Sponsor
                 </a>
               </Button>
