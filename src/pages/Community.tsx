@@ -9,8 +9,7 @@ import primoFly3 from "@/assets/community/primoFly/primoFly5.jpg";
 import primoSenior1 from "@/assets/community/PrimoSenior/primoSenior_1.png";
 import primoSenior2 from "@/assets/community/PrimoSenior/primoSenior_2.png";
 import primoSenior3 from "@/assets/community/PrimoSenior/primoSenior_3.png";
-
-
+import { Link } from "react-router-dom";
 
 const AutoCarousel = ({ images }) => {
   const [currentImg, setCurrentImg] = useState(0);
@@ -89,19 +88,15 @@ const communityActivities = [
     title: "Primo Senior",
     description:
       "We hosted interactive booths and showcased our robots at the city's STEM fair, drawing hundreds of visitors and spreading STEM awareness.",
-      images: [primoSenior1, primoSenior2, primoSenior3],
+    images: [primoSenior1, primoSenior2, primoSenior3],
   },
   {
     title: "Charity Robot Show",
     description:
       "A public robotics demonstration to raise funds for local children's hospitals. Our robots performed fun tasks and entertained the audience.",
-    images: [
-      "/images/community/charity1.jpg",
-      "/images/community/charity2.jpg",
-    ],
+    images: ["/images/community/charity1.jpg", "/images/community/charity2.jpg"],
   },
 ];
-
 
 const Community = () => {
   return (
@@ -109,7 +104,10 @@ const Community = () => {
       {/* Hero Section */}
       <section className="bg-gradient-hero py-20 text-center">
         <h1 className="text-5xl md:text-6xl font-bold mb-6 text-foreground">
-          Community <span className="bg-gradient-primary bg-clip-text text-transparent">Impact</span>
+          Community{" "}
+          <span className="bg-gradient-primary bg-clip-text text-transparent">
+            Impact
+          </span>
         </h1>
         <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
           We believe in giving back to our community by sharing our passion for
@@ -169,34 +167,26 @@ const Community = () => {
                 <div className="text-4xl md:text-5xl font-bold text-primary mb-2">
                   {stat.number}
                 </div>
-                <div className="text-muted-foreground font-medium">
-                  {stat.label}
-                </div>
+                <div className="text-muted-foreground font-medium">{stat.label}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Get Involved CTA */}
+      {/* Get Involved CTA - Updated Section */}
       <section className="container mx-auto px-6 text-center pb-16">
         <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-          Get Involved
+          Collaborate With Us
         </h2>
         <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-          Want to be part of our community initiatives? There are many ways to
-          contribute and make a difference.
+          Interested in partnering your group or organization with Primo? We welcome collaborations that inspire innovation and community growth.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Button variant="hero" size="lg" asChild>
-            <a href="mailto:community@robotics.edu">
-              Volunteer with Us
-            </a>
-          </Button>
-          <Button variant="outline" size="lg" asChild>
-            <a href="mailto:partnerships@robotics.edu">
-              Partner with Us
-            </a>
+            <Link to="/contact">
+              Contact Us
+            </Link>
           </Button>
         </div>
       </section>
