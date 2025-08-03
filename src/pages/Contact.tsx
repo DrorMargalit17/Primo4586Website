@@ -63,7 +63,7 @@ const Contact = () => {
     {
       icon: Phone,
       title: "Call Us",
-      details: ["+972-8-970-7777", "Mon-Fri 9AM-5PM"],
+      details: ["+972-58-727-4170", "Mon-Fri 9AM-5PM"],
     },
     {
       icon: Mail,
