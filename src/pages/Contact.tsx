@@ -19,11 +19,20 @@ const Contact = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate form submission
+    
+    // Create mailto link with form data
+    const mailtoLink = `mailto:4586media@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(
+      `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+    )}`;
+    
+    // Open email client
+    window.location.href = mailtoLink;
+    
     toast({
-      title: "Message Sent!",
-      description: "Thank you for contacting us. We'll get back to you soon.",
+      title: "Opening Email Client",
+      description: "Your email client will open with the pre-filled message.",
     });
+    
     setFormData({ name: "", email: "", subject: "", message: "" });
   };
 
@@ -43,17 +52,12 @@ const Contact = () => {
     {
       icon: Phone,
       title: "Call Us",
-      details: ["+1 (555) 123-4567", "+1 (555) 123-4568", "Mon-Fri 9AM-5PM"],
+      details: ["+972-8-970-7777", "Mon-Fri 9AM-5PM"],
     },
     {
       icon: Mail,
       title: "Email Us",
-      details: ["info@robotics.edu", "4586media@gmail.com", "partnerships@robotics.edu"],
-    },
-    {
-      icon: Clock,
-      title: "Lab Hours",
-      details: ["Monday-Friday: 9AM-9PM", "Saturday: 10AM-6PM", "Sunday: 12PM-8PM"],
+      details: ["4586media@gmail.com", "General inquiries and partnerships"],
     },
   ];
 
