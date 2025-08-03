@@ -433,11 +433,6 @@ const Team = () => {
           ))}
         </div>
       </section>
-      
-      {/* Debug spacing element */}
-      <div className="h-32 bg-red-500/20" style={{marginBottom: '8rem'}}>
-        <p className="text-center py-4 text-red-500">DEBUG: This should create spacing before footer</p>
-      </div>
     </div>
   );
 };
