@@ -152,12 +152,7 @@ const Team = () => {
       image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&h=300&fit=crop&crop=face",
       since: "2018",
     },
-    {
-      name: "Yair Zadok",
-      role: "Main Mentor",
-      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&h=300&fit=crop&crop=face",
-      since: "2024",
-    },
+    
   ];
 
   useEffect(() => {
@@ -339,7 +334,7 @@ const Team = () => {
             {teamMembers.map((member, index) => (
               <Card
                 key={index}
-                className="relative p-3 bg-gradient-surface border-border hover:border-primary/50 transition-all duration-300 hover:shadow-glow group min-h-[180px]"
+                className="relative p-6 bg-gradient-surface border-border hover:border-primary/50 transition-all duration-300 hover:shadow-glow group min-h-[180px]"
               >
                 <div className="text-center">
                   <div className="relative mb-2">
@@ -404,14 +399,14 @@ const Team = () => {
         <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-8 text-center">
           Mentors
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
           {mentors.map((mentor, index) => (
             <Card
               key={index}
-              className="relative p-6 bg-gradient-surface border-border hover:border-primary/50 transition-all duration-300 hover:shadow-glow group min-h-[280px]"
+              className="relative p-3 bg-gradient-surface border-border hover:border-primary/50 transition-all duration-300 hover:shadow-glow group min-h-[260px]"
             >
               <div className="text-center">
-                <div className="relative mb-4">
+                <div className="relative mb-2">
                   <img
                     src={mentor.image}
                     alt={mentor.name}
