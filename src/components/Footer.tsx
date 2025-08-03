@@ -7,8 +7,8 @@ import logoPng from '@/assets/PrimaryLogo.png';
 
 const validUsers = [
   { username: "DrorM", password: "124890" },
-  { username: "user1", password: "pass1" },
-  { username: "user2", password: "pass2" },
+  { username: "MayaG", password: "PrimoGoz" },
+  { username: "ShayK", password: "PrimoShay" },
 ];
 
 const Footer = () => {
