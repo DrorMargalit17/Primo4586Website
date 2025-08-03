@@ -17,7 +17,7 @@ const events: Event[] = [
     id: "1",
     title: "Spark Day",
     date: "2025-08-10",
-    time: "10:00 AM",
+    time: "16:30 - 20:00 PM",
     location: "Modi'in Israel",
     description: "Interactive robotics demonstrations and hands-on activities for families.",
   },
