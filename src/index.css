@@ -20,21 +20,16 @@
     --popover: 220 15% 12%;
     --popover-foreground: 210 40% 98%;
 
-    /* Brand Colors - Robotics Team Blue & Orange Theme */
-    --primary: 210 100% 56%;           /* Team Blue - Primary brand color */
-    --primary-hover: 210 100% 48%;     /* Team Blue - Hover state */
-    --primary-foreground: 220 15% 8%;  /* Text on blue backgrounds */
+    /* Brand Colors - Tech Blue Theme */
+    --primary: 210 100% 56%;
+    --primary-hover: 210 100% 48%;
+    --primary-foreground: 220 15% 8%;
 
-    --secondary: 220 15% 16%;          /* Surface secondary */
+    --secondary: 220 15% 16%;
     --secondary-foreground: 210 40% 98%;
 
-    /* Team Orange - Secondary brand color */
-    --orange: 25 95% 55%;              /* Team Orange - Main */
-    --orange-hover: 25 95% 48%;        /* Team Orange - Hover state */
-    --orange-foreground: 220 15% 8%;   /* Text on orange backgrounds */
-
-    /* Accent - Enhanced with team colors */
-    --accent: 180 100% 50%;            /* Keep cyan for tech feel */
+    /* Accent - Electric Cyan */
+    --accent: 180 100% 50%;
     --accent-hover: 180 100% 42%;
     --accent-foreground: 220 15% 8%;
 
@@ -53,18 +48,14 @@
     --input: 220 15% 16%;
     --ring: 210 100% 56%;
 
-    /* Gradients - Team Blue & Orange Combinations */
-    --gradient-primary: linear-gradient(135deg, hsl(210 100% 56%), hsl(25 95% 55%));           /* Blue to Orange */
-    --gradient-secondary: linear-gradient(135deg, hsl(25 95% 55%), hsl(210 100% 56%));         /* Orange to Blue */
-    --gradient-surface: linear-gradient(135deg, hsl(220 15% 12%), hsl(220 15% 16%));           /* Neutral surface */
-    --gradient-hero: linear-gradient(135deg, hsl(220 15% 8%) 0%, hsl(220 15% 12%) 50%, hsl(210 100% 56% / 0.1) 70%, hsl(25 95% 55% / 0.05) 100%); /* Hero with subtle team colors */
-    --gradient-team: linear-gradient(45deg, hsl(210 100% 56% / 0.8), hsl(25 95% 55% / 0.8));   /* Team identity gradient */
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(210 100% 56%), hsl(180 100% 50%));
+    --gradient-surface: linear-gradient(135deg, hsl(220 15% 12%), hsl(220 15% 16%));
+    --gradient-hero: linear-gradient(135deg, hsl(220 15% 8%) 0%, hsl(220 15% 12%) 50%, hsl(210 100% 56% / 0.1) 100%);
 
-    /* Shadows - Enhanced with team colors */
-    --shadow-glow: 0 0 20px hsl(210 100% 56% / 0.3);           /* Blue glow */
-    --shadow-orange-glow: 0 0 25px hsl(25 95% 55% / 0.35);     /* Orange glow */
-    --shadow-accent-glow: 0 0 30px hsl(180 100% 50% / 0.4);    /* Cyan glow */
-    --shadow-team-glow: 0 0 35px hsl(210 100% 56% / 0.2), 0 0 15px hsl(25 95% 55% / 0.1); /* Dual team color glow */
+    /* Shadows */
+    --shadow-glow: 0 0 20px hsl(210 100% 56% / 0.3);
+    --shadow-accent-glow: 0 0 30px hsl(180 100% 50% / 0.4);
     --shadow-elevated: 0 10px 30px -10px hsl(220 15% 8% / 0.5);
 
     /* Border Radius */

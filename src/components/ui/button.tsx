@@ -9,18 +9,13 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        /** Core button variants */
         default: "bg-primary text-primary-foreground hover:bg-primary-hover hover:shadow-glow transform hover:scale-105",
         destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline: "border border-border bg-surface hover:bg-surface-elevated hover:border-primary/50",
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-surface-elevated hover:text-foreground",
         link: "text-primary underline-offset-4 hover:underline hover:text-primary-hover",
-        
-        /** Team color variants for robotics branding */
-        hero: "bg-gradient-primary text-primary-foreground hover:shadow-team-glow transform hover:scale-105 font-semibold",
-        orange: "bg-orange text-orange-foreground hover:bg-orange-hover hover:shadow-orange-glow transform hover:scale-105",
-        team: "bg-gradient-team text-primary-foreground hover:shadow-team-glow transform hover:scale-105 font-semibold",
+        hero: "bg-gradient-primary text-primary-foreground hover:shadow-accent-glow transform hover:scale-105 font-semibold",
         floating: "bg-accent text-accent-foreground hover:bg-accent-hover hover:shadow-accent-glow rounded-full",
       },
       size: {
