@@ -35,6 +35,12 @@ export default {
 					DEFAULT: 'hsl(var(--secondary))',
 					foreground: 'hsl(var(--secondary-foreground))'
 				},
+				/** Team Orange - Secondary brand color for robotics team identity */
+				orange: {
+					DEFAULT: 'hsl(var(--orange))',
+					hover: 'hsl(var(--orange-hover))',
+					foreground: 'hsl(var(--orange-foreground))'
+				},
 				accent: {
 					DEFAULT: 'hsl(var(--accent))',
 					hover: 'hsl(var(--accent-hover))',
@@ -70,13 +76,19 @@ export default {
 				}
 			},
 			backgroundImage: {
-				'gradient-primary': 'var(--gradient-primary)',
-				'gradient-surface': 'var(--gradient-surface)',
-				'gradient-hero': 'var(--gradient-hero)',
+				/** Team color gradients for robotics branding */
+				'gradient-primary': 'var(--gradient-primary)',        /* Blue to Orange */
+				'gradient-secondary': 'var(--gradient-secondary)',    /* Orange to Blue */
+				'gradient-surface': 'var(--gradient-surface)',        /* Neutral surface */
+				'gradient-hero': 'var(--gradient-hero)',              /* Enhanced hero */
+				'gradient-team': 'var(--gradient-team)',              /* Team identity */
 			},
 			boxShadow: {
-				'glow': 'var(--shadow-glow)',
-				'accent-glow': 'var(--shadow-accent-glow)',
+				/** Team color glows for enhanced visual identity */
+				'glow': 'var(--shadow-glow)',                /* Blue glow */
+				'orange-glow': 'var(--shadow-orange-glow)',  /* Orange glow */
+				'accent-glow': 'var(--shadow-accent-glow)',  /* Cyan glow */
+				'team-glow': 'var(--shadow-team-glow)',      /* Dual team glow */
 				'elevated': 'var(--shadow-elevated)',
 			},
 			borderRadius: {
