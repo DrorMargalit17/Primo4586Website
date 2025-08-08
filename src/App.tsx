@@ -49,7 +49,7 @@ const App = () => (
             <Route path="/resources" element={<Resources />} />
             <Route path="/sponsors" element={<Sponsors />} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/admin" element={<AdminPanel />} /> {/* הוספתי את הנתיב של דף הניהול */}
+            <Route path="/admin" element={<AdminPanel />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Layout>
