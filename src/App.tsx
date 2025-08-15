@@ -16,7 +16,7 @@ import Resources from "./pages/Resources";
 import Sponsors from "./pages/Sponsors";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
-import AdminPanel from "./pages/AdminPanel";  // הוספתי פה את הייבוא של דף הניהול
+import AdminPanel from "./pages/AdminPanel";  
 
 const queryClient = new QueryClient();
 
