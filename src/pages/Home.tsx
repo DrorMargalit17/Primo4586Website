@@ -3,6 +3,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { EditableText } from "@/components/editor/EditableText";
 
 import UpcomingEvents from "@/components/UpcomingEvents";
 
@@ -247,13 +248,20 @@ const Home = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Left Content */}
             <div className="text-center lg:text-left animate-slide-in">
-              <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent">
-                Welcome to Primo4586
-              </h1>
-              <p className="text-xl md:text-2xl text-muted-foreground mb-8">
-                Where innovation meets engineering. We design, build, and program
-                autonomous robots that push the boundaries of what's possible.
-              </p>
+              <EditableText
+                contentKey="hero-title" 
+                defaultContent="Welcome to Primo4586"
+                contentType="heading"
+                tag="h1"
+                className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent"
+              />
+              <EditableText
+                contentKey="hero-description"
+                defaultContent="Where innovation meets engineering. We design, build, and program autonomous robots that push the boundaries of what's possible."
+                contentType="paragraph"
+                tag="p"
+                className="text-xl md:text-2xl text-muted-foreground mb-8"
+              />
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                 <Button variant="hero" size="lg" asChild>
                   <Link to="/about">
@@ -275,10 +283,20 @@ const Home = () => {
       {/* Core Values Section */}
       <section className="container mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-foreground mb-4">Our Core Values</h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            The principles that guide everything we do, from design to competition
-          </p>
+          <EditableText
+            contentKey="core-values-title"
+            defaultContent="Our Core Values"
+            contentType="heading"
+            tag="h2"
+            className="text-4xl font-bold text-foreground mb-4"
+          />
+          <EditableText
+            contentKey="core-values-description"
+            defaultContent="The principles that guide everything we do, from design to competition"
+            contentType="paragraph"
+            tag="p"
+            className="text-xl text-muted-foreground max-w-2xl mx-auto"
+          />
         </div>
 
         <CoreValuesCarousel />
@@ -292,13 +310,20 @@ const Home = () => {
       {/* CTA Section */}
       <section className="bg-surface py-16 px-6">
         <div className="container mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Ready to Join Our Journey?
-          </h2>
-          <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Be part of a team that's shaping the future of robotics and
-            technology innovation.
-          </p>
+          <EditableText
+            contentKey="cta-title"
+            defaultContent="Ready to Join Our Journey?"
+            contentType="heading"
+            tag="h2"
+            className="text-3xl md:text-4xl font-bold text-foreground mb-4"
+          />
+          <EditableText
+            contentKey="cta-description"
+            defaultContent="Be part of a team that's shaping the future of robotics and technology innovation."
+            contentType="paragraph" 
+            tag="p"
+            className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto"
+          />
           <Button variant="hero" size="lg" asChild>
             <Link to="/team">
               Meet Our Team <ArrowRight className="ml-2" />

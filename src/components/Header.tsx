@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Menu, X, ChevronDown } from "lucide-react";
 import logoPng from '@/assets/PrimaryLogo.png';
+import { AdminToggle } from '@/components/admin/AdminToggle';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -48,8 +49,9 @@ const Header = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-1">
-            {navItems.map((item) => {
+          <div className="hidden lg:flex items-center space-x-4">
+            <nav className="flex items-center space-x-1">
+              {navItems.map((item) => {
               if (item.isDropdown && item.name === "Robot") {
                 return (
                   <DropdownMenu key="robot">
@@ -115,8 +117,10 @@ const Header = () => {
                   {item.name}
                 </Link>
               );
-            })}
-          </nav>
+              })}
+            </nav>
+            <AdminToggle />
+          </div>
 
           {/* Mobile Menu Button */}
           <Button
