@@ -14,7 +14,101 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      content_versions: {
+        Row: {
+          content: string
+          content_id: string
+          created_at: string
+          created_by: string | null
+          id: string
+          version_number: number
+        }
+        Insert: {
+          content: string
+          content_id: string
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          version_number: number
+        }
+        Update: {
+          content?: string
+          content_id?: string
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          version_number?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "content_versions_content_id_fkey"
+            columns: ["content_id"]
+            isOneToOne: false
+            referencedRelation: "editable_content"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      editable_content: {
+        Row: {
+          content: string
+          content_type: Database["public"]["Enums"]["content_type"]
+          created_at: string
+          id: string
+          key: string
+          page_path: string
+          updated_at: string
+          updated_by: string | null
+        }
+        Insert: {
+          content: string
+          content_type?: Database["public"]["Enums"]["content_type"]
+          created_at?: string
+          id?: string
+          key: string
+          page_path: string
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Update: {
+          content?: string
+          content_type?: Database["public"]["Enums"]["content_type"]
+          created_at?: string
+          id?: string
+          key?: string
+          page_path?: string
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          email: string | null
+          id: string
+          is_admin: boolean
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          email?: string | null
+          id?: string
+          is_admin?: boolean
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          email?: string | null
+          id?: string
+          is_admin?: boolean
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -23,7 +117,7 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      content_type: "text" | "heading" | "paragraph"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +244,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      content_type: ["text", "heading", "paragraph"],
+    },
   },
 } as const
