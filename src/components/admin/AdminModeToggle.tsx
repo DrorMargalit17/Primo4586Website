@@ -33,12 +33,12 @@ export const AdminModeToggle = () => {
       <Badge variant="default" className="flex items-center gap-1">
         {adminMode === 'panel' ? (
           <>
-            <Settings className="h-10 w-3" />
+            <Settings className="h-3 w-3" />
             Admin Panel
           </>
         ) : (
           <>
-            <Edit3 className="h-10 w-3" />
+            <Edit3 className="h-3 w-3" />
             Edit Mode
           </>
         )}

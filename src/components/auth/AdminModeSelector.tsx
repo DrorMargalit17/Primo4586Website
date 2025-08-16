@@ -34,7 +34,7 @@ export const AdminModeSelector = ({ open, onOpenChange }: AdminModeSelectorProps
           <Button
             variant="outline"
             onClick={() => handleSelectMode('panel')}
-            className="h-16 flex flex-col gap-2"
+            className="h-20 flex flex-col gap-2"
           >
             <Settings className="h-6 w-6" />
             <span>Admin Panel</span>
@@ -43,7 +43,7 @@ export const AdminModeSelector = ({ open, onOpenChange }: AdminModeSelectorProps
           <Button
             variant="outline"
             onClick={() => handleSelectMode('edit')}
-            className="h-16 flex flex-col gap-2"
+            className="h-20 flex flex-col gap-2"
           >
             <Edit3 className="h-6 w-6" />
             <span>Edit Mode</span>
