@@ -1,27 +1,21 @@
 import { useEffect, useState } from "react";
-import { db } from "@/firebase";
-import {
-  collection,
-  onSnapshot,
-  orderBy,
-  query,
-  Timestamp,
-} from "firebase/firestore";
+import { supabase } from "@/integrations/supabase/client";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Calendar, MapPin, Clock, Plus } from "lucide-react";
+import { EditableText } from "@/components/editor/EditableText";
 
 interface Event {
   id: string;
   title: string;
-  date: Timestamp;
+  date: string;
   time: string;
   location: string;
   description: string;
 }
 
-const formatDate = (timestamp: Timestamp) => {
-  const date = timestamp.toDate();
+const formatDate = (dateString: string) => {
+  const date = new Date(dateString);
   return date.toLocaleDateString("en-US", {
     weekday: "short",
     month: "short",
@@ -31,12 +25,11 @@ const formatDate = (timestamp: Timestamp) => {
 };
 
 const addToGoogleCalendar = (event: Event) => {
-  // המרת תאריך ושעה ל־Date אחד
   const [hour, minute] = event.time.split(":").map(Number);
-  const startDate = event.date.toDate();
+  const startDate = new Date(event.date);
   startDate.setHours(hour, minute);
 
-  const endDate = new Date(startDate.getTime() + 2 * 60 * 60 * 1000); // 2 שעות
+  const endDate = new Date(startDate.getTime() + 2 * 60 * 60 * 1000); // 2 hours
 
   const formatDateForGoogle = (date: Date) =>
     date
@@ -49,7 +42,7 @@ const addToGoogleCalendar = (event: Event) => {
   )}&dates=${formatDateForGoogle(startDate)}/${formatDateForGoogle(
     endDate
   )}&details=${encodeURIComponent(event.description)}&location=${encodeURIComponent(
-    event.location
+    event.location || ""
   )}`;
 
   window.open(googleCalendarUrl, "_blank");
@@ -64,27 +57,53 @@ const UpcomingEvents = ({ showTitle = true, className = "" }: UpcomingEventsProp
   const [events, setEvents] = useState<Event[]>([]);
 
   useEffect(() => {
-    const eventsRef = collection(db, "events");
-    const q = query(eventsRef, orderBy("date", "asc"));
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      const eventsData = snapshot.docs.map(doc => ({
-        id: doc.id,
-        ...(doc.data() as Omit<Event, "id">),
-      }));
-      setEvents(eventsData);
-    });
+    const fetchEvents = async () => {
+      const { data, error } = await supabase
+        .from('events')
+        .select('*')
+        .order('date', { ascending: true });
 
-    return () => unsubscribe();
+      if (error) {
+        console.error('Error fetching events:', error);
+        return;
+      }
+
+      setEvents(data || []);
+    };
+
+    fetchEvents();
+
+    // Set up real-time subscription
+    const subscription = supabase
+      .channel('events')
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'events' }, () => {
+        fetchEvents();
+      })
+      .subscribe();
+
+    return () => {
+      subscription.unsubscribe();
+    };
   }, []);
 
   return (
     <section className={className}>
       {showTitle && (
         <div className="text-center mb-8">
-          <h2 className="text-4xl font-bold text-foreground mb-4">Upcoming Events</h2>
-          <p className="text-xl text-muted-foreground">
-            Join us at our upcoming robotics events and activities
-          </p>
+          <EditableText
+            contentKey="upcoming-events-title"
+            defaultContent="Upcoming Events"
+            contentType="heading"
+            tag="h2"
+            className="text-4xl font-bold text-foreground mb-4"
+          />
+          <EditableText
+            contentKey="upcoming-events-subtitle"
+            defaultContent="Join us at our upcoming robotics events and activities"
+            contentType="paragraph"
+            tag="p"
+            className="text-xl text-muted-foreground"
+          />
         </div>
       )}
 
@@ -110,7 +129,13 @@ const UpcomingEvents = ({ showTitle = true, className = "" }: UpcomingEventsProp
               </Button>
             </div>
 
-            <h3 className="text-2xl font-bold text-foreground mb-3">{event.title}</h3>
+            <EditableText
+              contentKey={`event-title-${event.id}`}
+              defaultContent={event.title}
+              contentType="heading"
+              tag="h3"
+              className="text-2xl font-bold text-foreground mb-3"
+            />
 
             <div className="space-y-2 mb-4">
               <div className="flex items-center text-muted-foreground">
@@ -123,7 +148,13 @@ const UpcomingEvents = ({ showTitle = true, className = "" }: UpcomingEventsProp
               </div>
             </div>
 
-            <p className="text-muted-foreground leading-relaxed">{event.description}</p>
+            <EditableText
+              contentKey={`event-description-${event.id}`}
+              defaultContent={event.description}
+              contentType="paragraph"
+              tag="p"
+              className="text-muted-foreground leading-relaxed"
+            />
           </Card>
         ))}
       </div>

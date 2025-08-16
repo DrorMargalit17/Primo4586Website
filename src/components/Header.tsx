@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Menu, X, ChevronDown } from "lucide-react";
 import logoPng from '@/assets/PrimaryLogo.png';
-import { AdminToggle } from '@/components/admin/AdminToggle';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -119,7 +118,6 @@ const Header = () => {
               );
               })}
             </nav>
-            <AdminToggle />
           </div>
 
           {/* Mobile Menu Button */}

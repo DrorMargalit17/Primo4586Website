@@ -5,7 +5,9 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { AuthProvider } from "@/hooks/useAuth";
+import { AdminModeProvider } from "@/hooks/useAdminMode";
 import Layout from "./components/Layout";
+import { AdminModeToggle } from "@/components/admin/AdminModeToggle";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Team from "./pages/Team";
@@ -17,7 +19,7 @@ import Resources from "./pages/Resources";
 import Sponsors from "./pages/Sponsors";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
-import AdminPanel from "./pages/AdminPanel";  
+import AdminPanel from "./pages/AdminPanel";
 
 const queryClient = new QueryClient();
 
@@ -34,29 +36,32 @@ function ScrollToTop() {
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <AuthProvider>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <ScrollToTop />
-          <Layout>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/team" element={<Team />} />
-              <Route path="/robot" element={<Robot />} />
-              <Route path="/robot2024" element={<Robot2024 />} />
-              <Route path="/community" element={<Community />} />
-              <Route path="/fll-mentorship" element={<FLLMentorship />} />
-              <Route path="/resources" element={<Resources />} />
-              <Route path="/sponsors" element={<Sponsors />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/admin" element={<AdminPanel />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Layout>
-        </BrowserRouter>
-      </TooltipProvider>
+      <AdminModeProvider>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <ScrollToTop />
+            <Layout>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/team" element={<Team />} />
+                <Route path="/robot" element={<Robot />} />
+                <Route path="/robot2024" element={<Robot2024 />} />
+                <Route path="/community" element={<Community />} />
+                <Route path="/fll-mentorship" element={<FLLMentorship />} />
+                <Route path="/resources" element={<Resources />} />
+                <Route path="/sponsors" element={<Sponsors />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/admin" element={<AdminPanel />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </Layout>
+            <AdminModeToggle />
+          </BrowserRouter>
+        </TooltipProvider>
+      </AdminModeProvider>
     </AuthProvider>
   </QueryClientProvider>
 );

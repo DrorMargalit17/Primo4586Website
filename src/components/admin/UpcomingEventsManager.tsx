@@ -1,53 +1,44 @@
 import { useState, useEffect } from "react";
-import { db } from "@/firebase";
-import {
-  collection,
-  addDoc,
-  getDocs,
-  deleteDoc,
-  doc,
-  Timestamp,
-  updateDoc,
-} from "firebase/firestore";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
 type Event = {
   id: string;
   title: string;
-  date: Timestamp;
-  time: string; // e.g. "16:30"
+  date: string;
+  time: string;
   location: string;
   description: string;
 };
 
-export default function AdminPanel() {
+export default function UpcomingEventsManager() {
   const [title, setTitle] = useState("");
-  const [date, setDate] = useState(""); // yyyy-mm-dd format
-  const [time, setTime] = useState(""); // HH:mm format
+  const [date, setDate] = useState("");
+  const [time, setTime] = useState("");
   const [location, setLocation] = useState("");
   const [description, setDescription] = useState("");
   const [events, setEvents] = useState<Event[]>([]);
   const [editingId, setEditingId] = useState<string | null>(null);
-
-  const eventsRef = collection(db, "events");
+  const [loading, setLoading] = useState(false);
+  const { toast } = useToast();
 
   const fetchEvents = async () => {
     try {
-      const snapshot = await getDocs(eventsRef);
-      const eventsData = snapshot.docs.map(doc => {
-        const data = doc.data() as Omit<Event, "id">;
-        return {
-          id: doc.id,
-          ...data,
-        };
-      });
-      eventsData.sort((a, b) => {
-        const aDate = a.date.toDate().getTime();
-        const bDate = b.date.toDate().getTime();
-        return aDate - bDate;
-      });
-      setEvents(eventsData);
+      const { data, error } = await supabase
+        .from('events')
+        .select('*')
+        .order('date', { ascending: true });
+
+      if (error) throw error;
+
+      setEvents(data || []);
     } catch (error) {
       console.error("Error fetching events:", error);
+      toast({
+        title: "Error",
+        description: "Failed to fetch events",
+        variant: "destructive",
+      });
     }
   };
 
@@ -66,7 +57,11 @@ export default function AdminPanel() {
 
   const handleSaveEvent = async () => {
     if (!title || !date || !time) {
-      alert("Please fill in title, date, and time");
+      toast({
+        title: "Error",
+        description: "Please fill in title, date, and time",
+        variant: "destructive",
+      });
       return;
     }
 
@@ -74,47 +69,88 @@ export default function AdminPanel() {
     const eventDateTime = new Date(date);
     eventDateTime.setHours(hour, minute);
 
+    setLoading(true);
+
     try {
       if (editingId) {
-        const eventDoc = doc(db, "events", editingId);
-        await updateDoc(eventDoc, {
-          title,
-          date: Timestamp.fromDate(eventDateTime),
-          time,
-          location,
-          description,
-        });
+        const { error } = await supabase
+          .from('events')
+          .update({
+            title,
+            date: eventDateTime.toISOString(),
+            time,
+            location,
+            description,
+          })
+          .eq('id', editingId);
+
+        if (error) throw error;
       } else {
-        await addDoc(eventsRef, {
-          title,
-          date: Timestamp.fromDate(eventDateTime),
-          time,
-          location,
-          description,
-        });
+        const { error } = await supabase
+          .from('events')
+          .insert({
+            title,
+            date: eventDateTime.toISOString(),
+            time,
+            location,
+            description,
+          });
+
+        if (error) throw error;
       }
+
       resetForm();
       fetchEvents();
+      toast({
+        title: "Success",
+        description: editingId ? "Event updated successfully" : "Event created successfully",
+      });
     } catch (error) {
       console.error("Error saving event:", error);
-      alert("Error saving event. Check console for details.");
+      toast({
+        title: "Error",
+        description: "Failed to save event",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleDeleteEvent = async (id: string) => {
     if (!confirm("Are you sure you want to delete this event?")) return;
+
+    setLoading(true);
+
     try {
-      await deleteDoc(doc(db, "events", id));
+      const { error } = await supabase
+        .from('events')
+        .delete()
+        .eq('id', id);
+
+      if (error) throw error;
+
       fetchEvents();
+      toast({
+        title: "Success",
+        description: "Event deleted successfully",
+      });
     } catch (error) {
       console.error("Error deleting event:", error);
-      alert("Error deleting event. Check console for details.");
+      toast({
+        title: "Error",
+        description: "Failed to delete event",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleEditEvent = (event: Event) => {
     setTitle(event.title);
-    setDate(event.date.toDate().toISOString().split("T")[0]);
+    const eventDate = new Date(event.date);
+    setDate(eventDate.toISOString().split("T")[0]);
     setTime(event.time);
     setLocation(event.location);
     setDescription(event.description);
@@ -135,6 +171,7 @@ export default function AdminPanel() {
           value={title}
           onChange={e => setTitle(e.target.value)}
           className="w-full mb-4 p-3 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary text-foreground bg-background"
+          disabled={loading}
         />
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
           <input
@@ -142,12 +179,14 @@ export default function AdminPanel() {
             value={date}
             onChange={e => setDate(e.target.value)}
             className="p-3 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary text-foreground bg-background"
+            disabled={loading}
           />
           <input
             type="time"
             value={time}
             onChange={e => setTime(e.target.value)}
             className="p-3 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary text-foreground bg-background"
+            disabled={loading}
           />
           <input
             type="text"
@@ -155,6 +194,7 @@ export default function AdminPanel() {
             value={location}
             onChange={e => setLocation(e.target.value)}
             className="p-3 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary text-foreground bg-background"
+            disabled={loading}
           />
         </div>
         <textarea
@@ -163,19 +203,22 @@ export default function AdminPanel() {
           onChange={e => setDescription(e.target.value)}
           rows={3}
           className="w-full p-3 border border-border rounded-md resize-none focus:outline-none focus:ring-2 focus:ring-primary text-foreground bg-background"
+          disabled={loading}
         />
 
         <div className="mt-6 flex items-center space-x-3 justify-center">
           <button
             onClick={handleSaveEvent}
-            className="px-6 py-2 bg-gradient-primary text-primary-foreground rounded-md hover:brightness-110 transition"
+            disabled={loading}
+            className="px-6 py-2 bg-gradient-primary text-primary-foreground rounded-md hover:brightness-110 transition disabled:opacity-50"
           >
-            {editingId ? "Update Event" : "Add Event"}
+            {loading ? "Saving..." : editingId ? "Update Event" : "Add Event"}
           </button>
           {editingId && (
             <button
               onClick={resetForm}
-              className="px-6 py-2 bg-gray-600 text-primary-foreground rounded-md hover:brightness-110 transition"
+              disabled={loading}
+              className="px-6 py-2 bg-gray-600 text-primary-foreground rounded-md hover:brightness-110 transition disabled:opacity-50"
             >
               Cancel
             </button>
@@ -193,21 +236,23 @@ export default function AdminPanel() {
             <div className="flex-1 mb-4 sm:mb-0 text-foreground">
               <h3 className="text-xl font-semibold">{event.title}</h3>
               <p className="text-sm text-muted-foreground">
-                {event.date.toDate().toLocaleDateString()} {event.time} - {event.location}
+                {new Date(event.date).toLocaleDateString()} {event.time} - {event.location}
               </p>
               <p className="mt-2 whitespace-pre-line">{event.description}</p>
             </div>
             <div className="flex space-x-3">
               <button
                 onClick={() => handleEditEvent(event)}
-                className="px-4 py-1 bg-yellow-400 hover:bg-yellow-500 rounded-md text-black transition"
+                disabled={loading}
+                className="px-4 py-1 bg-yellow-400 hover:bg-yellow-500 rounded-md text-black transition disabled:opacity-50"
                 aria-label={`Edit event ${event.title}`}
               >
                 Edit
               </button>
               <button
                 onClick={() => handleDeleteEvent(event.id)}
-                className="px-4 py-1 bg-red-600 hover:bg-red-700 rounded-md text-white transition"
+                disabled={loading}
+                className="px-4 py-1 bg-red-600 hover:bg-red-700 rounded-md text-white transition disabled:opacity-50"
                 aria-label={`Delete event ${event.title}`}
               >
                 Delete

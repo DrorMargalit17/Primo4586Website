@@ -1,20 +1,6 @@
 import { useState, useEffect } from "react";
-import {
-  collection,
-  addDoc,
-  getDocs,
-  deleteDoc,
-  doc,
-  updateDoc,
-  Timestamp,
-} from "firebase/firestore";
-import { db, storage } from "@/firebase";
-import {
-  ref,
-  uploadBytes,
-  getDownloadURL,
-  deleteObject,
-} from "firebase/storage";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
 type Activity = {
   id: string;
@@ -29,16 +15,26 @@ export default function CommunityActivitiesManager() {
   const [images, setImages] = useState<File[]>([]);
   const [activities, setActivities] = useState<Activity[]>([]);
   const [editingId, setEditingId] = useState<string | null>(null);
-
-  const refCollection = collection(db, "communityActivities");
+  const [loading, setLoading] = useState(false);
+  const { toast } = useToast();
 
   const fetchActivities = async () => {
-    const snapshot = await getDocs(refCollection);
-    const data = snapshot.docs.map(doc => ({
-      id: doc.id,
-      ...(doc.data() as Omit<Activity, "id">),
-    }));
-    setActivities(data);
+    const { data, error } = await supabase
+      .from('community_activities')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      console.error('Error fetching activities:', error);
+      toast({
+        title: "Error",
+        description: "Failed to fetch activities",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setActivities(data || []);
   };
 
   useEffect(() => {
@@ -56,58 +52,101 @@ export default function CommunityActivitiesManager() {
     const urls: string[] = [];
 
     for (const file of files) {
-      const storageRef = ref(storage, `communityActivities/${activityId}/${file.name}`);
-      await uploadBytes(storageRef, file);
-      const url = await getDownloadURL(storageRef);
-      urls.push(url);
+      const fileName = `${Date.now()}-${file.name}`;
+      const { data, error } = await supabase.storage
+        .from('community-activities')
+        .upload(`${activityId}/${fileName}`, file);
+
+      if (error) {
+        console.error('Error uploading image:', error);
+        continue;
+      }
+
+      const { data: { publicUrl } } = supabase.storage
+        .from('community-activities')
+        .getPublicUrl(data.path);
+
+      urls.push(publicUrl);
     }
 
     return urls;
   };
 
-  const deleteImageFolder = async (activityId: string) => {
-    // Placeholder for deletion logic if needed
+  const deleteActivityImages = async (activityId: string, imageUrls: string[]) => {
+    for (const url of imageUrls) {
+      const path = url.split('/').slice(-2).join('/'); // Extract path from URL
+      await supabase.storage
+        .from('community-activities')
+        .remove([path]);
+    }
   };
 
   const handleSave = async () => {
     if (!title || !description) {
-      alert("Please fill all fields");
+      toast({
+        title: "Error",
+        description: "Please fill all fields",
+        variant: "destructive",
+      });
       return;
     }
 
+    setLoading(true);
+
     try {
       if (editingId) {
-        const docRef = doc(db, "communityActivities", editingId);
         let newUrls: string[] = [];
         if (images.length > 0) {
           newUrls = await uploadImages(editingId, images);
         }
 
-        await updateDoc(docRef, {
-          title,
-          description,
-          ...(newUrls.length > 0 ? { images: newUrls } : {}),
-        });
+        const { error } = await supabase
+          .from('community_activities')
+          .update({
+            title,
+            description,
+            ...(newUrls.length > 0 ? { images: newUrls } : {}),
+          })
+          .eq('id', editingId);
+
+        if (error) throw error;
       } else {
-        const newDoc = await addDoc(refCollection, {
-          title,
-          description,
-          images: [],
-          createdAt: Timestamp.now(),
-        });
+        const { data, error } = await supabase
+          .from('community_activities')
+          .insert({
+            title,
+            description,
+            images: [],
+          })
+          .select()
+          .single();
 
-        const imageUrls = await uploadImages(newDoc.id, images);
+        if (error) throw error;
 
-        await updateDoc(newDoc, {
-          images: imageUrls,
-        });
+        if (images.length > 0) {
+          const imageUrls = await uploadImages(data.id, images);
+          await supabase
+            .from('community_activities')
+            .update({ images: imageUrls })
+            .eq('id', data.id);
+        }
       }
 
       resetForm();
       fetchActivities();
+      toast({
+        title: "Success",
+        description: editingId ? "Activity updated successfully" : "Activity created successfully",
+      });
     } catch (err) {
       console.error("Error saving activity", err);
-      alert("Error saving activity");
+      toast({
+        title: "Error",
+        description: "Error saving activity",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -118,16 +157,39 @@ export default function CommunityActivitiesManager() {
     setImages([]);
   };
 
-  const handleDelete = async (id: string) => {
+  const handleDelete = async (activity: Activity) => {
     if (!confirm("Delete this activity?")) return;
 
+    setLoading(true);
+
     try {
-      await deleteDoc(doc(db, "communityActivities", id));
-      await deleteImageFolder(id);
+      // Delete images from storage
+      if (activity.images.length > 0) {
+        await deleteActivityImages(activity.id, activity.images);
+      }
+
+      // Delete activity from database
+      const { error } = await supabase
+        .from('community_activities')
+        .delete()
+        .eq('id', activity.id);
+
+      if (error) throw error;
+
       fetchActivities();
+      toast({
+        title: "Success",
+        description: "Activity deleted successfully",
+      });
     } catch (err) {
       console.error("Error deleting activity", err);
-      alert("Error deleting activity");
+      toast({
+        title: "Error",
+        description: "Error deleting activity",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -140,6 +202,7 @@ export default function CommunityActivitiesManager() {
           value={title}
           onChange={e => setTitle(e.target.value)}
           className="w-full mb-4 p-3 border border-border rounded-md bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+          disabled={loading}
         />
         <textarea
           placeholder="Description"
@@ -147,24 +210,29 @@ export default function CommunityActivitiesManager() {
           onChange={e => setDescription(e.target.value)}
           rows={3}
           className="w-full mb-4 p-3 border border-border rounded-md resize-none bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+          disabled={loading}
         />
         <input
           type="file"
           multiple
+          accept="image/*"
           onChange={e => setImages(e.target.files ? Array.from(e.target.files) : [])}
           className="mb-6"
+          disabled={loading}
         />
         <div className="flex space-x-4 justify-center">
           <button
             onClick={handleSave}
-            className="px-6 py-2 bg-gradient-primary text-primary-foreground rounded-md hover:brightness-110 transition"
+            disabled={loading}
+            className="px-6 py-2 bg-gradient-primary text-primary-foreground rounded-md hover:brightness-110 transition disabled:opacity-50"
           >
-            {editingId ? "Update Activity" : "Add Activity"}
+            {loading ? "Saving..." : editingId ? "Update Activity" : "Add Activity"}
           </button>
           {editingId && (
             <button
               onClick={resetForm}
-              className="px-6 py-2 bg-gray-600 text-primary-foreground rounded-md hover:brightness-110 transition"
+              disabled={loading}
+              className="px-6 py-2 bg-gray-600 text-primary-foreground rounded-md hover:brightness-110 transition disabled:opacity-50"
             >
               Cancel
             </button>
@@ -195,13 +263,15 @@ export default function CommunityActivitiesManager() {
             <div className="mt-6 flex space-x-4">
               <button
                 onClick={() => handleEdit(activity)}
-                className="px-4 py-1 bg-yellow-400 hover:bg-yellow-500 rounded-md text-black transition"
+                disabled={loading}
+                className="px-4 py-1 bg-yellow-400 hover:bg-yellow-500 rounded-md text-black transition disabled:opacity-50"
               >
                 Edit
               </button>
               <button
-                onClick={() => handleDelete(activity.id)}
-                className="px-4 py-1 bg-red-600 hover:bg-red-700 rounded-md text-white transition"
+                onClick={() => handleDelete(activity)}
+                disabled={loading}
+                className="px-4 py-1 bg-red-600 hover:bg-red-700 rounded-md text-white transition disabled:opacity-50"
               >
                 Delete
               </button>

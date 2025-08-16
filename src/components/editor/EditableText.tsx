@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Input } from '@/components/ui/input';
 import { useAuth } from '@/hooks/useAuth';
+import { useAdminMode } from '@/hooks/useAdminMode';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { Edit3, Save, X, History } from 'lucide-react';
@@ -26,6 +27,7 @@ export const EditableText = ({
   children 
 }: EditableTextProps) => {
   const { isAdmin } = useAuth();
+  const { isEditMode } = useAdminMode();
   const { toast } = useToast();
   const [content, setContent] = useState(defaultContent);
   const [isEditing, setIsEditing] = useState(false);
@@ -130,8 +132,8 @@ export const EditableText = ({
     setShowHistory(false);
   };
 
-  // If not admin, just render the content normally
-  if (!isAdmin) {
+  // If not admin or not in edit mode, just render the content normally
+  if (!isAdmin || !isEditMode) {
     const Tag = tag as keyof JSX.IntrinsicElements;
     return (
       <Tag className={className}>
@@ -190,11 +192,11 @@ export const EditableText = ({
   const Tag = tag as keyof JSX.IntrinsicElements;
   return (
     <div className="relative group">
-      <Tag className={`${className} ${isAdmin ? 'border-2 border-dashed border-transparent hover:border-primary/50 transition-colors' : ''}`}>
+      <Tag className={`${className} ${isAdmin && isEditMode ? 'border-2 border-dashed border-transparent hover:border-primary/50 transition-colors' : ''}`}>
         {children ? children : content}
       </Tag>
       
-      {isAdmin && (
+      {isAdmin && isEditMode && (
         <div className="absolute -top-2 -right-2 opacity-0 group-hover:opacity-100 transition-opacity flex gap-1">
           <Button
             size="sm"

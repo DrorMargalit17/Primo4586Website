@@ -14,6 +14,33 @@ export type Database = {
   }
   public: {
     Tables: {
+      community_activities: {
+        Row: {
+          created_at: string | null
+          description: string
+          id: string
+          images: string[] | null
+          title: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          description: string
+          id?: string
+          images?: string[] | null
+          title: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          description?: string
+          id?: string
+          images?: string[] | null
+          title?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       content_versions: {
         Row: {
           content: string
@@ -79,6 +106,39 @@ export type Database = {
           page_path?: string
           updated_at?: string
           updated_by?: string | null
+        }
+        Relationships: []
+      }
+      events: {
+        Row: {
+          created_at: string | null
+          date: string
+          description: string | null
+          id: string
+          location: string | null
+          time: string
+          title: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          date: string
+          description?: string | null
+          id?: string
+          location?: string | null
+          time: string
+          title: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          date?: string
+          description?: string | null
+          id?: string
+          location?: string | null
+          time?: string
+          title?: string
+          updated_at?: string | null
         }
         Relationships: []
       }
