@@ -6,7 +6,7 @@ import { Settings, Edit3, X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 export const AdminModeToggle = () => {
-  const { isAdmin } = useAuth();
+  const { isAdmin, signOut } = useAuth();
   const { adminMode, setAdminMode } = useAdminMode();
   const navigate = useNavigate();
 
@@ -23,13 +23,14 @@ export const AdminModeToggle = () => {
     }
   };
 
-  const exitAdminMode = () => {
+  const exitAdminMode = async () => {
+    await signOut();
     setAdminMode(null);
     navigate('/');
   };
 
   return (
-    <div className="fixed top-4 right-4 z-50 flex items-center gap-2">
+    <div className="fixed bottom-4 right-4 z-50 flex items-center gap-2">
       <Badge variant="default" className="flex items-center gap-1">
         {adminMode === 'panel' ? (
           <>

@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Cpu, Zap, Eye, Cog } from "lucide-react";
 import sparrow from "@/assets/Robot/2025Robot.jpg";
 import SeasonLogo from "@/assets/Robot/Reefscape_FRC_Logo.png";
+import { EditableText } from "@/components/editor/EditableText";
 
 
 const Robot = () => {
@@ -35,14 +36,21 @@ const Robot = () => {
                   className="h-20 w-auto"
                 />
               </div>
-              <h1 className="text-5xl md:text-6xl font-bold mb-6 text-foreground">
+              <EditableText 
+                contentKey="robot-hero-title" 
+                defaultContent="Meet SPARROW" 
+                tag="h1" 
+                className="text-5xl md:text-6xl font-bold mb-6 text-foreground"
+              >
                 Meet <span className="bg-gradient-primary bg-clip-text text-transparent">SPARROW</span>
-              </h1>
-              <p className="text-xl text-muted-foreground mb-8">
-                Our latest autonomous robot designed for precision, efficiency, and
-                adaptability. Sparrow represents the culmination of years of
-                engineering excellence and innovation.
-              </p>
+              </EditableText>
+              <EditableText 
+                contentKey="robot-hero-description" 
+                defaultContent="Our latest autonomous robot designed for precision, efficiency, and adaptability. Sparrow represents the culmination of years of engineering excellence and innovation." 
+                contentType="paragraph"
+                tag="p" 
+                className="text-xl text-muted-foreground mb-8"
+              />
               <div className="flex flex-wrap gap-2 mb-8">
                 <Badge className="bg-primary text-primary-foreground">Autonomous</Badge>
                 <Badge className="bg-accent text-accent-foreground">Competition Ready</Badge>
@@ -66,12 +74,19 @@ const Robot = () => {
       <section className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           <div>
-            <h2 className="text-4xl font-bold text-foreground mb-4">About Our Robot</h2>
-            <p className="text-xl text-muted-foreground">
-              SPARROW was built to tackle the unique challenges of the 2025 season with unmatched precision and power. 
-              Designed with robust engineering and intelligent programming, it excels in autonomy, agility, and teamwork integration.
-              From complex tasks to collaborative field maneuvers, SPARROW is the result of countless hours of design, testing, and refinement.
-            </p>
+            <EditableText 
+              contentKey="robot-about-title" 
+              defaultContent="About Our Robot" 
+              tag="h2" 
+              className="text-4xl font-bold text-foreground mb-4"
+            />
+            <EditableText 
+              contentKey="robot-about-description" 
+              defaultContent="SPARROW was built to tackle the unique challenges of the 2025 season with unmatched precision and power. Designed with robust engineering and intelligent programming, it excels in autonomy, agility, and teamwork integration. From complex tasks to collaborative field maneuvers, SPARROW is the result of countless hours of design, testing, and refinement." 
+              contentType="paragraph"
+              tag="p" 
+              className="text-xl text-muted-foreground"
+            />
           </div>
           <div>
             <h2 className="text-4xl font-bold text-foreground mb-4">Season Achievements</h2>

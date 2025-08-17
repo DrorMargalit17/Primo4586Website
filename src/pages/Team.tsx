@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Linkedin, Mail } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
+import { EditableText } from "@/components/editor/EditableText";
 
 const Team = () => {
   const [selectedTeams, setSelectedTeams] = useState<Record<string, string[]>>({});
@@ -178,13 +179,21 @@ const Team = () => {
       {/* Hero Section (Original) */}
       <section className="bg-gradient-hero py-20 px-6">
         <div className="container mx-auto text-center">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 text-foreground">
+          <EditableText 
+            contentKey="team-hero-title" 
+            defaultContent="Meet Our Team" 
+            tag="h1" 
+            className="text-5xl md:text-6xl font-bold mb-6 text-foreground"
+          >
             Meet Our <span className="bg-gradient-primary bg-clip-text text-transparent">Team</span>
-          </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            A diverse group of passionate students and mentors working together
-            to push the boundaries of robotics technology and innovation.
-          </p>
+          </EditableText>
+          <EditableText 
+            contentKey="team-hero-description" 
+            defaultContent="A diverse group of passionate students and mentors working together to push the boundaries of robotics technology and innovation." 
+            contentType="paragraph"
+            tag="p" 
+            className="text-xl text-muted-foreground max-w-3xl mx-auto"
+          />
         </div>
       </section>
 

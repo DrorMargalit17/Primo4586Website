@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Mail, MapPin, Phone, Facebook, Instagram, Youtube} from "lucide-react";
 import { TikTokIcon } from "@/components/ui/tiktok-icon";
 import { FooterAuth } from "@/components/auth/FooterAuth";
+import { AdminModeToggle } from "@/components/admin/AdminModeToggle";
 import { EditableText } from "@/components/editor/EditableText";
 import logoPng from '@/assets/PrimaryLogo.png';
 
@@ -195,6 +196,7 @@ const Footer = () => {
             className="text-muted-foreground text-sm mt-2 md:mt-0"
           />
         </div>
+        <AdminModeToggle />
       </div>
     </footer>
   );

@@ -10,6 +10,7 @@ import primoSenior1 from "@/assets/community/PrimoSenior/primoSenior_1.png";
 import primoSenior2 from "@/assets/community/PrimoSenior/primoSenior_2.png";
 import primoSenior3 from "@/assets/community/PrimoSenior/primoSenior_3.png";
 import { Link } from "react-router-dom";
+import { EditableText } from "@/components/editor/EditableText";
 
 const AutoCarousel = ({ images }) => {
   const [currentImg, setCurrentImg] = useState(0);
@@ -103,17 +104,24 @@ const Community = () => {
     <div className="space-y-20 px-6 container mx-auto">
       {/* Hero Section */}
       <section className="bg-gradient-hero py-20 text-center">
-        <h1 className="text-5xl md:text-6xl font-bold mb-6 text-foreground">
+        <EditableText 
+          contentKey="community-hero-title" 
+          defaultContent="Community Impact" 
+          tag="h1" 
+          className="text-5xl md:text-6xl font-bold mb-6 text-foreground"
+        >
           Community{" "}
           <span className="bg-gradient-primary bg-clip-text text-transparent">
             Impact
           </span>
-        </h1>
-        <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-          We believe in giving back to our community by sharing our passion for
-          robotics and inspiring others to explore STEM fields through hands-on
-          learning and mentorship.
-        </p>
+        </EditableText>
+        <EditableText 
+          contentKey="community-hero-description" 
+          defaultContent="We believe in giving back to our community by sharing our passion for robotics and inspiring others to explore STEM fields through hands-on learning and mentorship." 
+          contentType="paragraph"
+          tag="p" 
+          className="text-xl text-muted-foreground max-w-3xl mx-auto"
+        />
       </section>
 
       {/* New Section: Title and Description for Community Activities */}
@@ -133,8 +141,19 @@ const Community = () => {
             style={{ height: 320 }}
           >
             <div className="flex flex-col justify-center h-full">
-              <h3 className="text-3xl font-bold text-foreground mb-4">{activity.title}</h3>
-              <p className="text-muted-foreground text-lg leading-relaxed">{activity.description}</p>
+              <EditableText 
+                contentKey={`community-activity-title-${index}`} 
+                defaultContent={activity.title} 
+                tag="h3" 
+                className="text-3xl font-bold text-foreground mb-4"
+              />
+              <EditableText 
+                contentKey={`community-activity-description-${index}`} 
+                defaultContent={activity.description} 
+                contentType="paragraph"
+                tag="p" 
+                className="text-muted-foreground text-lg leading-relaxed"
+              />
             </div>
             <AutoCarousel images={activity.images} />
           </Card>
