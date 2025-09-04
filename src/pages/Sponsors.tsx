@@ -57,7 +57,7 @@ const Sponsors = () => {
       website: "https://www.argentools.co.il/",
       description: "Argentools is a dynamic company specializing in advanced tooling solutions and precision engineering services. Since 2025, they have been a key sponsor of ours, offering vital financial backing and expert industry knowledge to support our development.",
       
-      since: "2018",
+      since: "2019",
     },
     {
       id: 6,
