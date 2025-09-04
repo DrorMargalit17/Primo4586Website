@@ -97,7 +97,7 @@ const Team = () => {
       name: "Ilya Kazakevich",
       role: "Mechanics Mentor",
       image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=300&h=300&fit=crop&crop=face",
-      since: "2012",
+      since: "2019",
     },
     {
       name: "Danny Shavit",
