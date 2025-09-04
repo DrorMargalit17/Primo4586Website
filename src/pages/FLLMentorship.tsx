@@ -8,7 +8,7 @@ const FLLMentorship = () => {
   const fllTeams = [
     {
       name: "Boeing 727",
-      description: "Our flagship FLL team competing in regional and state championships with a focus on robot design and core values.",
+      description: "A highly creative and innovative team, known for pushing boundaries and excelling in programming and professional-quality building.",
       achievements: [
         { icon: Trophy, text: "Qualified For Nation Competition", type: "gold" },
         { icon: Award, text: "First Place Robot Design", type: "blue" },
@@ -17,7 +17,7 @@ const FLLMentorship = () => {
     },
     {
       name: "Toxic Pandas 506", 
-      description: "A creative team focused on innovative solutions and community impact through FIRST LEGO League challenges.",
+      description: "A values-driven team from Dorot School (Modi’in), emphasizing enjoyment in their work, collaboration, and strong teamwork.",
       achievements: [
         { icon: Lightbulb, text: "Qualified For Nation Competition", type: "gold" },
         { icon: Users, text: "Core Values First Place", type: "green" },
@@ -83,8 +83,9 @@ const FLLMentorship = () => {
             FLL <span className="bg-gradient-primary bg-clip-text text-transparent">Mentorship</span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Empowering young minds through FIRST LEGO League, where students develop 
-            engineering skills, teamwork, and core values while tackling real-world challenges.
+            In FLL, teams focus on research, building, and programming to solve challenges and complete robot missions. 
+            They also learn core values like teamwork, Gracious Professionalism, and respect for others. Together, 
+            these elements teach students problem-solving, creativity, and collaboration.
           </p>
         </div>
       </section>

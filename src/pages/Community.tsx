@@ -117,7 +117,7 @@ const Community = () => {
         </EditableText>
         <EditableText 
           contentKey="community-hero-description" 
-          defaultContent="We believe in giving back to our community by sharing our passion for robotics and inspiring others to explore STEM fields through hands-on learning and mentorship." 
+          defaultContent="We believe in giving back to our community by sharing our passion for robotics and inspiring others to explore STEM. Our mission reaches from age 3 to the 3rd age, showing that curiosity and innovation have no limits!" 
           contentType="paragraph"
           tag="p" 
           className="text-xl text-muted-foreground max-w-3xl mx-auto"
@@ -199,7 +199,10 @@ const Community = () => {
           Collaborate With Us
         </h2>
         <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-          Interested in partnering your group or organization with Primo? We welcome collaborations that inspire innovation and community growth.
+          Are you a team looking for collaboration? 
+          Primo is always open to partnerships that spark
+          innovation, fuel creativity, and strengthen our
+          community. Let’s build the future together!        
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Button variant="hero" size="lg" asChild>

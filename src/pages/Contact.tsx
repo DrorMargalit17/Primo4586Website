@@ -234,20 +234,20 @@ const Contact = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {[
               {
-                question: "How can I join the team?",
-                answer: "We welcome new members throughout the year. Send us an email with your interests and background.",
+                question: "How can I sponsor your team?",
+                answer: "As a robotics team, we rely on many resources, so we truly appreciate any kind of support! Feel free to contact us, and together we’ll go on a wonderful shared journey!",
+              },
+              {
+                question: "When can I visit your lab?",
+                answer: "In our workshop, we host groups of people at any given time, and we’d be delighted if you come to visit us, feel free to schedule a visit with us in advance :)",
               },
               {
                 question: "Do I need prior experience?",
-                answer: "No prior experience required! We provide training and mentorship for all skill levels.",
+                answer: "At PRIMO, it’s not just about building robots! We teach all the knowledge needed to take part in a robotics team and beyond.",
               },
               {
-                question: "Can I visit your lab?",
-                answer: "Yes! We host open lab sessions monthly. Check our events page or contact us to schedule a visit.",
-              },
-              {
-                question: "How can my company sponsor the team?",
-                answer: "We offer various sponsorship levels. Contact our partnerships team to discuss opportunities.",
+                question: "How does primo impact her students?",
+                answer: "PRIMO broadens the horizons of everyone involved, whether through knowledge, social circles, or by shaping the future of each participant!",
               },
             ].map((faq, index) => (
               <Card

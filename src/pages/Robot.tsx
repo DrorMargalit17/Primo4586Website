@@ -46,7 +46,7 @@ const Robot = () => {
               </EditableText>
               <EditableText 
                 contentKey="robot-hero-description" 
-                defaultContent="Our latest autonomous robot designed for precision, efficiency, and adaptability. Sparrow represents the culmination of years of engineering excellence and innovation." 
+                defaultContent="Sparrow is our latest robot, engineered for precision, efficiency, and adaptability. It represents the result of years of innovation and hard work." 
                 contentType="paragraph"
                 tag="p" 
                 className="text-xl text-muted-foreground mb-8"

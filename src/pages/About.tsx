@@ -27,12 +27,12 @@ const About = () => {
   ];
 
   const achievements = [
-    "Regional Champions 2023",
-    "Innovation Award Winner",
-    "Community Impact Recognition",
-    "Technical Excellence Award",
-    "Best Design Award 2022",
-    "Outstanding Teamwork Recognition",
+    "2022 - Team Spirit Award",
+    "Only Israeli finalist in 2020",
+    "2019 - District 2 EI award",
+    "2017 - winners of DCMP",
+    "Gracious professionalism award 2024-2025",
+    "2017 - Imagery Award in honor of Jack Kamen",
   ];
 
   return (
@@ -158,7 +158,7 @@ const About = () => {
             <div className="space-y-4 text-muted-foreground leading-relaxed">
               <p>
                 Primo 4586 was founded 13 years ago, in 2012, 
-                by four motivated high school students sgraduates of
+                by four motivated high school students graduates of
                 their school's FLL (FIRST LEGO League) team, 
                 "Boeing 727." These passionate teens were
                  driven by a desire to start an FRC 
@@ -167,6 +167,13 @@ const About = () => {
                  the values they had learned through FLL: a 
                  sense of family, promoting science and 
                  technology in the community, and more
+              </p>
+              <p>
+                After a long struggle to get approval for launching an FRC team, 
+                they finally succeeded during their senior year (12th grade), 
+                under the condition that the team would consist of at least 
+                50% girls—a standard that continues to guide us to this day. In fact, 
+                70% of our team captains have been females.
               </p>
             </div>
           </div>

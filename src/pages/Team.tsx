@@ -48,8 +48,8 @@ const Team = () => {
   ];
 
   const teamLeads = [
-    { name: "Ariel Ivri", role: "Mechanics & FLL TeamLeader", image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face", teams: ["mechanics", "community"] },
-    { name: "Gali Levy", role: "Mechanics Manager", image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face", teams: ["mechanics", "cad"] },
+    { name: "Ariel Ivri", role: "FLL TeamLeader", image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face", teams: ["mechanics", "community"] },
+    { name: "Gali Levy", role: "Mechanics TeamLeader", image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face", teams: ["mechanics", "cad"] },
     { name: "Karny Eissenberg", role: "Design TeamLeader", image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=300&h=300&fit=crop&crop=face", teams: ["design", "community"] },
     { name: "Dror Margalit", role: "Media TeamLeader", image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&h=300&fit=crop&crop=face", teams: ["media", "resources", "fll", "community", "design", "cad", "mechanics"] },
     { name: "Eilon Hoppert", role: "Software TeamLeader & Coach", image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=300&fit=crop&crop=face", teams: ["software","DriveTeam", "cad", "mechanics"] },
@@ -100,6 +100,12 @@ const Team = () => {
       since: "2012",
     },
     {
+      name: "Danny Shavit",
+      role: "Electronics Mentor",
+      image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=300&h=300&fit=crop&crop=face",
+      since: "2014",
+    },
+    {
       name: "Avi Segal",
       role: "Software Mentor",
       image: "https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=300&h=300&fit=crop&crop=face",
@@ -115,25 +121,25 @@ const Team = () => {
       name: "Michal Naim",
       role: "Financial Mentor",
       image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&h=300&fit=crop&crop=face",
-      since: "2018",
+      since: "2017",
     },
     {
       name: "Noa Fuchs",
       role: "Community Mentor",
       image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&h=300&fit=crop&crop=face",
-      since: "2018",
+      since: "2017",
     },
     {
       name: "Hen Perah",
       role: "Software Mentor",
       image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&h=300&fit=crop&crop=face",
-      since: "2018",
+      since: "2019",
     },
     {
       name: "Yadin Kovel",
       role: "General Mentor",
       image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&h=300&fit=crop&crop=face",
-      since: "2018",
+      since: "2022",
     },
     {
       name: "Shalev Neuman",
@@ -148,11 +154,12 @@ const Team = () => {
       since: "2018",
     },
     {
-      name: "Rotem Zippori",
+      name: "Yuval Zippori",
       role: "General Mentor",
       image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&h=300&fit=crop&crop=face",
-      since: "2018",
+      since: "2017",
     },
+    
     
   ];
 

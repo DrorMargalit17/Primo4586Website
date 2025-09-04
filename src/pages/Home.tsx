@@ -37,31 +37,31 @@ const features = [
     icon: Handshake,
     title: "Family Spirit",
     description:
-      "'Primo is a family' is more than just a slogan — it’s a core value that guides everything we do. It's reflected in our Shabbat gatherings, team bonding activities, and the overall atmosphere.Our family extends across generations — from founding mentors and alumni who continue to support us, to current members, parents, and the surrounding community. The deep-rooted connections we've built within our team, school, and city are what make us a true family. We also nurture the future through programs like FLL and school involvement, constantly expanding our family circle.",
+      "As a team, we are guided by a set of core values that shape our actions—within the team, in collaboration with others, and in our community. One of the most important values for us is being a family.'Primo-family' is more than a slogan to us - it’s a core value. This is reflected in our weekly gatherings, bonding activities, and overall group atmosphere. It’s about leading by example and building strong connections.",
   },
   {
     icon: Briefcase,
     title: "Professionalism",
     description:
-      "Professionalism is a key value in Primo, essential to achieving excellence as a team. Our committed mentors pass on real-world knowledge, and veteran members train others during the season and in summer courses. This culture of learning ensures that every member gains strong technical skills and can work independently, which directly contributes to our success.",
+      "Professionalism is a core value in Primo, guiding us to achieve the best results as a team. It’s reflected in the dedicated work ethic of all members, enhanced by mentors who share industry knowledge and senior members who pass on their expertise. This ensures high-quality learning, leading to better outcomes and greater independence",
   },
   {
     icon: HeartHandshake,
     title: "Gracious Professionalism",
     description:
-      "We emphasize kindness and respect, both within the team and beyond. Internally, every member is treated with equal respect, regardless of role or experience. Externally, we maintain friendly and professional relationships with other teams in our city and beyond, always offering support and collaboration.",
+      "Gracious Professionalism (GP) is a core value for us, emphasizing both external and internal kindness and respect. Externally, we build professional, supportive relationships with other teams and communities, both locally and beyond. Internally, we promote a culture of mutual respect, where all team members are valued equally, regardless of their role or experience",
   },
   {
     icon: Target,
     title: "Sense of Mission",
     description:
-      "Our team operates with a strong sense of purpose — to contribute to our community, our country, and the global FIRST community. We proudly represent STEAM values and believe deeply in the impact of our work.",
+      "Team members act out of a sense of mission and a willingness to contribute as much as they can to the community - locally, nationally, and to FIRST. This is because they represent the values of STEAM and believe deeply in their work, methods, and the values it stands on",
   },
   {
     icon: Sparkles,
     title: "Initiative",
     description:
-      "Primo empowers its members to take initiative, encouraging them to develop and lead their own projects. This fosters creativity, responsibility, and leadership, giving members the chance to influence the team's growth and face real challenges head-on.",
+      "As a team, we empower members and provide a platform for developing ideas. This allows team members to realize their potential and lead their own projects. This path fosters and develops creativity among our team members, while also instilling responsibility. This initiative gives members the opportunity to make an impact, face a variety of challenges, and influence the growth of the team",
   },
 ];
 
