@@ -157,15 +157,16 @@ const About = () => {
             />
             <div className="space-y-4 text-muted-foreground leading-relaxed">
               <p>
-                Primo 4586 was founded 11 years ago, in 2012, at the initiative of 4 motivated FLL “Boeing 727” alumni who wanted to establish an 
-                FRC at the school based on the values ​​they received from FLL, such as family 
-                spirit, spreading the worlds of science and technology in the community, and more!
-              </p>
-              <p>
-                And after struggling for a long time to open an FRC group,
-                in their year of 12th grade they managed to open the group 
-                while meeting the condition that the group would be 50% girls
-                ,a condition that still guides us today, and the group had 70% female captains
+                Primo 4586 was founded 13 years ago, in 2012, 
+                by four motivated high school students sgraduates of
+                their school's FLL (FIRST LEGO League) team, 
+                "Boeing 727." These passionate teens were
+                 driven by a desire to start an FRC 
+                 (FIRST Robotics Competition) team at 
+                 their school, one that would be based on 
+                 the values they had learned through FLL: a 
+                 sense of family, promoting science and 
+                 technology in the community, and more
               </p>
             </div>
           </div>
