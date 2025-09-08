@@ -36,9 +36,10 @@ const Robot2024 = () => {
                 Meet <span className="bg-gradient-primary bg-clip-text text-transparent">Punk</span>
               </h1>
               <p className="text-xl text-muted-foreground mb-8">
-                Our 2024 competition robot designed for strategic gameplay and 
-                reliable performance. Punk showcased our team's growth in 
-                engineering and competitive strategy.
+                Our 2024 competition robot designed for strategic
+                gameplay and reliable performance. Punk showcased
+                our team's growth in engineering and competitive 
+                strategy.
               </p>
               <div className="flex flex-wrap gap-2 mb-8">
                 <Badge className="bg-primary text-primary-foreground">2024 Season</Badge>
