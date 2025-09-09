@@ -67,9 +67,13 @@ const Robot2024 = () => {
           <div>
             <h2 className="text-4xl font-bold text-foreground mb-4">About Our Robot</h2>
             <p className="text-xl text-muted-foreground">
-              PUNK was built to tackle the unique challenges of the 2025 season with unmatched precision and power. 
-              Designed with robust engineering and intelligent programming, it excels in autonomy, agility, and teamwork integration.
-              From complex tasks to collaborative field maneuvers, PUNK is the result of countless hours of design, testing, and refinement.
+              Our 2024 robot, Punk, is designed to perform the main scoring
+              tasks of the Crescendo game. It uses a swerve MK4I drivetrain
+              for smooth and agile movement, an intake system to collect 
+              Notes from the floor, and a feeder that transfers them efficiently
+              to the shooter. The shooter can accurately score Notes into the 
+              Speaker from different positions on the field, and Punk can also
+              place Notes into the Amp for extra points. 
             </p>
           </div>
           <div>
