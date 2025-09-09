@@ -56,27 +56,57 @@ const FLLMentorship = () => {
   const fllMentors = [
     {
       name: "Shay Kalisher",
-      role: "Lead FLL Mentor",
+      role: "Boeing's Mentor",
       image: "https://images.unsplash.com/photo-1494790108755-2616b612b647?w=300&h=300&fit=crop&crop=face",
       since: "2023"
     },
     {
       name: "Ariel Ivri",
-      role: "Technical Mentor",
+      role: "Boeing's Mentor",
       image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face",
       since: "2023"
     },
     {
       name: "Dror Margalit",
-      role: "Core Values Mentor",
+      role: "Toxic Pandas's Mentor",
       image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&h=300&fit=crop&crop=face",
       since: "2024"
     },
     {
       name: "Ofir Shafran",
-      role: "Project Mentor",
+      role: "Toxic Pandas's Mentor",
       image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
       since: "2024"
+    },
+    {
+      name: "Ariel Mevorach",
+      role: "Hatulego's Mentor",
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
+      since: "2025"
+    },
+    {
+      name: "Itamar Ivri",
+      role: "Hatulego's Mentor",
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
+      since: "2025"
+    },
+    {
+      name: "Daniel Levy",
+      role: "Ironi G's Mentor",
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
+      since: "2025"
+    },
+    {
+      name: "Sapir Rosner",
+      role: "Ironi G's Mentor",
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
+      since: "2025"
+    },
+    {
+      name: "Adam Dashevsky",
+      role: "Shivtei Israel's Mentor",
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
+      since: "2025"
     }
   ];
 
@@ -129,7 +159,7 @@ const FLLMentorship = () => {
           </p>
         </div>
 
-        <div className={`grid grid-cols-2 gap-8
+        <div className={`grid grid-cols-1 gap-8
           ${fllTeams.length === 1 ? 'sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1' : ''}
           ${fllTeams.length === 2 ? 'sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2' : ''}
           ${fllTeams.length > 2 ? 'sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3' : ''}
