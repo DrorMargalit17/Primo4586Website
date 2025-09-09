@@ -31,7 +31,7 @@ const Team = () => {
       name: "Maya Goz",
       role: "Co. Captain & Community TeamLeader",
       image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-      teams: ["community", "media", "design", "resources"],
+      teams: ["community", "media", "design", "resources", "mechanics", "electronics"],
     },
     {
       name: "Shay Kalisher",
@@ -43,20 +43,20 @@ const Team = () => {
       name: "Nadav Marx",
       role: "Co-Captain",
       image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face",
-      teams: ["mechanics","cad", "electronics", "strategy"],
+      teams: ["mechanics","cad", "electronics", "strategy", "manufacturing", "resources"],
     },
   ];
 
   const teamLeads = [
-    { name: "Ariel Ivri", role: "FLL TeamLeader", image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face", teams: ["mechanics", "community"] },
-    { name: "Gali Levy", role: "Mechanics TeamLeader", image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face", teams: ["mechanics", "cad"] },
-    { name: "Karny Eissenberg", role: "Design TeamLeader", image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=300&h=300&fit=crop&crop=face", teams: ["design", "community"] },
-    { name: "Dror Margalit", role: "Media TeamLeader", image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&h=300&fit=crop&crop=face", teams: ["media", "resources", "fll", "community", "design", "cad", "mechanics"] },
-    { name: "Eilon Hoppert", role: "Software TeamLeader & Coach", image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=300&fit=crop&crop=face", teams: ["software","DriveTeam", "cad", "mechanics"] },
+    { name: "Ariel Ivri", role: "FLL TeamLeader", image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face", teams: ["mechanics", "community", "strategy", "media", "reasources", "fll"] },
+    { name: "Gali Levy", role: "Mechanics TeamLeader", image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face", teams: ["mechanics", "cad", "community"] },
+    { name: "Karny Eissenberg", role: "Design TeamLeader", image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=300&h=300&fit=crop&crop=face", teams: ["design", "mechanics", "electronics"] },
+    { name: "Dror Margalit", role: "Media TeamLeader", image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&h=300&fit=crop&crop=face", teams: ["media", "fll", "community", "design", "mechanics"] },
+    { name: "Eilon Hoppert", role: "Software TeamLeader & Coach", image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=300&fit=crop&crop=face", teams: ["software","DriveTeam", "cad", "mechanics", "strategy", "electronics"] },
     { name: "Yair Lavie", role: "CAD & Manufacturing TeamLeader", image: "https://images.unsplash.com/photo-1507591064344-4c6ce005b128?w=300&h=300&fit=crop&crop=face", teams: ["manufacturing", "mechanics", "cad", "strategy"] },
     { name: "Talya Fuchs", role: "Electronics TeamLeader", image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=300&h=300&fit=crop&crop=face", teams: ["electronics", "media", "community"] },
     { name: "Shir Cohen", role: "Strategy TeamLeader", image: "https://images.unsplash.com/photo-1494790108755-2616b612b647?w=300&h=300&fit=crop&crop=face", teams: ["strategy"] },
-    { name: "Daniel Levi", role: "Resources TeamLeader & FLL Manager", image: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=300&h=300&fit=crop&crop=face", teams: ["resources", "fll"] },
+    { name: "Daniel Levi", role: "Resources TeamLeader & FLL Manager", image: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=300&h=300&fit=crop&crop=face", teams: ["resources", "fll", "community"] },
   ];
 
   const teamMembers = [
