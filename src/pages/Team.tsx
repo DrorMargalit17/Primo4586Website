@@ -89,6 +89,9 @@ const Team = () => {
     { name: "Liran Friedman", role: "", image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=300&h=300&fit=crop&crop=face", teams: ["software", "media", "community"] },
     { name: "Yuval Porat", role: "", image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=300&h=300&fit=crop&crop=face", teams: [] },
     { name: "Yael Zer Kavod", role: "", image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=300&h=300&fit=crop&crop=face", teams: [] },
+    { name: "Daniel Benin", role: "", image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=300&h=300&fit=crop&crop=face", teams: [] },
+    { name: "Shlomi Anthony Pollak", role: "", image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=300&h=300&fit=crop&crop=face", teams: [] },
+
 
   ];
 
