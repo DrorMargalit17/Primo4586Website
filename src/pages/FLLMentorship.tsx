@@ -32,6 +32,24 @@ const FLLMentorship = () => {
         //{ icon: Users, text: "Core Values First Place", type: "green" },
       ],
       image: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=250&fit=crop"
+    },
+    {
+      name: "Ironi G", 
+      description: "A team from a middle school in Modi’in. This is a new team.",
+      achievements: [
+        //{ icon: Lightbulb, text: "Qualified For Nation Competition", type: "gold" },
+        //{ icon: Users, text: "Core Values First Place", type: "green" },
+      ],
+      image: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=250&fit=crop"
+    },
+    {
+      name: "Shivtei Israel", 
+      description: "A team from Shivtei Israel School, Modi’in.",
+      achievements: [
+        //{ icon: Lightbulb, text: "Qualified For Nation Competition", type: "gold" },
+        //{ icon: Users, text: "Core Values First Place", type: "green" },
+      ],
+      image: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=250&fit=crop"
     }
   ];
 
