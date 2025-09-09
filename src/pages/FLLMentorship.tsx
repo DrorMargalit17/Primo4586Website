@@ -23,6 +23,15 @@ const FLLMentorship = () => {
         { icon: Users, text: "Core Values First Place", type: "green" },
       ],
       image: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=250&fit=crop"
+    },
+    {
+      name: "Hatulego", 
+      description: "A team that participated in the last off-season FLL in Modi’in, from Alonim School, Modi’in. They will return this year as a competitive team.",
+      achievements: [
+        //{ icon: Lightbulb, text: "Qualified For Nation Competition", type: "gold" },
+        //{ icon: Users, text: "Core Values First Place", type: "green" },
+      ],
+      image: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=250&fit=crop"
     }
   ];
 
