@@ -5,6 +5,8 @@ import { Linkedin, Mail } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { EditableText } from "@/components/editor/EditableText";
 
+import orBuzaglo from "@/assets/TeamProfile/orBuzaglo.jpeg";
+
 const Team = () => {
   const [selectedTeams, setSelectedTeams] = useState<Record<string, string[]>>({});
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
@@ -62,7 +64,7 @@ const Team = () => {
   const teamMembers = [
     { name: "Amit Levy", role: "CAD Master", image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face", teams: ["cad", "manufacturing", "mechanics", "community"] },
     { name: "Uri Rosin", role: "Robot Driver", image: "https://images.unsplash.com/photo-1494790108755-2616b612b647?w=300&h=300&fit=crop&crop=face", teams: ["software", "DriveTeam", "community"] },
-    { name: "Or Buzaglo", role: "Scouting GOAT", image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face", teams: ["cad", "manufacturing"] },
+    { name: "Or Buzaglo", role: "Scouting GOAT", image: orBuzaglo, teams: ["cad", "manufacturing"] },
     { name: "Adam Dashevsky", role: "Human Player", image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=300&fit=crop&crop=face", teams: ["mechanics", "cad" , "electronics", "design", "fll"] },
     { name: "Ziv Avivi", role: "Programmer", image: "https://images.unsplash.com/photo-1507591064344-4c6ce005b128?w=300&h=300&fit=crop&crop=face", teams: ["software", "mechanics", "resources"] },
     { name: "Noga Zechmeister", role: "Robot operator", image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=300&h=300&fit=crop&crop=face", teams: ["strategy", "DriveTeam"] },
@@ -353,14 +355,14 @@ const Team = () => {
             {teamMembers.map((member, index) => (
               <Card
                 key={index}
-                className="relative p-6 bg-gradient-surface border-border hover:border-primary/50 transition-all duration-300 hover:shadow-glow group min-h-[180px]"
+                className="relative p-6 bg-gradient-surface border-border hover:border-primary/50 transition-all duration-300 hover:shadow-glow group min-h-[220px]"
               >
                 <div className="text-center">
                   <div className="relative mb-2">
                     <img
                       src={member.image}
                       alt={member.name}
-                      className="w-16 h-16 rounded-full mx-auto object-cover border-4 border-primary/20 group-hover:border-primary/50 transition-all duration-300"
+                      className="w-23 h-23 rounded-full mx-auto object-cover border-4 border-primary/20 group-hover:border-primary/50 transition-all duration-300"
                     />
                   </div>
 

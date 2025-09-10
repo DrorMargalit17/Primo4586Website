@@ -1,11 +1,8 @@
 import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Cpu, Zap, Eye, Cog } from "lucide-react";
 import sparrow from "@/assets/Robot/2025Robot.jpg";
 import SeasonLogo from "@/assets/Robot/Reefscape_FRC_Logo.png";
 import { EditableText } from "@/components/editor/EditableText";
-
 
 const Robot = () => {
   const systems = [
@@ -70,9 +67,38 @@ const Robot = () => {
         </div>
       </section>
 
-      {/* Info & Achievements Section */}
+      {/* Mission & Info Section */}
       <section className="container mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          {/* Season Mission */}
+          <div>
+            <h2 className="text-4xl font-bold text-foreground mb-4">Our Season Mission</h2>
+            <p className="text-xl text-muted-foreground">
+              In each match, two alliances of three teams 
+              compete to score as many points as possible.
+               Robots interact with two main game pieces: 
+               coral (PVC pipe structures) and algae 
+               (playground balls). During the autonomous period 
+               (first 15 seconds), robots operate without driver input,
+                attempting to move, place coral on the reef or move 
+                algae. Once the teleoperated period begins, human 
+                drivers take control. Robots collect coral from 
+                their alliance’s loading stations, place it at 
+                different levels of the reef structure, and remove
+                 algae that blocks scoring spots. Algae can either
+                  be scored in the processor or returned to the field.
+                   In the final 30 seconds, known as the endgame,
+                    robots attempt to climb onto the barge cages
+                     located near their reef. They can earn different
+                      amounts of points based on how high they climb
+                       or how securely they hang. This final challenge
+                        often determines the outcome of a close match,
+                         as endgame points carry significant weight in
+                          rankings.
+            </p>
+          </div>
+
+          {/* About Our Robot */}
           <div>
             <EditableText 
               contentKey="robot-about-title" 
@@ -82,14 +108,18 @@ const Robot = () => {
             />
             <EditableText 
               contentKey="robot-about-description" 
-              defaultContent="SPARROW was built to tackle the unique challenges of the 2025 season with unmatched precision and power. Designed with robust engineering and intelligent programming, it excels in autonomy, agility, and teamwork integration. From complex tasks to collaborative field maneuvers, SPARROW is the result of countless hours of design, testing, and refinement." 
+              defaultContent="Our robot features the MK4N swerve drivetrain, offering a low profile for easier attachment of additional mechanisms while remaining fast, precise, and reliable. The three-stage aluminum elevator, fully designed and built in-house, uses a belt system with custom plastic bearings for smooth, fast, and accurate operation, with all stages rising together to simplify control. The coral feeder and outtake (“shooter”) are primarily made of polycarbonate for durability, lightweight construction, and easy machining; the feeder collects coral from the loading station and transfers it to the outtake, which uses two shafts and compliant wheels, guided by an optical sensor to hold the coral securely, and is mounted on the elevator to reach all reef levels. The algae gripper, also polycarbonate with compliant wheels, was positioned next to the coral outtake after testing showed this improved cycle speed and allowed future expansions; it rotates on a custom CNC-machined timing wheel and bearing assembly, enabling it to both collect algae directly from the reef and score it into the processor." 
               contentType="paragraph"
               tag="p" 
               className="text-xl text-muted-foreground"
             />
           </div>
+        </div>
+
+        {/* Achievements + Group Photo */}
+        <div className="mt-16 grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           <div>
-            <h2 className="text-4xl font-bold text-foreground mb-4">Season Achievements</h2>
+            <h2 className="text-4xl font-bold text-foreground mb-6">Season Achievements</h2>
             <div className="grid grid-cols-1 gap-4">
               {achievements.map((achievement, index) => (
                 <Card
@@ -100,6 +130,18 @@ const Robot = () => {
                 </Card>
               ))}
             </div>
+          </div>
+
+          {/* Group Photo */}
+          <div>
+            <h2 className="text-4xl font-bold text-foreground mb-6">Team Photo</h2>
+            <Card className="overflow-hidden border-border hover:border-primary/50 transition-all duration-300 shadow-lg">
+              <img
+                src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=800&h=500&fit=crop"
+                alt="Team group photo"
+                className="w-full h-80 object-cover"
+              />
+            </Card>
           </div>
         </div>
       </section>
