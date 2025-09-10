@@ -6,6 +6,7 @@ import { useState, useEffect, useRef } from "react";
 import { EditableText } from "@/components/editor/EditableText";
 
 import orBuzaglo from "@/assets/TeamProfile/orBuzaglo.jpeg";
+import danielLevy from "@/assets/TeamProfile/DanielLevy.jpeg";
 
 const Team = () => {
   const [selectedTeams, setSelectedTeams] = useState<Record<string, string[]>>({});
@@ -58,7 +59,7 @@ const Team = () => {
     { name: "Yair Lavie", role: "CAD & Manufacturing TeamLeader", image: "https://images.unsplash.com/photo-1507591064344-4c6ce005b128?w=300&h=300&fit=crop&crop=face", teams: ["manufacturing", "mechanics", "cad", "strategy"] },
     { name: "Talya Fuchs", role: "Electronics TeamLeader", image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=300&h=300&fit=crop&crop=face", teams: ["electronics", "media", "community"] },
     { name: "Shir Cohen", role: "Strategy TeamLeader", image: "https://images.unsplash.com/photo-1494790108755-2616b612b647?w=300&h=300&fit=crop&crop=face", teams: ["strategy"] },
-    { name: "Daniel Levi", role: "Resources TeamLeader & FLL Manager", image: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=300&h=300&fit=crop&crop=face", teams: ["resources", "fll", "community"] },
+    { name: "Daniel Levi", role: "Resources TeamLeader & FLL Manager", image: danielLevy, teams: ["resources", "fll", "community"] },
   ];
 
   const teamMembers = [
