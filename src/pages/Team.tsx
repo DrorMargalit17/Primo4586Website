@@ -7,6 +7,9 @@ import { EditableText } from "@/components/editor/EditableText";
 
 //import orBuzaglo from "@/assets/TeamProfile/orBuzaglo.jpeg";
 //import danielLevy from "@/assets/TeamProfile/DanielLevy.jpeg";
+import shayKalisher from "@/assets/TeamProfile/ShayKalisher.jpg";
+import arielIvri from "@/assets/TeamProfile/ArielIvri.jpg";
+
 
 const Team = () => {
   const [selectedTeams, setSelectedTeams] = useState<Record<string, string[]>>({});
@@ -39,7 +42,7 @@ const Team = () => {
     {
       name: "Shay Kalisher",
       role: "Captain",
-      image: "https://images.unsplash.com/photo-1494790108755-2616b612b647?w=300&h=300&fit=crop&crop=face",
+      image: shayKalisher,
       teams: ["cad", "community", "electronics", "resources"],
     },
     {
@@ -51,7 +54,7 @@ const Team = () => {
   ];
 
   const teamLeads = [
-    { name: "Ariel Ivri", role: "FLL TeamLeader", image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face", teams: ["mechanics", "community", "strategy", "media", "reasources", "fll"] },
+    { name: "Ariel Ivri", role: "FLL TeamLeader", image: arielIvri, teams: ["mechanics", "community", "strategy", "media", "reasources", "fll"] },
     { name: "Gali Levy", role: "Mechanics TeamLeader", image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face", teams: ["mechanics", "cad", "community"] },
     { name: "Karny Eissenberg", role: "Design TeamLeader", image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=300&h=300&fit=crop&crop=face", teams: ["design", "mechanics", "electronics"] },
     { name: "Dror Margalit", role: "Media TeamLeader", image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&h=300&fit=crop&crop=face", teams: ["media", "fll", "community", "design", "mechanics"] },
