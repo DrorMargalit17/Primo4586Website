@@ -66,13 +66,13 @@ const Team = () => {
 
   const teamMembers = [
     { name: "Amit Levy", role: "CAD Master", image: "/TeamProfiles/AmitLevy.JPG", teams: ["cad", "manufacturing", "mechanics", "community"] },
-    { name: "Uri Rosin", role: "Robot Driver", image: "https://images.unsplash.com/photo-1494790108755-2616b612b647?w=300&h=300&fit=crop&crop=face", teams: ["software", "DriveTeam", "community"] },
+    { name: "Uri Rosin", role: "Robot Driver", image: "/TeamProfiles/UriRosin.JPG", teams: ["software", "DriveTeam", "community"] },
     { name: "Or Buzaglo", role: "Scouting GOAT", image: "/TeamProfiles/OrBuzaglo.jpg", teams: ["cad", "manufacturing"] },
-    { name: "Adam Dashevsky", role: "Human Player", image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=300&fit=crop&crop=face", teams: ["mechanics", "cad" , "electronics", "design", "fll"] },
+    { name: "Adam Dashevsky", role: "Human Player", image: "/TeamProfiles/AdamDashevsky.JPG", teams: ["mechanics", "cad" , "electronics", "design", "fll"] },
     { name: "Ziv Avivi", role: "Programmer", image: "https://images.unsplash.com/photo-1507591064344-4c6ce005b128?w=300&h=300&fit=crop&crop=face", teams: ["software", "mechanics", "resources"] },
-    { name: "Noga Zechmeister", role: "Robot operator", image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=300&h=300&fit=crop&crop=face", teams: ["strategy", "DriveTeam"] },
+    { name: "Noga Zechmeister", role: "Robot operator", image: "/TeamProfiles/NogaZechmeister.JPG", teams: ["strategy", "DriveTeam"] },
     { name: "Amir Blinda", role: "FLL Operator", image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=300&h=300&fit=crop&crop=face", teams: ["fll"] },
-    { name: "Osher Shkard", role: "", image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face", teams: ["Media" , "Community"] },
+    { name: "Osher Shkard", role: "", image: "/TeamProfiles/OsherShkard.JPG", teams: ["Media" , "Community"] },
     { name: "Ori Lahat", role: "", image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&h=300&fit=crop&crop=face", teams: [] },
     { name: "Ofir Shafran", role: "", image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=300&h=300&fit=crop&crop=face", teams: ["mechanics", "cad", "software", "design", "community", "fll"] },
     { name: "Benjamin Binkin", role: "", image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=300&h=300&fit=crop&crop=face", teams: ["mechanics", "electronics", "design"] },
