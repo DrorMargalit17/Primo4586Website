@@ -7,7 +7,7 @@ import { EditableText } from "@/components/editor/EditableText";
 
 //import orBuzaglo from "@/assets/TeamProfile/orBuzaglo.jpeg";
 //import danielLevy from "@/assets/TeamProfile/DanielLevy.jpeg";
-//import shayKalisher from "@/assets/TeamProfile/ShayKalisher.jpg";
+import shayKalisher from "../assets/TeamProfile/ShayKalisher.jpg";
 //import arielIvri from "@/assets/TeamProfile/ArielIvri.jpg";
 
 
@@ -42,7 +42,7 @@ const Team = () => {
     {
       name: "Shay Kalisher",
       role: "Captain",
-      image: "",
+      image: shayKalisher,
       teams: ["cad", "community", "electronics", "resources"],
     },
     {
