@@ -42,7 +42,7 @@ const Team = () => {
     {
       name: "Shay Kalisher",
       role: "Captain",
-      image: "/TeamProfiles/shayKalisher.jpg",
+      image: "/TeamProfiles/ShayKalisher.JPG",
       teams: ["cad", "community", "electronics", "resources"],
     },
     {
