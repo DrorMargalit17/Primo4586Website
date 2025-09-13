@@ -54,7 +54,7 @@ const Team = () => {
 
   const teamLeads = [
     { name: "Ariel Ivri", role: "FLL TeamLeader", image: "/TeamProfiles/ArielIvri.JPG", teams: ["mechanics", "community", "strategy", "media", "reasources", "fll"] },
-    { name: "Gali Levy", role: "Mechanics TeamLeader", image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face", teams: ["mechanics", "cad", "community"] },
+    { name: "Gali Levy", role: "Mechanics TeamLeader", image: "/TeamProfiles/GaliLevy.JPG", teams: ["mechanics", "cad", "community"] },
     { name: "Karny Eissenberg", role: "Design TeamLeader", image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=300&h=300&fit=crop&crop=face", teams: ["design", "mechanics", "electronics"] },
     { name: "Dror Margalit", role: "Media TeamLeader", image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&h=300&fit=crop&crop=face", teams: ["media", "fll", "community", "design", "mechanics"] },
     { name: "Eilon Hoppert", role: "Software TeamLeader & Coach", image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=300&fit=crop&crop=face", teams: ["software","DriveTeam", "cad", "mechanics", "strategy", "electronics"] },
