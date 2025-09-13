@@ -67,7 +67,7 @@ const Team = () => {
   const teamMembers = [
     { name: "Amit Levy", role: "CAD Master", image: "/TeamProfiles/AmitLevy.JPG", teams: ["cad", "manufacturing", "mechanics", "community"] },
     { name: "Uri Rosin", role: "Robot Driver", image: "https://images.unsplash.com/photo-1494790108755-2616b612b647?w=300&h=300&fit=crop&crop=face", teams: ["software", "DriveTeam", "community"] },
-    { name: "Or Buzaglo", role: "Scouting GOAT", image: "/TeamProfiles/OrBuzaglo.jpeg", teams: ["cad", "manufacturing"] },
+    { name: "Or Buzaglo", role: "Scouting GOAT", image: "/TeamProfiles/OrBuzaglo.jpg", teams: ["cad", "manufacturing"] },
     { name: "Adam Dashevsky", role: "Human Player", image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=300&fit=crop&crop=face", teams: ["mechanics", "cad" , "electronics", "design", "fll"] },
     { name: "Ziv Avivi", role: "Programmer", image: "https://images.unsplash.com/photo-1507591064344-4c6ce005b128?w=300&h=300&fit=crop&crop=face", teams: ["software", "mechanics", "resources"] },
     { name: "Noga Zechmeister", role: "Robot operator", image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=300&h=300&fit=crop&crop=face", teams: ["strategy", "DriveTeam"] },
