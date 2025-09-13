@@ -7,7 +7,6 @@ import { EditableText } from "@/components/editor/EditableText";
 
 //import orBuzaglo from "@/assets/TeamProfile/orBuzaglo.jpeg";
 //import danielLevy from "@/assets/TeamProfile/DanielLevy.jpeg";
-//import shayKalisher from "../assets/TeamProfile/ShayKalisher.jpg";
 //import arielIvri from "@/assets/TeamProfile/ArielIvri.jpg";
 
 
@@ -54,7 +53,7 @@ const Team = () => {
   ];
 
   const teamLeads = [
-    { name: "Ariel Ivri", role: "FLL TeamLeader", image: "", teams: ["mechanics", "community", "strategy", "media", "reasources", "fll"] },
+    { name: "Ariel Ivri", role: "FLL TeamLeader", image: "/TeamProfiles/ArielIvri.JPG", teams: ["mechanics", "community", "strategy", "media", "reasources", "fll"] },
     { name: "Gali Levy", role: "Mechanics TeamLeader", image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face", teams: ["mechanics", "cad", "community"] },
     { name: "Karny Eissenberg", role: "Design TeamLeader", image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=300&h=300&fit=crop&crop=face", teams: ["design", "mechanics", "electronics"] },
     { name: "Dror Margalit", role: "Media TeamLeader", image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&h=300&fit=crop&crop=face", teams: ["media", "fll", "community", "design", "mechanics"] },
@@ -62,13 +61,13 @@ const Team = () => {
     { name: "Yair Lavie", role: "CAD & Manufacturing TeamLeader", image: "https://images.unsplash.com/photo-1507591064344-4c6ce005b128?w=300&h=300&fit=crop&crop=face", teams: ["manufacturing", "mechanics", "cad", "strategy"] },
     { name: "Talya Fuchs", role: "Electronics TeamLeader", image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=300&h=300&fit=crop&crop=face", teams: ["electronics", "media", "community"] },
     { name: "Shir Cohen", role: "Strategy TeamLeader", image: "https://images.unsplash.com/photo-1494790108755-2616b612b647?w=300&h=300&fit=crop&crop=face", teams: ["strategy"] },
-    { name: "Daniel Levi", role: "Resources TeamLeader & FLL Manager", image: "", teams: ["resources", "fll", "community"] },
+    { name: "Daniel Levi", role: "Resources TeamLeader & FLL Manager", image: "/TeamProfiles/DanielLevy.jpeg", teams: ["resources", "fll", "community"] },
   ];
 
   const teamMembers = [
     { name: "Amit Levy", role: "CAD Master", image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face", teams: ["cad", "manufacturing", "mechanics", "community"] },
     { name: "Uri Rosin", role: "Robot Driver", image: "https://images.unsplash.com/photo-1494790108755-2616b612b647?w=300&h=300&fit=crop&crop=face", teams: ["software", "DriveTeam", "community"] },
-    { name: "Or Buzaglo", role: "Scouting GOAT", image: "", teams: ["cad", "manufacturing"] },
+    { name: "Or Buzaglo", role: "Scouting GOAT", image: "public/TeamProfiles/OrBuzaglo.jpeg", teams: ["cad", "manufacturing"] },
     { name: "Adam Dashevsky", role: "Human Player", image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=300&fit=crop&crop=face", teams: ["mechanics", "cad" , "electronics", "design", "fll"] },
     { name: "Ziv Avivi", role: "Programmer", image: "https://images.unsplash.com/photo-1507591064344-4c6ce005b128?w=300&h=300&fit=crop&crop=face", teams: ["software", "mechanics", "resources"] },
     { name: "Noga Zechmeister", role: "Robot operator", image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=300&h=300&fit=crop&crop=face", teams: ["strategy", "DriveTeam"] },
