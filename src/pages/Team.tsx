@@ -61,13 +61,13 @@ const Team = () => {
     { name: "Yair Lavie", role: "CAD & Manufacturing TeamLeader", image: "https://images.unsplash.com/photo-1507591064344-4c6ce005b128?w=300&h=300&fit=crop&crop=face", teams: ["manufacturing", "mechanics", "cad", "strategy"] },
     { name: "Talya Fuchs", role: "Electronics TeamLeader", image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=300&h=300&fit=crop&crop=face", teams: ["electronics", "media", "community"] },
     { name: "Shir Cohen", role: "Strategy TeamLeader", image: "https://images.unsplash.com/photo-1494790108755-2616b612b647?w=300&h=300&fit=crop&crop=face", teams: ["strategy"] },
-    { name: "Daniel Levi", role: "Resources TeamLeader & FLL Manager", image: "/TeamProfiles/DanielLevy.jpeg", teams: ["resources", "fll", "community"] },
+    { name: "Daniel Levi", role: "Resources TeamLeader & FLL Manager", image: "", teams: ["resources", "fll", "community"] },
   ];
 
   const teamMembers = [
     { name: "Amit Levy", role: "CAD Master", image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face", teams: ["cad", "manufacturing", "mechanics", "community"] },
     { name: "Uri Rosin", role: "Robot Driver", image: "https://images.unsplash.com/photo-1494790108755-2616b612b647?w=300&h=300&fit=crop&crop=face", teams: ["software", "DriveTeam", "community"] },
-    { name: "Or Buzaglo", role: "Scouting GOAT", image: "public/TeamProfiles/OrBuzaglo.jpeg", teams: ["cad", "manufacturing"] },
+    { name: "Or Buzaglo", role: "Scouting GOAT", image: "", teams: ["cad", "manufacturing"] },
     { name: "Adam Dashevsky", role: "Human Player", image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=300&fit=crop&crop=face", teams: ["mechanics", "cad" , "electronics", "design", "fll"] },
     { name: "Ziv Avivi", role: "Programmer", image: "https://images.unsplash.com/photo-1507591064344-4c6ce005b128?w=300&h=300&fit=crop&crop=face", teams: ["software", "mechanics", "resources"] },
     { name: "Noga Zechmeister", role: "Robot operator", image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=300&h=300&fit=crop&crop=face", teams: ["strategy", "DriveTeam"] },
