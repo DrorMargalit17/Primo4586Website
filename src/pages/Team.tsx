@@ -116,7 +116,7 @@ const Team = () => {
     {
       name: "Avi Segal",
       role: "Software Mentor",
-      image: "https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=300&h=300&fit=crop&crop=face",
+      image: "/MentorsProfiles/AviSegal.jpg",
       since: "2015",
     },
     {
@@ -128,13 +128,13 @@ const Team = () => {
     {
       name: "Michal Naim",
       role: "Financial Mentor",
-      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&h=300&fit=crop&crop=face",
+      image: "/MentorsProfiles/MichalNaim.jpg",
       since: "2017",
     },
     {
       name: "Noa Fuchs",
       role: "Community Mentor",
-      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&h=300&fit=crop&crop=face",
+      image: "/MentorsProfiles/NoaFuchs.jpg",
       since: "2017",
     },
     {
