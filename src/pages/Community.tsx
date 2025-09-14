@@ -83,7 +83,7 @@ const communityActivities = [
     title: "Spark Day Festival",
     description:
       "A project in collaboration with Greenblitz #4590 and Excalibur #6738, attended by around 300+ people. The festival featured many LEGO and robotics stations, including robot driving.",
-    images: ["/images/community/charity1.jpg", "/images/community/charity2.jpg"],
+    images: ["/community/sparkDay/sparkDay_1.jpg", "/community/sparkDay/sparkDay_2.jpg", "/community/sparkDay/sparkDay_3.jpg"],
   },
   {
     title: "PRIMOLAB Experiment Booklet",
@@ -95,7 +95,7 @@ const communityActivities = [
     title: "Participation in the “Waves of Hope” project by Mariners #8223",
     description:
       "We gave two lectures on Scratch programming and space.",
-    images: ["/images/community/charity1.jpg", "/images/community/charity2.jpg"],
+    images: ["/community/wavesOfHope/wavesOfHope_1.jpg", "/community/wavesOfHope/wavesOfHope_2.jpg"],
   },
   {
     title: "Primo Senior",
