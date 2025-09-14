@@ -19,7 +19,7 @@ const Sponsors = () => {
     {
       id: 1,
       name: "CodeValue",
-      logo: logoCodeValue,
+      logo: "/Sponsors/codeValue.png",
       website: "https://www.codevalue.com/",
       description: "CodeValue is a leading software development company, specializing in advanced technological solutions and driving innovation across organizations. Since 2025, they have been one of our main sponsors, providing essential financial support as well as top-tier professional and technological guidance.",
       
@@ -28,7 +28,7 @@ const Sponsors = () => {
     {
       id: 2,
       name: "CHEMOGRAF",
-      logo: logoChemograf,
+      logo: "/Sponsors/Chemograf.png",
       website: "https://chemograf.com/?lang=he",
       description: "Chemograf is a pioneering company in the field of chemical technologies and advanced materials. Since 2024, they have been a key sponsor of ours, offering vital funding and expert knowledge to support our initiatives and growth.",
       
@@ -37,7 +37,7 @@ const Sponsors = () => {
     {
       id: 3,
       name: "PLASKOLITE",
-      logo: logoPlaskolite,
+      logo: "/Sponsors/plaskolite.png",
       website: "https://plaskolite.com/",
       description: "Plaskolite is a leading manufacturer specializing in innovative plastic solutions and engineered acrylic products. Since 2025, they have been a valued sponsor of ours, providing crucial financial support and technical expertise to help advance our projects.",
       
@@ -46,7 +46,7 @@ const Sponsors = () => {
     {
       id: 4,
       name: "WEISS GROUP",
-      logo: logoWeissGroup,
+      logo: "/Sponsors/Weiss_Group.png",
       website: "https://weissgroup.co.il/en/",
       description: "Weiss Group is a distinguished company specializing in high-precision industrial equipment and automation solutions. Since 2025, they have been a proud sponsor of ours, contributing essential funding and expert technical support to drive our success.",
       
@@ -55,7 +55,7 @@ const Sponsors = () => {
     {
       id: 5,
       name: "Argentools",
-      logo: logoArgentools,
+      logo: "/Sponsors/Argentols.png",
       website: "https://www.argentools.co.il/",
       description: "Argentools is a dynamic company specializing in advanced tooling solutions and precision engineering services. Since 2025, they have been a key sponsor of ours, offering vital financial backing and expert industry knowledge to support our development.",
       
@@ -64,7 +64,7 @@ const Sponsors = () => {
     {
       id: 6,
       name: "Kursia",
-      logo: logoKursia,
+      logo: "/Sponsors/Kursia.png",
       website: "https://modiinapp.com/he/page/7500/%D7%A7%D7%95%D7%A8%D7%A1%D7%99%D7%94-%D7%91%D7%99%D7%AA-%D7%A9%D7%9C-%D7%98%D7%A2%D7%9E%D7%99%D7%9D",
       description: "Kursia is a renowned establishment in Modi’in, Israel, offering a diverse range of culinary experiences with a focus on high-quality, flavorful dishes. Since 2025, they have been a valued sponsor of ours, providing essential support and contributing to the success of our initiatives.",
       since: "2025",
@@ -72,7 +72,7 @@ const Sponsors = () => {
     {
       id: 7,
       name: "Cheese Pizza",
-      logo: CheesePizza,
+      logo: "/Sponsors/CheesePizza.jpg",
       website: "https://pizzacheese.co.il/",
       description: "Pizza Cheese is a local Israeli pizzeria known for its fresh ingredients, rich flavors, and welcoming atmosphere. They generously support us by donating delicious food every week throughout the season. Their kindness not only keeps us energized but also creates a warm sense of community around our team.",
       
@@ -80,8 +80,8 @@ const Sponsors = () => {
     },
     {
       id: 8,
-      name: "3D3",
-      logo: ThreeD3,
+      name: "3d3",
+      logo: "/Sponsors/3d3.jpg",
       website: "https://www.3d3.co.il/",
       description: "3D3 is an innovative Israeli company specializing in advanced 3D printing and creative design solutions. They generously support us by contributing every week throughout the season, helping us stay equipped and inspired. Their commitment not only strengthens our work but also builds a strong sense of partnership within our team",
       
@@ -90,7 +90,7 @@ const Sponsors = () => {
     {
       id: 9,
       name: "Ironi B",
-      logo: logoIroniB,
+      logo: "/Sponsors/ironiB.png",
       website: "https://ironibetrabin.mashov.info/",
       description: "Ironi B is our local high school, providing quality education and fostering growth in academics, arts, and community engagement. It plays a central role in shaping the future of its students and the wider community.",
       since: "2012",
@@ -98,7 +98,7 @@ const Sponsors = () => {
     {
       id: 10,
       name: "Modi'in City",
-      logo: logoModiin,
+      logo: "/Sponsors/modiin.png",
       website: "https://www.modiin.muni.il/ModiinWebSite/MainPage.aspx",
       description: "Modi’in City is our vibrant hometown, known for its modern infrastructure, rich history, and dynamic community life. It serves as a center for culture, education, and innovation in the region, offering a high quality of life to its residents.",
       
