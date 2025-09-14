@@ -9,6 +9,8 @@ import logoArgentools from "@/assets/sponsors/Argentols.png";
 import logoKursia from "@/assets/sponsors/Kursia.png";
 import logoIroniB from "@/assets/sponsors/ironiB.png";
 import logoModiin from "@/assets/sponsors/modiin.png";
+import CheesePizza from "@/assets/sponsors/CheesePizza.jpg";
+import ThreeD3 from "@/assets/sponsors/3d3.jpg";
 
 
 
@@ -69,6 +71,24 @@ const Sponsors = () => {
     },
     {
       id: 7,
+      name: "Cheese Pizza",
+      logo: CheesePizza,
+      website: "https://pizzacheese.co.il/",
+      description: "Pizza Cheese is a local Israeli pizzeria known for its fresh ingredients, rich flavors, and welcoming atmosphere. They generously support us by donating delicious food every week throughout the season. Their kindness not only keeps us energized but also creates a warm sense of community around our team.",
+      
+      since: "2025",
+    },
+    {
+      id: 8,
+      name: "3D3",
+      logo: ThreeD3,
+      website: "https://www.3d3.co.il/",
+      description: "3D3 is an innovative Israeli company specializing in advanced 3D printing and creative design solutions. They generously support us by contributing every week throughout the season, helping us stay equipped and inspired. Their commitment not only strengthens our work but also builds a strong sense of partnership within our team",
+      
+      since: "2025",
+    },
+    {
+      id: 9,
       name: "Ironi B",
       logo: logoIroniB,
       website: "https://ironibetrabin.mashov.info/",
@@ -76,7 +96,7 @@ const Sponsors = () => {
       since: "2012",
     },
     {
-      id: 8,
+      id: 10,
       name: "Modi'in City",
       logo: logoModiin,
       website: "https://www.modiin.muni.il/ModiinWebSite/MainPage.aspx",
@@ -84,6 +104,7 @@ const Sponsors = () => {
       
       since: "2012",
     },
+    
   ];
 
   return (
