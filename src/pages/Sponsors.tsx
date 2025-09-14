@@ -1,18 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ExternalLink } from "lucide-react";
-import logoCodeValue from "@/assets/sponsors/codeValue.png";
-import logoChemograf from "@/assets/sponsors/Chemograf.png";
-import logoPlaskolite from "@/assets/sponsors/plaskolite.png";
-import logoWeissGroup from "@/assets/sponsors/Weiss_Group.png";
-import logoArgentools from "@/assets/sponsors/Argentols.png";
-import logoKursia from "@/assets/sponsors/Kursia.png";
-import logoIroniB from "@/assets/sponsors/ironiB.png";
-import logoModiin from "@/assets/sponsors/modiin.png";
-import CheesePizza from "@/assets/sponsors/CheesePizza.jpg";
-import ThreeD3 from "@/assets/sponsors/3d3.jpg";
-
-
 
 const Sponsors = () => {
   const sponsors = [
