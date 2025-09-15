@@ -101,7 +101,7 @@ const communityActivities = [
     title: "Primo Senior",
     description:
       "During COVID-19, the project moved online to help seniors use communication platforms (e.g., Zoom). Created tutorial videos on software such as Word, PowerPoint, and Gmail (hundreds of views). Presented the videos in the Modiin Senior Day Center and assisted seniors in person.",
-    images: [primoSenior1, primoSenior2, primoSenior3],
+    images: ["/community/PrimoSenior/primoSenior_1.png", "/community/PrimoSenior/primoSenior_2.png", "/community/PrimoSenior/primoSenior_3.png"],
   },
   {
     title: "Science With PrimoFly",
