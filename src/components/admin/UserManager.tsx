@@ -21,6 +21,10 @@ const UserManager = () => {
   const [resetEmail, setResetEmail] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [adminEmail, setAdminEmail] = useState("");
+  const [adminPassword, setAdminPassword] = useState("");
+  const [showAdminPassword, setShowAdminPassword] = useState(false);
+  const [registerLoading, setRegisterLoading] = useState(false);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -147,12 +151,137 @@ const UserManager = () => {
     }
   };
 
+  const registerAdmin = async () => {
+    if (!adminEmail || !adminPassword) {
+      toast({
+        title: "Error",
+        description: "Please provide both email and password",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (adminPassword.length < 6) {
+      toast({
+        title: "Error",
+        description: "Password must be at least 6 characters long",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setRegisterLoading(true);
+
+    try {
+      const { data, error } = await supabase.auth.signUp({
+        email: adminEmail,
+        password: adminPassword,
+        options: {
+          emailRedirectTo: `${window.location.origin}/`,
+        }
+      });
+
+      if (error) throw error;
+
+      if (data.user) {
+        // Update the user's profile to make them an admin
+        const { error: profileError } = await supabase
+          .from("profiles")
+          .update({ is_admin: true })
+          .eq("user_id", data.user.id);
+
+        if (profileError) throw profileError;
+
+        toast({
+          title: "Success",
+          description: `Admin account created successfully for ${adminEmail}`,
+        });
+
+        // Clear form and refresh users list
+        setAdminEmail("");
+        setAdminPassword("");
+        setShowAdminPassword(false);
+        fetchUsers();
+      }
+    } catch (error: any) {
+      console.error("Error creating admin:", error);
+      toast({
+        title: "Error",
+        description: error.message || "Failed to create admin account",
+        variant: "destructive",
+      });
+    } finally {
+      setRegisterLoading(false);
+    }
+  };
+
   if (loading) {
     return <div className="text-center py-8">Loading users...</div>;
   }
 
   return (
     <div className="space-y-6">
+      {/* Admin Registration Section */}
+      <Card className="p-6 bg-gradient-surface border-border">
+        <h3 className="text-lg font-semibold text-foreground mb-4">Register New Administrator</h3>
+        <div className="space-y-4">
+          <div>
+            <Label htmlFor="admin-email" className="text-foreground">Admin Email</Label>
+            <Input
+              id="admin-email"
+              type="email"
+              placeholder="admin@example.com"
+              value={adminEmail}
+              onChange={(e) => setAdminEmail(e.target.value)}
+              className="mt-1"
+            />
+          </div>
+          <div>
+            <Label htmlFor="admin-password" className="text-foreground">Admin Password</Label>
+            <div className="relative mt-1">
+              <Input
+                id="admin-password"
+                type={showAdminPassword ? "text" : "password"}
+                placeholder="Enter password (min 6 characters)"
+                value={adminPassword}
+                onChange={(e) => setAdminPassword(e.target.value)}
+                className="pr-10"
+              />
+              <Button
+                type="button"
+                variant="ghost"
+                size="sm"
+                className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
+                onClick={() => setShowAdminPassword(!showAdminPassword)}
+              >
+                {showAdminPassword ? (
+                  <EyeOff className="h-4 w-4 text-muted-foreground" />
+                ) : (
+                  <Eye className="h-4 w-4 text-muted-foreground" />
+                )}
+              </Button>
+            </div>
+          </div>
+          <Button
+            onClick={registerAdmin}
+            disabled={registerLoading}
+            className="w-full"
+          >
+            {registerLoading ? (
+              <>
+                <RotateCcw className="mr-2 h-4 w-4 animate-spin" />
+                Creating Admin...
+              </>
+            ) : (
+              <>
+                <UserCheck className="mr-2 h-4 w-4" />
+                Create Administrator
+              </>
+            )}
+          </Button>
+        </div>
+      </Card>
+
       {/* Password Reset Section */}
       <Card className="p-6 bg-gradient-surface border-border">
         <h3 className="text-lg font-semibold text-foreground mb-4">Reset User Password</h3>

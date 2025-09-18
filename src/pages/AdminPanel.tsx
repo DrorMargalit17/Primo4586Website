@@ -14,7 +14,7 @@ type SectionKey = "upcoming" | "community" | "users" | "team" | "home" | null;
 const sections = [
   { key: "upcoming", title: "Upcoming Events", icon: CalendarDays },
   { key: "community", title: "Community Activities", icon: Users },
-  { key: "users", title: "User Management", icon: UserCog },
+  { key: "users", title: "Admin Management", icon: UserCog },
   { key: "team", title: "Team Cards", icon: Hammer },
   { key: "home", title: "Home Pictures", icon: Image },
 ] as const;
