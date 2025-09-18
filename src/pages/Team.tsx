@@ -35,7 +35,7 @@ const Team = () => {
     {
       name: "Maya Goz",
       role: "Co. Captain & Community TeamLeader",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
+      image: "/TeamProfiles/MayaGoz.jpg",
       teams: ["community", "media", "design", "resources", "mechanics", "electronics"],
     },
     {
@@ -55,10 +55,10 @@ const Team = () => {
   const teamLeads = [
     { name: "Ariel Ivri", role: "FLL TeamLeader", image: "/TeamProfiles/ArielIvri.JPG", teams: ["mechanics", "community", "strategy", "media", "reasources", "fll"] },
     { name: "Gali Levy", role: "Mechanics TeamLeader", image: "/TeamProfiles/GaliLevy.JPG", teams: ["mechanics", "cad", "community"] },
-    { name: "Karny Eissenberg", role: "Design TeamLeader", image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=300&h=300&fit=crop&crop=face", teams: ["design", "mechanics", "electronics"] },
+    { name: "Karny Eissenberg", role: "Design TeamLeader", image: "/TeamProfiles/KarnyEissenberg.JPG", teams: ["design", "mechanics", "electronics"] },
     { name: "Dror Margalit", role: "Media TeamLeader", image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&h=300&fit=crop&crop=face", teams: ["media", "fll", "community", "design", "mechanics"] },
     { name: "Eilon Hoppert", role: "Software TeamLeader & Coach", image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=300&fit=crop&crop=face", teams: ["software","DriveTeam", "cad", "mechanics", "strategy", "electronics"] },
-    { name: "Yair Lavie", role: "CAD & Manufacturing TeamLeader", image: "https://images.unsplash.com/photo-1507591064344-4c6ce005b128?w=300&h=300&fit=crop&crop=face", teams: ["manufacturing", "mechanics", "cad", "strategy"] },
+    { name: "Yair Lavie", role: "CAD & Manufacturing TeamLeader", image: "/TeamProfiles/YairLavie.JPG", teams: ["manufacturing", "mechanics", "cad", "strategy"] },
     { name: "Talya Fuchs", role: "Electronics TeamLeader", image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=300&h=300&fit=crop&crop=face", teams: ["electronics", "media", "community"] },
     { name: "Shir Cohen", role: "Strategy TeamLeader", image: "https://images.unsplash.com/photo-1494790108755-2616b612b647?w=300&h=300&fit=crop&crop=face", teams: ["strategy"] },
     { name: "Daniel Levi", role: "Resources TeamLeader & FLL Manager", image: "/TeamProfiles/DanielLevi.JPG", teams: ["resources", "fll", "community"] },
@@ -89,7 +89,7 @@ const Team = () => {
     { name: "Itay Alon", role: "", image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face", teams: [] },
     { name: "Noam Shtein", role: "", image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&h=300&fit=crop&crop=face", teams: [] },
     { name: "Mor Gaz", role: "", image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=300&h=300&fit=crop&crop=face", teams: ["mechanics", "electronics", "design"] },
-    { name: "Yotam Cohen", role: "", image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=300&h=300&fit=crop&crop=face", teams: ["mechanics", "design", "media", "community"] },
+    { name: "Yotam Cohen", role: "", image: "/TeamProfiles/YotamCohen.JPG", teams: ["mechanics", "design", "media", "community"] },
     { name: "Noa Hillel", role: "", image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=300&h=300&fit=crop&crop=face", teams: ["mechanics", "electronics", "design"] },
     { name: "Liran Friedman", role: "", image: "/TeamProfiles/LiranFriedman.JPG", teams: ["software", "media", "community"] },
     { name: "Yuval Porat", role: "", image: "/TeamProfiles/YuvalPorat.JPG", teams: ["mechanics", "electronics", "community"] },
@@ -285,68 +285,70 @@ const Team = () => {
           Team Leads
         </h2>
         <div className="flex justify-center">
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-[1100px] w-full justify-items-center">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6 w-full">
             {teamLeads.map((member, index) => (
               <Card
                 key={index}
-                className="relative p-6 bg-gradient-surface border-border hover:border-primary/50 transition-all duration-300 hover:shadow-glow group min-h-[280px] w-full max-w-[250px]"
-            >
-              <div className="text-center">
-                <div className="relative mb-4">
-                  <img
-                    src={member.image}
-                    alt={member.name}
-                    className="w-28 h-28 rounded-full mx-auto object-cover border-4 border-primary/20 group-hover:border-primary/50 transition-all duration-300"
-                  />
+                className="relative p-6 bg-gradient-surface border-border hover:border-primary/50 transition-all duration-300 hover:shadow-glow group min-h-[280px] w-full"
+              >
+                <div className="text-center">
+                  <div className="relative mb-4">
+                    <img
+                      src={member.image}
+                      alt={member.name}
+                      className="w-32 h-32 rounded-full mx-auto object-cover border-4 border-primary/20 group-hover:border-primary/50 transition-all duration-300"
+                    />
+                  </div>
+
+                  <h3 className="text-md font-semibold text-foreground mb-1">{member.name}</h3>
+                  <p className="text-primary text-sm font-medium mb-2">{member.role}</p>
                 </div>
 
-                <h3 className="text-md font-semibold text-foreground mb-1">{member.name}</h3>
-
-                <p className="text-primary text-sm font-medium mb-2">{member.role}</p>
-              </div>
-
-              {/* Teams dropdown bottom-left */}
-              <div
-                ref={(el) => (dropdownRefs.current[member.name] = el)}
-                className="absolute bottom-4 left-4"
-              >
-                <button
-                  onClick={() => toggleDropdown(member.name)}
-                  className="bg-primary/10 text-primary px-2 py-1 rounded-full text-xs font-semibold hover:bg-primary/20 transition"
-                  aria-haspopup="true"
-                  aria-expanded={openDropdown === member.name}
+                {/* Teams dropdown bottom-left */}
+                <div
+                  ref={(el) => (dropdownRefs.current[member.name] = el)}
+                  className="absolute bottom-4 left-4"
                 >
-                  Teams ▾
-                </button>
-                {openDropdown === member.name && (
-                  <div className="absolute left-0 mt-1 w-40 max-h-40 overflow-y-auto bg-surface border border-primary/30 rounded-md shadow-lg z-50 p-2">
-                    {teamOptions.map((team) => {
-                      const isMemberInTeam = member.teams.includes(team.value);
-                      return (
-                        <div
-                          key={team.value}
-                          className={`flex items-center px-2 py-1 rounded cursor-default select-none ${
-                            isMemberInTeam ? "bg-primary/20 text-primary font-semibold" : "text-muted-foreground"
-                          }`}
-                        >
-                          <input
-                            type="checkbox"
-                            checked={isMemberInTeam}
-                            readOnly
-                            className="mr-2 cursor-default"
-                          />
-                          <span>{team.label}</span>
-                        </div>
-                      );
-                    })}
-                  </div>
-                )}
-              </div>
+                  <button
+                    onClick={() => toggleDropdown(member.name)}
+                    className="bg-primary/10 text-primary px-2 py-1 rounded-full text-xs font-semibold hover:bg-primary/20 transition"
+                    aria-haspopup="true"
+                    aria-expanded={openDropdown === member.name}
+                  >
+                    Teams ▾
+                  </button>
+                  {openDropdown === member.name && (
+                    <div className="absolute left-0 mt-1 w-40 max-h-40 overflow-y-auto bg-surface border border-primary/30 rounded-md shadow-lg z-50 p-2">
+                      {teamOptions.map((team) => {
+                        const isMemberInTeam = member.teams.includes(team.value);
+                        return (
+                          <div
+                            key={team.value}
+                            className={`flex items-center px-2 py-1 rounded cursor-default select-none ${
+                              isMemberInTeam
+                                ? "bg-primary/20 text-primary font-semibold"
+                                : "text-muted-foreground"
+                            }`}
+                          >
+                            <input
+                              type="checkbox"
+                              checked={isMemberInTeam}
+                              readOnly
+                              className="mr-2 cursor-default"
+                            />
+                            <span>{team.label}</span>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
               </Card>
             ))}
           </div>
         </div>
       </section>
+
 
       {/* Team Members */}
       <section className="container mx-auto px-6">
