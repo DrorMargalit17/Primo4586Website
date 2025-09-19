@@ -5,11 +5,6 @@ import { Linkedin, Mail } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { EditableText } from "@/components/editor/EditableText";
 
-//import orBuzaglo from "@/assets/TeamProfile/orBuzaglo.jpeg";
-//import danielLevy from "@/assets/TeamProfile/DanielLevy.jpeg";
-//import arielIvri from "@/assets/TeamProfile/ArielIvri.jpg";
-
-
 const Team = () => {
   const [selectedTeams, setSelectedTeams] = useState<Record<string, string[]>>({});
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
@@ -447,7 +442,6 @@ const Team = () => {
                 <p className="text-muted-foreground text-sm mb-6">Mentor since {mentor.since}</p>
 
                 <div className="flex justify-center space-x-4">
-                  {/* Removed github, linkedin and mail links per request */}
                 </div>
               </div>
             </Card>
