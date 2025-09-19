@@ -4,17 +4,19 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import UpcomingEventsManager from "@/components/admin/UpcomingEventsManager";
 import CommunityActivitiesManager from "@/components/admin/CommunityActivitiesManager";
 import UserManager from "@/components/admin/UserManager";
+import ResourcesManager from "@/components/admin/ResourcesManager";
 //import TeamCardsManager from "@/components/admin/TeamCardsManager";
 //import HomePicturesManager from "@/components/admin/HomePicturesManager";
 
-import { CalendarDays, Users, Hammer, Image, UserCog } from "lucide-react";
+import { CalendarDays, Users, Hammer, Image, UserCog, FolderOpen } from "lucide-react";
 
-type SectionKey = "upcoming" | "community" | "users" | "team" | "home" | null;
+type SectionKey = "upcoming" | "community" | "users" | "resources" | "team" | "home" | null;
 
 const sections = [
   { key: "upcoming", title: "Upcoming Events", icon: CalendarDays },
   { key: "community", title: "Community Activities", icon: Users },
   { key: "users", title: "Admin Management", icon: UserCog },
+  { key: "resources", title: "Resources", icon: FolderOpen },
   { key: "team", title: "Team Cards", icon: Hammer },
   { key: "home", title: "Home Pictures", icon: Image },
 ] as const;
@@ -30,6 +32,8 @@ export default function AdminPanel() {
         return <CommunityActivitiesManager />;
       case "users":
         return <UserManager />;
+      case "resources":
+        return <ResourcesManager />;
       case "team":
         // return <TeamCardsManager />;
         return <div className="p-4 text-center text-muted-foreground">Team Cards Manager coming soon.</div>;

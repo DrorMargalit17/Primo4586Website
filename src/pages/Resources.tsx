@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
@@ -15,98 +15,94 @@ import {
   Bot,
   DollarSign,
 } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
-const teams = [
-  {
-    icon: Brain,
-    title: "Strategy",
-    resources: [
-      { name: "Game Analysis Sheet", type: "PDF", link: "#" },
-      { name: "Match Strategy Presentation", type: "Slides", link: "#" },
-    ],
-  },
-  {
-    icon: Hammer,
-    title: "CAD & Manufacture",
-    resources: [
-      { name: "Fusion 360 Files", type: "CAD", link: "#" },
-      { name: "Machining Guidelines", type: "PDF", link: "#" },
-    ],
-  },
-  {
-    icon: Settings,
-    title: "Mechanics",
-    resources: [
-      { name: "Subsystem Overview", type: "Document", link: "#" },
-      { name: "Assembly Instructions", type: "PDF", link: "#" },
-    ],
-  },
-  {
-    icon: Cpu,
-    title: "Electronics",
-    resources: [
-      { name: "Wiring Diagram", type: "Schematic", link: "#" },
-      { name: "Sensor Guide", type: "Manual", link: "#" },
-    ],
-  },
-  {
-    icon: Code,
-    title: "Software",
-    resources: [
-      { name: "Control Code Repo", type: "GitHub Repository", link: "#" },
-      { name: "Autonomous Algorithms", type: "Python Scripts", link: "#" },
-    ],
-  },
-  {
-    icon: Users,
-    title: "Community",
-    resources: [
-      { name: "Outreach Summary", type: "Report", link: "#" },
-      { name: "Volunteer Program", type: "Document", link: "#" },
-    ],
-  },
-  {
-    icon: Camera,
-    title: "Media",
-    resources: [
-      { name: "Photo Collection", type: "Drive Folder", link: "#" },
-      { name: "Promo Video", type: "YouTube", link: "#" },
-    ],
-  },
-  {
-    icon: Palette,
-    title: "Design",
-    resources: [
-      { name: "Brand Guide", type: "PDF", link: "#" },
-      { name: "Logo Pack", type: "Assets", link: "#" },
-    ],
-  },
-  {
-    icon: Bot,
-    title: "FLL",
-    resources: [
-      { name: "Mentorship Plan", type: "Document", link: "#" },
-      { name: "Team Goals", type: "PDF", link: "#" },
-    ],
-  },
-  {
-    icon: DollarSign,
-    title: "Resource Mobilization",
-    resources: [
-      { name: "Sponsorship Letter", type: "PDF", link: "#" },
-      { name: "Budget Plan", type: "Spreadsheet", link: "#" },
-    ],
-  },
-];
+interface Resource {
+  id: string;
+  category: string;
+  name: string;
+  type: string;
+  link: string;
+}
+
+interface Team {
+  icon: React.ComponentType<{ className?: string }>;
+  title: string;
+  resources: Resource[];
+}
+
+const teamIcons = {
+  "Strategy": Brain,
+  "CAD & Manufacture": Hammer,
+  "Mechanics": Settings,
+  "Electronics": Cpu,
+  "Software": Code,
+  "Community": Users,
+  "Media": Camera,
+  "Design": Palette,
+  "FLL": Bot,
+  "Resource Mobilization": DollarSign,
+};
 
 const Resources = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [teams, setTeams] = useState<Team[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  const fetchResources = async () => {
+    try {
+      const { data, error } = await supabase
+        .from("resources")
+        .select("*")
+        .order("category", { ascending: true })
+        .order("name", { ascending: true });
+
+      if (error) throw error;
+
+      // Group resources by category
+      const resourcesByCategory = (data || []).reduce((acc: { [key: string]: Resource[] }, resource: Resource) => {
+        if (!acc[resource.category]) {
+          acc[resource.category] = [];
+        }
+        acc[resource.category].push(resource);
+        return acc;
+      }, {});
+
+      // Create teams array with icons and resources
+      const teamsData: Team[] = Object.entries(resourcesByCategory).map(([category, resources]) => ({
+        icon: teamIcons[category as keyof typeof teamIcons] || Brain,
+        title: category,
+        resources: resources as Resource[]
+      }));
+
+      setTeams(teamsData);
+    } catch (error) {
+      console.error("Error fetching resources:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchResources();
+  }, []);
 
   const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
       setOpenIndex(null);
     }
   };
+
+  if (loading) {
+    return (
+      <div className="container mx-auto px-6 py-16">
+        <h1 className="text-4xl md:text-5xl font-bold text-center mb-16 text-foreground">
+          Team <span className="bg-gradient-primary bg-clip-text text-transparent">Resources</span>
+        </h1>
+        <div className="text-center">Loading resources...</div>
+      </div>
+    );
+  }
 
   return (
     <div className="container mx-auto px-6 py-16">
