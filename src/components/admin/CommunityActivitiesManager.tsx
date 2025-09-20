@@ -1,13 +1,109 @@
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { 
+  DndContext, 
+  closestCenter, 
+  KeyboardSensor, 
+  PointerSensor, 
+  useSensor, 
+  useSensors,
+  DragEndEvent
+} from '@dnd-kit/core';
+import { 
+  arrayMove, 
+  SortableContext, 
+  sortableKeyboardCoordinates, 
+  verticalListSortingStrategy 
+} from '@dnd-kit/sortable';
+import { 
+  useSortable 
+} from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
+import { GripVertical } from "lucide-react";
 
 type Activity = {
   id: string;
   title: string;
   description: string;
   images: string[];
+  display_order: number;
 };
+
+// Sortable Activity Component
+function SortableActivity({ 
+  activity, 
+  onEdit, 
+  onDelete, 
+  loading 
+}: { 
+  activity: Activity; 
+  onEdit: (activity: Activity) => void; 
+  onDelete: (activity: Activity) => void; 
+  loading: boolean; 
+}) {
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+  } = useSortable({ id: activity.id });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  };
+
+  return (
+    <div
+      ref={setNodeRef}
+      style={style}
+      className="bg-gradient-surface border border-border rounded-2xl p-6 shadow-md flex items-start gap-4"
+    >
+      <div
+        {...attributes}
+        {...listeners}
+        className="cursor-grab active:cursor-grabbing flex-shrink-0 p-1 text-muted-foreground hover:text-foreground transition-colors"
+      >
+        <GripVertical size={20} />
+      </div>
+      
+      <div className="flex-1">
+        <h3 className="text-xl font-semibold">{activity.title}</h3>
+        <p className="text-muted-foreground mt-2 whitespace-pre-line">{activity.description}</p>
+        {activity.images.length > 0 && (
+          <div className="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-2">
+            {activity.images.map((url, i) => (
+              <img
+                key={i}
+                src={url}
+                alt={`Activity Image ${i + 1}`}
+                className="w-full h-32 object-cover rounded-md"
+              />
+            ))}
+          </div>
+        )}
+        <div className="mt-6 flex space-x-4">
+          <button
+            onClick={() => onEdit(activity)}
+            disabled={loading}
+            className="px-4 py-1 bg-yellow-400 hover:bg-yellow-500 rounded-md text-black transition disabled:opacity-50"
+          >
+            Edit
+          </button>
+          <button
+            onClick={() => onDelete(activity)}
+            disabled={loading}
+            className="px-4 py-1 bg-red-600 hover:bg-red-700 rounded-md text-white transition disabled:opacity-50"
+          >
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function CommunityActivitiesManager() {
   const [title, setTitle] = useState("");
@@ -18,11 +114,18 @@ export default function CommunityActivitiesManager() {
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
 
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
+
   const fetchActivities = async () => {
     const { data, error } = await supabase
       .from('community_activities')
       .select('*')
-      .order('created_at', { ascending: false });
+      .order('display_order', { ascending: true });
 
     if (error) {
       console.error('Error fetching activities:', error);
@@ -111,12 +214,16 @@ export default function CommunityActivitiesManager() {
 
         if (error) throw error;
       } else {
+        // Get the highest display_order and add 1 for new activity
+        const maxOrder = Math.max(...activities.map(a => a.display_order || 0), 0);
+        
         const { data, error } = await supabase
           .from('community_activities')
           .insert({
             title,
             description,
             images: [],
+            display_order: maxOrder + 1,
           })
           .select()
           .single();
@@ -147,6 +254,44 @@ export default function CommunityActivitiesManager() {
       });
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleDragEnd = async (event: DragEndEvent) => {
+    const { active, over } = event;
+
+    if (active.id !== over?.id) {
+      const oldIndex = activities.findIndex(item => item.id === active.id);
+      const newIndex = activities.findIndex(item => item.id === over?.id);
+
+      const newActivities = arrayMove(activities, oldIndex, newIndex);
+      setActivities(newActivities);
+
+      // Update display_order in database
+      try {
+        const updates = newActivities.map((activity, index) => 
+          supabase
+            .from('community_activities')
+            .update({ display_order: index + 1 })
+            .eq('id', activity.id)
+        );
+
+        await Promise.all(updates);
+
+        toast({
+          title: "Success",
+          description: "Activity order updated successfully",
+        });
+      } catch (err) {
+        console.error("Error updating activity order:", err);
+        toast({
+          title: "Error",
+          description: "Failed to update activity order",
+          variant: "destructive",
+        });
+        // Revert the order on error
+        fetchActivities();
+      }
     }
   };
 
@@ -240,45 +385,28 @@ export default function CommunityActivitiesManager() {
         </div>
       </div>
 
-      <ul className="max-w-3xl mx-auto space-y-6">
-        {activities.map(activity => (
-          <li
-            key={activity.id}
-            className="bg-gradient-surface border border-border rounded-2xl p-6 shadow-md"
-          >
-            <h3 className="text-xl font-semibold">{activity.title}</h3>
-            <p className="text-muted-foreground mt-2 whitespace-pre-line">{activity.description}</p>
-            {activity.images.length > 0 && (
-              <div className="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-2">
-                {activity.images.map((url, i) => (
-                  <img
-                    key={i}
-                    src={url}
-                    alt={`Activity Image ${i + 1}`}
-                    className="w-full h-32 object-cover rounded-md"
-                  />
-                ))}
-              </div>
-            )}
-            <div className="mt-6 flex space-x-4">
-              <button
-                onClick={() => handleEdit(activity)}
-                disabled={loading}
-                className="px-4 py-1 bg-yellow-400 hover:bg-yellow-500 rounded-md text-black transition disabled:opacity-50"
-              >
-                Edit
-              </button>
-              <button
-                onClick={() => handleDelete(activity)}
-                disabled={loading}
-                className="px-4 py-1 bg-red-600 hover:bg-red-700 rounded-md text-white transition disabled:opacity-50"
-              >
-                Delete
-              </button>
-            </div>
-          </li>
-        ))}
-      </ul>
+      <DndContext 
+        sensors={sensors}
+        collisionDetection={closestCenter}
+        onDragEnd={handleDragEnd}
+      >
+        <SortableContext 
+          items={activities.map(a => a.id)}
+          strategy={verticalListSortingStrategy}
+        >
+          <div className="max-w-3xl mx-auto space-y-6">
+            {activities.map(activity => (
+              <SortableActivity
+                key={activity.id}
+                activity={activity}
+                onEdit={handleEdit}
+                onDelete={handleDelete}
+                loading={loading}
+              />
+            ))}
+          </div>
+        </SortableContext>
+      </DndContext>
     </div>
   );
 }
