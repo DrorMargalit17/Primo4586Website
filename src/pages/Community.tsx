@@ -78,6 +78,7 @@ interface Activity {
   title: string;
   description: string;
   images: string[];
+  display_order: number;
 }
 
 const Community = () => {
@@ -93,7 +94,7 @@ const Community = () => {
       const { data, error } = await supabase
         .from("community_activities")
         .select("*")
-        .order("created_at", { ascending: false });
+        .order("display_order", { ascending: true });
 
       if (error) throw error;
       setActivities(data || []);
