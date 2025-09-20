@@ -204,6 +204,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      delete_past_events: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
+      }
       get_current_user_admin_status: {
         Args: Record<PropertyKey, never>
         Returns: boolean

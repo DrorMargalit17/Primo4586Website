@@ -58,6 +58,14 @@ const UpcomingEvents = ({ showTitle = true, className = "" }: UpcomingEventsProp
 
   useEffect(() => {
     const fetchEvents = async () => {
+      // First delete past events
+      const { error: deleteError } = await supabase.rpc('delete_past_events');
+      
+      if (deleteError) {
+        console.error('Error deleting past events:', deleteError);
+      }
+
+      // Then fetch current events
       const { data, error } = await supabase
         .from('events')
         .select('*')
