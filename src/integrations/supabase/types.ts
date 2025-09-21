@@ -202,6 +202,45 @@ export type Database = {
         }
         Relationships: []
       }
+      team_members: {
+        Row: {
+          created_at: string
+          display_order: number | null
+          id: string
+          image: string
+          name: string
+          role: string | null
+          section: string
+          teams: string[] | null
+          updated_at: string
+          year: string | null
+        }
+        Insert: {
+          created_at?: string
+          display_order?: number | null
+          id?: string
+          image: string
+          name: string
+          role?: string | null
+          section: string
+          teams?: string[] | null
+          updated_at?: string
+          year?: string | null
+        }
+        Update: {
+          created_at?: string
+          display_order?: number | null
+          id?: string
+          image?: string
+          name?: string
+          role?: string | null
+          section?: string
+          teams?: string[] | null
+          updated_at?: string
+          year?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

@@ -5,7 +5,7 @@ import UpcomingEventsManager from "@/components/admin/UpcomingEventsManager";
 import CommunityActivitiesManager from "@/components/admin/CommunityActivitiesManager";
 import UserManager from "@/components/admin/UserManager";
 import ResourcesManager from "@/components/admin/ResourcesManager";
-//import TeamCardsManager from "@/components/admin/TeamCardsManager";
+import TeamCardsManager from "@/components/admin/TeamCardsManager";
 //import HomePicturesManager from "@/components/admin/HomePicturesManager";
 
 import { CalendarDays, Users, Hammer, Image, UserCog, FolderOpen } from "lucide-react";
@@ -35,8 +35,7 @@ export default function AdminPanel() {
       case "resources":
         return <ResourcesManager />;
       case "team":
-        // return <TeamCardsManager />;
-        return <div className="p-4 text-center text-muted-foreground">Team Cards Manager coming soon.</div>;
+        return <TeamCardsManager />;
       case "home":
         // return <HomePicturesManager />;
         return <div className="p-4 text-center text-muted-foreground">Home Pictures Manager coming soon.</div>;
