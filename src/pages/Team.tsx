@@ -435,39 +435,8 @@ const Team = () => {
           member={editingMember}
           section={currentSection}
         />
-      </div>
-    );
-  }
-
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
-          <p className="text-muted-foreground">Loading team members...</p>
-        </div>
-      </div>
-    );
-  }
-
-  return (
-    <div className="space-y-20">
-      {/* Content will be rendered here when I complete the implementation */}
-      <div className="container mx-auto px-6 py-16">
-        <p className="text-center text-muted-foreground">Team Cards Manager functionality is being implemented...</p>
-      </div>
-      
-      {/* Form Modal */}
-      <TeamMemberForm
-        isOpen={isFormOpen}
-        onClose={() => setIsFormOpen(false)}
-        onSave={handleFormSave}
-        onDelete={handleDelete}
-        member={editingMember}
-        section={currentSection}
-      />
     </div>
   );
-}
+};
 
 export default Team;
