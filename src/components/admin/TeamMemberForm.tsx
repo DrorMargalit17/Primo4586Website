@@ -2,11 +2,9 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Trash2 } from "lucide-react";
+import { Trash2, Upload, X } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -56,10 +54,14 @@ export const TeamMemberForm = ({ isOpen, onClose, onSave, onDelete, member, sect
     section,
     year: "",
   });
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [imagePreview, setImagePreview] = useState<string>("");
+  const [uploading, setUploading] = useState(false);
 
   useEffect(() => {
     if (member) {
       setFormData({ ...member });
+      setImagePreview(member.image);
     } else {
       setFormData({
         name: "",
@@ -69,18 +71,61 @@ export const TeamMemberForm = ({ isOpen, onClose, onSave, onDelete, member, sect
         section,
         year: "",
       });
+      setImagePreview("");
     }
+    setImageFile(null);
   }, [member, section]);
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setImageFile(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const uploadImage = async (file: File): Promise<string> => {
+    const fileExt = file.name.split('.').pop();
+    const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`;
+    
+    const { data, error } = await supabase.storage
+      .from('team-images')
+      .upload(fileName, file);
+
+    if (error) throw error;
+
+    const { data: { publicUrl } } = supabase.storage
+      .from('team-images')
+      .getPublicUrl(fileName);
+
+    return publicUrl;
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!formData.name.trim() || !formData.image.trim()) {
-      toast.error("Name and image are required");
+    if (!formData.name.trim()) {
+      toast.error("Name is required");
+      return;
+    }
+
+    if (!imageFile && !formData.image) {
+      toast.error("Image is required");
       return;
     }
 
     try {
+      setUploading(true);
+      let imageUrl = formData.image;
+
+      if (imageFile) {
+        imageUrl = await uploadImage(imageFile);
+      }
+
       let savedMember;
       
       if (member?.id) {
@@ -90,7 +135,7 @@ export const TeamMemberForm = ({ isOpen, onClose, onSave, onDelete, member, sect
           .update({
             name: formData.name,
             role: formData.role || null,
-            image: formData.image,
+            image: imageUrl,
             teams: formData.teams,
             year: formData.year || null,
           })
@@ -118,7 +163,7 @@ export const TeamMemberForm = ({ isOpen, onClose, onSave, onDelete, member, sect
           .insert({
             name: formData.name,
             role: formData.role || null,
-            image: formData.image,
+            image: imageUrl,
             teams: formData.teams,
             section: formData.section,
             year: formData.year || null,
@@ -137,6 +182,8 @@ export const TeamMemberForm = ({ isOpen, onClose, onSave, onDelete, member, sect
     } catch (error) {
       console.error("Error saving team member:", error);
       toast.error("Failed to save team member");
+    } finally {
+      setUploading(false);
     }
   };
 
@@ -215,14 +262,47 @@ export const TeamMemberForm = ({ isOpen, onClose, onSave, onDelete, member, sect
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="image">Image URL *</Label>
-            <Input
-              id="image"
-              value={formData.image}
-              onChange={(e) => setFormData(prev => ({ ...prev, image: e.target.value }))}
-              placeholder="Enter image URL"
-              required
-            />
+            <Label htmlFor="image">Image *</Label>
+            <div className="space-y-4">
+              {imagePreview && (
+                <div className="relative w-32 h-32 mx-auto">
+                  <img 
+                    src={imagePreview} 
+                    alt="Preview" 
+                    className="w-full h-full object-cover rounded-full border-2 border-primary/20"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setImagePreview("");
+                      setImageFile(null);
+                      setFormData(prev => ({ ...prev, image: "" }));
+                    }}
+                    className="absolute -top-2 -right-2 bg-destructive text-destructive-foreground rounded-full p-1 hover:bg-destructive/80"
+                  >
+                    <X className="h-3 w-3" />
+                  </button>
+                </div>
+              )}
+              <div className="flex items-center justify-center w-full">
+                <label htmlFor="image-upload" className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-primary/30 rounded-lg cursor-pointer hover:bg-primary/5">
+                  <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                    <Upload className="w-8 h-8 mb-4 text-primary" />
+                    <p className="mb-2 text-sm text-muted-foreground">
+                      <span className="font-semibold">Click to upload</span> team member image
+                    </p>
+                    <p className="text-xs text-muted-foreground">PNG, JPG, WEBP (MAX. 5MB)</p>
+                  </div>
+                  <input
+                    id="image-upload"
+                    type="file"
+                    className="hidden"
+                    accept="image/*"
+                    onChange={handleImageChange}
+                  />
+                </label>
+              </div>
+            </div>
           </div>
 
           {section === 'mentors' && (
@@ -272,11 +352,11 @@ export const TeamMemberForm = ({ isOpen, onClose, onSave, onDelete, member, sect
               )}
             </div>
             <div className="flex gap-2">
-              <Button type="button" variant="outline" onClick={onClose}>
+              <Button type="button" variant="outline" onClick={onClose} disabled={uploading}>
                 Cancel
               </Button>
-              <Button type="submit">
-                {member ? "Update" : "Add"} {getSectionTitle()}
+              <Button type="submit" disabled={uploading}>
+                {uploading ? "Uploading..." : (member ? "Update" : "Add")} {getSectionTitle()}
               </Button>
             </div>
           </DialogFooter>
