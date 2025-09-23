@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -20,12 +20,12 @@ const Sponsors = () => {
   useEffect(() => {
     const fetchSponsors = async () => {
       const { data, error } = await supabase
-        .from("sponsors")
-        .select("*")
-        .order("display_order", { ascending: true });
+        .from('sponsors')
+        .select('*')
+        .order('display_order', { ascending: true });
 
       if (error) {
-        console.error("Error fetching sponsors:", error);
+        console.error('Error fetching sponsors:', error);
         return;
       }
 
@@ -34,7 +34,7 @@ const Sponsors = () => {
 
     fetchSponsors();
 
-    // Set up real-time subscription for sponsors
+    // Set up real-time subscription
     const subscription = supabase
       .channel('sponsors')
       .on('postgres_changes', { event: '*', schema: 'public', table: 'sponsors' }, () => {

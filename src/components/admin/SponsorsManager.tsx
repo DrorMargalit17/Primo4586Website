@@ -1,15 +1,15 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { useToast } from "@/components/ui/use-toast";
-import { Trash2, Edit2, Plus, MoveUp, MoveDown, Upload } from "lucide-react";
-import { DndContext, closestCenter, DragEndEvent } from "@dnd-kit/core";
-import { SortableContext, verticalListSortingStrategy, useSortable } from "@dnd-kit/sortable";
-import { CSS } from "@dnd-kit/utilities";
+import { Card } from "@/components/ui/card";
+import { Trash2, Edit, Plus, GripVertical, Upload } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+import { DndContext, closestCenter, KeyboardSensor, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
+import { arrayMove, SortableContext, sortableKeyboardCoordinates, verticalListSortingStrategy } from '@dnd-kit/sortable';
+import { SortableItem } from './SortableItem';
 
 interface Sponsor {
   id: string;
@@ -21,73 +21,23 @@ interface Sponsor {
   display_order: number;
 }
 
-interface SortableSponsorProps {
-  sponsor: Sponsor;
-  onEdit: (sponsor: Sponsor) => void;
-  onDelete: (id: string) => void;
-}
-
-const SortableSponsor = ({ sponsor, onEdit, onDelete }: SortableSponsorProps) => {
-  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
-    id: sponsor.id,
-  });
-
-  const style = {
-    transform: CSS.Transform.toString(transform),
-    transition,
-  };
-
-  return (
-    <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
-      <Card className="p-4 mb-4 cursor-move hover:bg-accent/50 transition-colors">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-4">
-            <img src={sponsor.logo} alt={sponsor.name} className="w-12 h-12 object-contain" />
-            <div>
-              <h3 className="font-semibold">{sponsor.name}</h3>
-              <p className="text-sm text-muted-foreground">Since {sponsor.since}</p>
-            </div>
-          </div>
-          <div className="flex space-x-2">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={(e) => {
-                e.stopPropagation();
-                onEdit(sponsor);
-              }}
-            >
-              <Edit2 className="h-4 w-4" />
-            </Button>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={(e) => {
-                e.stopPropagation();
-                onDelete(sponsor.id);
-              }}
-            >
-              <Trash2 className="h-4 w-4" />
-            </Button>
-          </div>
-        </div>
-      </Card>
-    </div>
-  );
-};
-
 const SponsorsManager = () => {
   const [sponsors, setSponsors] = useState<Sponsor[]>([]);
-  const [formData, setFormData] = useState({
-    name: "",
-    website: "",
-    description: "",
-    since: "",
-    logo: null as File | null,
-  });
+  const [name, setName] = useState("");
+  const [website, setWebsite] = useState("");
+  const [description, setDescription] = useState("");
+  const [since, setSince] = useState("");
+  const [logoFile, setLogoFile] = useState<File | null>(null);
   const [editingId, setEditingId] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
   const { toast } = useToast();
+
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
 
   useEffect(() => {
     fetchSponsors();
@@ -95,12 +45,12 @@ const SponsorsManager = () => {
 
   const fetchSponsors = async () => {
     const { data, error } = await supabase
-      .from("sponsors")
-      .select("*")
-      .order("display_order", { ascending: true });
+      .from('sponsors')
+      .select('*')
+      .order('display_order', { ascending: true });
 
     if (error) {
-      console.error("Error fetching sponsors:", error);
+      console.error('Error fetching sponsors:', error);
       toast({
         title: "Error",
         description: "Failed to fetch sponsors",
@@ -113,76 +63,107 @@ const SponsorsManager = () => {
   };
 
   const resetForm = () => {
-    setFormData({
-      name: "",
-      website: "",
-      description: "",
-      since: "",
-      logo: null,
-    });
+    setName("");
+    setWebsite("");
+    setDescription("");
+    setSince("");
+    setLogoFile(null);
     setEditingId(null);
   };
 
-  const handleFileUpload = async (file: File): Promise<string> => {
-    const fileExt = file.name.split(".").pop();
+  const uploadLogo = async (file: File) => {
+    const fileExt = file.name.split('.').pop();
     const fileName = `${Math.random().toString(36).substring(2)}.${fileExt}`;
+    const filePath = fileName;
 
-    const { error: uploadError } = await supabase.storage
-      .from("sponsor-logos")
-      .upload(fileName, file);
+    const { error } = await supabase.storage
+      .from('sponsor-logos')
+      .upload(filePath, file);
 
-    if (uploadError) {
-      throw uploadError;
+    if (error) {
+      throw new Error(`Upload failed: ${error.message}`);
     }
 
-    const { data } = supabase.storage
-      .from("sponsor-logos")
-      .getPublicUrl(fileName);
+    const { data: { publicUrl } } = supabase.storage
+      .from('sponsor-logos')
+      .getPublicUrl(filePath);
 
-    return data.publicUrl;
+    return publicUrl;
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
+  const handleSaveSponsor = async () => {
+    if (!name.trim() || !website.trim() || !description.trim() || !since.trim()) {
+      toast({
+        title: "Error",
+        description: "Please fill in all fields",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (!editingId && !logoFile) {
+      toast({
+        title: "Error",
+        description: "Please select a logo file",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsUploading(true);
 
     try {
       let logoUrl = "";
       
-      if (formData.logo) {
-        logoUrl = await handleFileUpload(formData.logo);
+      if (logoFile) {
+        logoUrl = await uploadLogo(logoFile);
       }
 
-      const sponsorData = {
-        name: formData.name,
-        website: formData.website,
-        description: formData.description,
-        since: formData.since,
-        ...(logoUrl && { logo: logoUrl }),
-      };
-
       if (editingId) {
+        const updateData: any = {
+          name: name.trim(),
+          website: website.trim(),
+          description: description.trim(),
+          since: since.trim(),
+        };
+
+        if (logoFile) {
+          updateData.logo = logoUrl;
+        }
+
         const { error } = await supabase
-          .from("sponsors")
-          .update(sponsorData)
-          .eq("id", editingId);
+          .from('sponsors')
+          .update(updateData)
+          .eq('id', editingId);
 
         if (error) throw error;
+
         toast({
           title: "Success",
           description: "Sponsor updated successfully",
         });
       } else {
-        const maxOrder = Math.max(...sponsors.map(s => s.display_order), 0);
+        const maxOrderResult = await supabase
+          .from('sponsors')
+          .select('display_order')
+          .order('display_order', { ascending: false })
+          .limit(1);
+
+        const nextOrder = maxOrderResult.data?.[0]?.display_order ? maxOrderResult.data[0].display_order + 1 : 1;
+
         const { error } = await supabase
-          .from("sponsors")
+          .from('sponsors')
           .insert({
-            ...sponsorData,
+            name: name.trim(),
             logo: logoUrl,
-            display_order: maxOrder + 1,
+            website: website.trim(),
+            description: description.trim(),
+            since: since.trim(),
+            display_order: nextOrder,
           });
 
         if (error) throw error;
+
         toast({
           title: "Success",
           description: "Sponsor added successfully",
@@ -192,38 +173,29 @@ const SponsorsManager = () => {
       resetForm();
       fetchSponsors();
     } catch (error) {
-      console.error("Error saving sponsor:", error);
+      console.error('Error saving sponsor:', error);
       toast({
         title: "Error",
         description: "Failed to save sponsor",
         variant: "destructive",
       });
     } finally {
-      setLoading(false);
+      setIsUploading(false);
     }
   };
 
-  const handleEdit = (sponsor: Sponsor) => {
-    setFormData({
-      name: sponsor.name,
-      website: sponsor.website,
-      description: sponsor.description,
-      since: sponsor.since,
-      logo: null,
-    });
-    setEditingId(sponsor.id);
-  };
-
-  const handleDelete = async (id: string) => {
-    if (!confirm("Are you sure you want to delete this sponsor?")) return;
+  const handleDeleteSponsor = async (id: string) => {
+    if (!window.confirm('Are you sure you want to delete this sponsor?')) {
+      return;
+    }
 
     const { error } = await supabase
-      .from("sponsors")
+      .from('sponsors')
       .delete()
-      .eq("id", id);
+      .eq('id', id);
 
     if (error) {
-      console.error("Error deleting sponsor:", error);
+      console.error('Error deleting sponsor:', error);
       toast({
         title: "Error",
         description: "Failed to delete sponsor",
@@ -236,82 +208,77 @@ const SponsorsManager = () => {
       title: "Success",
       description: "Sponsor deleted successfully",
     });
+    
     fetchSponsors();
   };
 
-  const handleDragEnd = async (event: DragEndEvent) => {
+  const handleEditSponsor = (sponsor: Sponsor) => {
+    setName(sponsor.name);
+    setWebsite(sponsor.website);
+    setDescription(sponsor.description);
+    setSince(sponsor.since);
+    setEditingId(sponsor.id);
+  };
+
+  const handleDragEnd = async (event: any) => {
     const { active, over } = event;
 
-    if (!over || active.id === over.id) return;
+    if (active.id !== over?.id) {
+      const oldIndex = sponsors.findIndex((item) => item.id === active.id);
+      const newIndex = sponsors.findIndex((item) => item.id === over.id);
+      
+      const newSponsors = arrayMove(sponsors, oldIndex, newIndex);
+      setSponsors(newSponsors);
 
-    const oldIndex = sponsors.findIndex((s) => s.id === active.id);
-    const newIndex = sponsors.findIndex((s) => s.id === over.id);
+      // Update display_order in database
+      const updates = newSponsors.map((sponsor, index) => ({
+        id: sponsor.id,
+        display_order: index + 1,
+      }));
 
-    const newSponsors = [...sponsors];
-    const [movedSponsor] = newSponsors.splice(oldIndex, 1);
-    newSponsors.splice(newIndex, 0, movedSponsor);
-
-    // Update display orders
-    const updates = newSponsors.map((sponsor, index) => ({
-      id: sponsor.id,
-      display_order: index + 1,
-    }));
-
-    setSponsors(newSponsors);
-
-    try {
       for (const update of updates) {
         await supabase
-          .from("sponsors")
+          .from('sponsors')
           .update({ display_order: update.display_order })
-          .eq("id", update.id);
+          .eq('id', update.id);
       }
-      
+
       toast({
         title: "Success",
-        description: "Sponsor order updated successfully",
+        description: "Sponsor order updated",
       });
-    } catch (error) {
-      console.error("Error updating sponsor order:", error);
-      toast({
-        title: "Error",
-        description: "Failed to update sponsor order",
-        variant: "destructive",
-      });
-      fetchSponsors(); // Revert to original order
     }
   };
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold">Manage Sponsors</h2>
-        <Button onClick={resetForm} variant="outline">
-          <Plus className="w-4 h-4 mr-2" />
-          Add New Sponsor
-        </Button>
-      </div>
-
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <Label htmlFor="name">Sponsor Name</Label>
-            <Input
-              id="name"
-              value={formData.name}
-              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              required
-            />
-          </div>
-
-          <div>
-            <Label htmlFor="since">Since Year</Label>
-            <Input
-              id="since"
-              value={formData.since}
-              onChange={(e) => setFormData({ ...formData, since: e.target.value })}
-              required
-            />
+      {/* Add/Edit Form */}
+      <Card className="p-6">
+        <h3 className="text-lg font-semibold mb-4">
+          {editingId ? "Edit Sponsor" : "Add New Sponsor"}
+        </h3>
+        
+        <div className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <Label htmlFor="name">Sponsor Name</Label>
+              <Input
+                id="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Enter sponsor name"
+              />
+            </div>
+            
+            <div>
+              <Label htmlFor="since">Year Since</Label>
+              <Input
+                id="since"
+                value={since}
+                onChange={(e) => setSince(e.target.value)}
+                placeholder="e.g., 2025"
+              />
+            </div>
           </div>
 
           <div>
@@ -319,62 +286,114 @@ const SponsorsManager = () => {
             <Input
               id="website"
               type="url"
-              value={formData.website}
-              onChange={(e) => setFormData({ ...formData, website: e.target.value })}
-              required
+              value={website}
+              onChange={(e) => setWebsite(e.target.value)}
+              placeholder="https://example.com"
             />
           </div>
 
           <div>
-            <Label htmlFor="logo">Logo Image</Label>
-            <Input
-              id="logo"
-              type="file"
-              accept="image/*"
-              onChange={(e) => setFormData({ ...formData, logo: e.target.files?.[0] || null })}
-              required={!editingId}
+            <Label htmlFor="logo">Logo</Label>
+            <div className="flex items-center gap-2">
+              <Input
+                id="logo"
+                type="file"
+                accept="image/*"
+                onChange={(e) => setLogoFile(e.target.files?.[0] || null)}
+                className="flex-1"
+              />
+              <Upload className="h-4 w-4 text-muted-foreground" />
+            </div>
+          </div>
+
+          <div>
+            <Label htmlFor="description">Description</Label>
+            <Textarea
+              id="description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              placeholder="Enter sponsor description..."
+              rows={3}
             />
           </div>
-        </div>
 
-        <div>
-          <Label htmlFor="description">Description</Label>
-          <Textarea
-            id="description"
-            value={formData.description}
-            onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-            rows={3}
-            required
-          />
-        </div>
-
-        <div className="flex space-x-2">
-          <Button type="submit" disabled={loading}>
-            {loading ? "Saving..." : editingId ? "Update Sponsor" : "Add Sponsor"}
-          </Button>
-          {editingId && (
-            <Button type="button" variant="outline" onClick={resetForm}>
-              Cancel
+          <div className="flex gap-2">
+            <Button 
+              onClick={handleSaveSponsor} 
+              disabled={isUploading}
+            >
+              {isUploading ? "Saving..." : editingId ? "Update Sponsor" : "Add Sponsor"}
             </Button>
-          )}
+            
+            {editingId && (
+              <Button variant="outline" onClick={resetForm}>
+                Cancel
+              </Button>
+            )}
+          </div>
         </div>
-      </form>
+      </Card>
 
-      <div>
-        <h3 className="text-lg font-semibold mb-4">Existing Sponsors (Drag to reorder)</h3>
-        <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-          <SortableContext items={sponsors.map(s => s.id)} strategy={verticalListSortingStrategy}>
-            {sponsors.map((sponsor) => (
-              <SortableSponsor
-                key={sponsor.id}
-                sponsor={sponsor}
-                onEdit={handleEdit}
-                onDelete={handleDelete}
-              />
-            ))}
+      {/* Sponsors List */}
+      <Card className="p-6">
+        <h3 className="text-lg font-semibold mb-4">Sponsors ({sponsors.length})</h3>
+        
+        <DndContext
+          sensors={sensors}
+          collisionDetection={closestCenter}
+          onDragEnd={handleDragEnd}
+        >
+          <SortableContext items={sponsors} strategy={verticalListSortingStrategy}>
+            <div className="space-y-3">
+              {sponsors.map((sponsor) => (
+                <SortableItem key={sponsor.id} id={sponsor.id}>
+                  <div className="flex items-center gap-4 p-4 border rounded-lg">
+                    <GripVertical className="h-5 w-5 text-muted-foreground cursor-grab" />
+                    
+                    <div className="w-16 h-16 bg-white rounded-lg flex items-center justify-center overflow-hidden border">
+                      <img
+                        src={sponsor.logo}
+                        alt={sponsor.name}
+                        className="max-w-full max-h-full object-contain"
+                      />
+                    </div>
+                    
+                    <div className="flex-1 min-w-0">
+                      <h4 className="font-medium truncate">{sponsor.name}</h4>
+                      <p className="text-sm text-muted-foreground">Since {sponsor.since}</p>
+                      <p className="text-sm text-muted-foreground truncate">{sponsor.description}</p>
+                    </div>
+                    
+                    <div className="flex gap-2">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => handleEditSponsor(sponsor)}
+                      >
+                        <Edit className="h-4 w-4" />
+                      </Button>
+                      
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => handleDeleteSponsor(sponsor.id)}
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </div>
+                </SortableItem>
+              ))}
+              
+              {sponsors.length === 0 && (
+                <div className="text-center py-8 text-muted-foreground">
+                  No sponsors found. Add your first sponsor above!
+                </div>
+              )}
+            </div>
           </SortableContext>
         </DndContext>
-      </div>
+      </Card>
     </div>
   );
 };
