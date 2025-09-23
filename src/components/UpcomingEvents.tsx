@@ -79,7 +79,13 @@ const UpcomingEvents = ({ showTitle = true, className = "" }: UpcomingEventsProp
       setEvents(data || []);
     };
 
+    // Initial fetch
     fetchEvents();
+
+    // Set up periodic cleanup every 5 minutes
+    const cleanupInterval = setInterval(() => {
+      fetchEvents();
+    }, 5 * 60 * 1000);
 
     // Set up real-time subscription
     const subscription = supabase
@@ -90,6 +96,7 @@ const UpcomingEvents = ({ showTitle = true, className = "" }: UpcomingEventsProp
       .subscribe();
 
     return () => {
+      clearInterval(cleanupInterval);
       subscription.unsubscribe();
     };
   }, []);
