@@ -180,10 +180,10 @@ const Community = () => {
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
-              { number: "500+", label: "Students Inspired" },
-              { number: "50+", label: "Mentees Guided" },
-              { number: "$25K+", label: "Funds Raised" },
-              { number: "200+", label: "Monthly Visitors" },
+              { number: "600+", label: "Students Inspired" },
+              { number: "10+", label: "Schools Impacted" },
+              { number: "15K+", label: "Youth Inspired By STEM" },
+              { number: "15+", label: "Continuing Projects" },
             ].map((stat, index) => (
               <div key={index} className="text-center">
                 <div className="text-4xl md:text-5xl font-bold text-primary mb-2">
