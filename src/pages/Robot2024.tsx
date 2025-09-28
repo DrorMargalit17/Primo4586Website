@@ -1,9 +1,19 @@
 import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Cpu, Zap, Eye, Cog } from "lucide-react";
-import Punk from "@/assets/Robot/2024Robot.jpeg";
-import SeasonLogo from "@/assets/Robot/Crescendo_FRC_Logo.png";
+
+//Pictures
+const Punk = "/Robot_2024/2024Robot.jpeg";
+const SeasonLogo = "/Robot_2024/Crescendo_FRC_Logo.png";
+const teamPhoto = "/Robot_2024/TeamPhoto.jpg"
+
+//Robot Gallery
+const robotGallery1 = "/Robot_2024/RobotGallery_1.jpg";
+const robotGallery2 = "/Robot_2024/RobotGallery_2.jpg";
+const robotGallery3 = "/Robot_2024/RobotGallery_3.jpg";
+const robotGallery4 = "/Robot_2024/RobotGallery_4.jpg";
+const robotGallery5 = "/Robot_2024/RobotGallery_5.jpg";
+const robotGallery6 = "/Robot_2024/RobotGallery_6.jpg";
+
 
 const Robot2024 = () => {
   const systems = [
@@ -127,7 +137,7 @@ const Robot2024 = () => {
             </h2>
             <Card className="overflow-hidden border-border hover:border-primary/50 transition-all duration-300 shadow-lg">
               <img
-                src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=800&h=500&fit=crop"
+                src={teamPhoto}
                 alt="Team group photo"
                 className="w-full h-80 object-cover"
               />
@@ -212,14 +222,7 @@ const Robot2024 = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {[
-            "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=300&fit=crop",
-            "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=300&fit=crop",
-            "https://images.unsplash.com/photo-1518717758536-85ae29035b6d?w=400&h=300&fit=crop",
-            "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=400&h=300&fit=crop",
-            "https://images.unsplash.com/photo-1560472355-536de3962603?w=400&h=300&fit=crop",
-            "https://images.unsplash.com/photo-1551434678-e076c223a692?w=400&h=300&fit=crop",
-          ].map((image, index) => (
+          {[robotGallery1, robotGallery2, robotGallery3, robotGallery4, robotGallery5, robotGallery6].map((image, index) => (
             <Card
               key={index}
               className="overflow-hidden border-border hover:border-primary/50 transition-all duration-300 hover:shadow-glow group"

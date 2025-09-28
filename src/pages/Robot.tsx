@@ -1,8 +1,10 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import sparrow from "@/assets/Robot/2025Robot.jpg";
-import SeasonLogo from "@/assets/Robot/Reefscape_FRC_Logo.png";
 import { EditableText } from "@/components/editor/EditableText";
+
+//Pictures
+const sparrow = "/Robot_2025/2025Robot.jpg";
+const SeasonLogo = "/Robot_2025/Reefscape_FRC_Logo.png"
 
 const Robot = () => {
   const systems = [
