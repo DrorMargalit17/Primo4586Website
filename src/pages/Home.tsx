@@ -7,11 +7,24 @@ import { EditableText } from "@/components/editor/EditableText";
 
 import UpcomingEvents from "@/components/UpcomingEvents";
 
-import team1 from "@/assets/HomePage/team_1.jpg";
-import team2 from "@/assets/HomePage/team_2.jpg";
-import team3 from "@/assets/HomePage/team_3.jpg";
-import team4 from "@/assets/HomePage/team_4.jpg";
-import team5 from "@/assets/HomePage/team_5.jpg";
+const team1 = "/HomePagePictures/team_1.jpg";
+const team2 = "/HomePagePictures/team_2.jpg";
+const team3 = "/HomePagePictures/team_3.jpg";
+const team4 = "/HomePagePictures/team_4.jpg";
+const team5 = "/HomePagePictures/team_5.jpg";
+const team6 = "/HomePagePictures/team_6.JPG";
+const team7 = "/HomePagePictures/team_7.JPG";
+const team8 = "/HomePagePictures/team_8.JPG";
+const team9 = "/HomePagePictures/team_9.JPG";
+const team10 = "/HomePagePictures/team_10.JPG";
+const team11 = "/HomePagePictures/team_11.JPG";
+const team12 = "/HomePagePictures/team_12.JPG";
+const team13 = "/HomePagePictures/team_13.JPG";
+const team14 = "/HomePagePictures/team_14.JPG";
+const team15 = "/HomePagePictures/team_15.JPG";
+
+
+
 /*
 import team6 from "@/assets/HomePage/team_6.jpg";
 import team7 from "@/assets/HomePage/team_7.jpg";
@@ -29,8 +42,7 @@ import team15 from "@/assets/HomePage/team_15.jpg";
 
 import { Handshake, Briefcase, HeartHandshake, Target, Sparkles } from "lucide-react";
 
-const teamImages = [team1, team2, team3, team4, team5, 
-  /*team6,team7,team8,team9,team10,team11,team12,team13,team14,team15 */];
+const teamImages = [team1, team2, team3, team4, team5,team6,team7,team8,team9,team10,team11,team12,team13,team14,team15];
 
 const features = [
   {
