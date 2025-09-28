@@ -74,27 +74,10 @@ const Robot = () => {
           <div>
             <h2 className="text-4xl font-bold text-foreground mb-4">Our Season Mission</h2>
             <p className="text-xl text-muted-foreground">
-              In each match, two alliances of three teams 
-              compete to score as many points as possible.
-               Robots interact with two main game pieces: 
-               coral (PVC pipe structures) and algae 
-               (playground balls). During the autonomous period 
-               (first 15 seconds), robots operate without driver input,
-                attempting to move, place coral on the reef or move 
-                algae. Once the teleoperated period begins, human 
-                drivers take control. Robots collect coral from 
-                their alliance’s loading stations, place it at 
-                different levels of the reef structure, and remove
-                 algae that blocks scoring spots. Algae can either
-                  be scored in the processor or returned to the field.
-                   In the final 30 seconds, known as the endgame,
-                    robots attempt to climb onto the barge cages
-                     located near their reef. They can earn different
-                      amounts of points based on how high they climb
-                       or how securely they hang. This final challenge
-                        often determines the outcome of a close match,
-                         as endgame points carry significant weight in
-                          rankings.
+              Each match has two alliances of three robots competing to score points.
+              In the first 15 seconds (autonomous), robots act on their own: moving, placing coral on the reef, or shifting algae.
+              During teleop, drivers take control: collecting coral from stations, placing it on the reef, and clearing algae. Algae can be scored in the processor or returned to the field.
+              In the final 30 seconds (endgame), robots climb onto barge cages near the reef, with climb points often deciding the match outcome.
             </p>
           </div>
 
