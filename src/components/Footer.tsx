@@ -48,7 +48,7 @@ const Footer = () => {
                 />
                 <EditableText
                   contentKey="footer-brand-subtitle"
-                  defaultContent="Innovation in Motion"
+                  defaultContent="Giving A Chance, Making A Change"
                   contentType="text"
                   tag="p"
                   className="text-sm text-muted-foreground"

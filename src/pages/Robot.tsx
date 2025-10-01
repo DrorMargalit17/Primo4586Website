@@ -5,6 +5,7 @@ import { EditableText } from "@/components/editor/EditableText";
 //Pictures
 const sparrow = "/Robot_2025/2025Robot.jpg";
 const SeasonLogo = "/Robot_2025/Reefscape_FRC_Logo.png"
+const teamPhoto = "/Robot_2025/teamPhoto.JPG"
 
 const Robot = () => {
   const systems = [
@@ -122,7 +123,7 @@ const Robot = () => {
             <h2 className="text-4xl font-bold text-foreground mb-6">Team Photo</h2>
             <Card className="overflow-hidden border-border hover:border-primary/50 transition-all duration-300 shadow-lg">
               <img
-                src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=800&h=500&fit=crop"
+                src={teamPhoto}
                 alt="Team group photo"
                 className="w-full h-80 object-cover"
               />

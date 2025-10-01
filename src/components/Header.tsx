@@ -43,7 +43,7 @@ const Header = () => {
             </div>
             <div>
               <h1 className="text-xl font-bold text-foreground">Primo4586</h1>
-              <p className="text-xs text-muted-foreground">Innovation in Motion</p>
+              <p className="text-xs text-muted-foreground">Giving A Chance, Making A Change</p>
             </div>
           </Link>
 
