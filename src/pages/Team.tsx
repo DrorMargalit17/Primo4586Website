@@ -455,15 +455,7 @@ const Team = () => {
               )}
               
               <div className="text-center">
-                <div className="relative mb-2">
-                  <img
-                    src={mentor.image}
-                    alt={mentor.name}
-                    className="w-32 h-32 rounded-full mx-auto object-cover border-4 border-primary/20 group-hover:border-primary/50 transition-all duration-300"
-                  />
-                </div>
-
-                <h3 className="text-lg font-bold text-foreground mb-1">{mentor.name}</h3>
+                <h3 className="text-lg font-bold text-foreground mb-2">{mentor.name}</h3>
                 <p className="text-primary font-medium mb-2">{mentor.role}</p>
                 <p className="text-muted-foreground text-sm mb-6">Mentor since {mentor.year}</p>
               </div>

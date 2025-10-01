@@ -113,7 +113,8 @@ export const TeamMemberForm = ({ isOpen, onClose, onSave, onDelete, member, sect
       return;
     }
 
-    if (!imageFile && !formData.image) {
+    // Image is only required for non-mentor sections
+    if (section !== 'mentors' && !imageFile && !formData.image) {
       toast.error("Image is required");
       return;
     }
@@ -135,7 +136,7 @@ export const TeamMemberForm = ({ isOpen, onClose, onSave, onDelete, member, sect
           .update({
             name: formData.name,
             role: formData.role || null,
-            image: imageUrl,
+            image: imageUrl || null,
             teams: formData.teams,
             year: formData.year || null,
           })
@@ -163,7 +164,7 @@ export const TeamMemberForm = ({ isOpen, onClose, onSave, onDelete, member, sect
           .insert({
             name: formData.name,
             role: formData.role || null,
-            image: imageUrl,
+            image: imageUrl || null,
             teams: formData.teams,
             section: formData.section,
             year: formData.year || null,
@@ -262,7 +263,7 @@ export const TeamMemberForm = ({ isOpen, onClose, onSave, onDelete, member, sect
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="image">Image *</Label>
+            <Label htmlFor="image">Image {section !== 'mentors' && '*'}</Label>
             <div className="space-y-4">
               {imagePreview && (
                 <div className="relative w-32 h-32 mx-auto">
