@@ -7,6 +7,15 @@ const sparrow = "/Robot_2025/2025Robot.jpg";
 const SeasonLogo = "/Robot_2025/Reefscape_FRC_Logo.png"
 const teamPhoto = "/Robot_2025/teamPhoto.JPG"
 
+//Gallery Pictures
+const robotGallery1 = "/Robot_2025/RobotGallery_1.JPG";
+const robotGallery2 = "/Robot_2025/RobotGallery_2.JPG";
+const robotGallery3 = "/Robot_2025/RobotGallery_3.JPG";
+const robotGallery4 = "/Robot_2025/RobotGallery_4.JPG";
+const robotGallery5 = "/Robot_2025/RobotGallery_5.JPG";
+const robotGallery6 = "/Robot_2025/RobotGallery_6.JPG";
+
+
 const Robot = () => {
   const systems = [
     { label: "Swerve", value: "Swerve MK4N traffic vehicle" },
@@ -200,14 +209,7 @@ const Robot = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {[
-            "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=300&fit=crop",
-            "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=300&fit=crop",
-            "https://images.unsplash.com/photo-1518717758536-85ae29035b6d?w=400&h=300&fit=crop",
-            "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=400&h=300&fit=crop",
-            "https://images.unsplash.com/photo-1560472355-536de3962603?w=400&h=300&fit=crop",
-            "https://images.unsplash.com/photo-1551434678-e076c223a692?w=400&h=300&fit=crop",
-          ].map((image, index) => (
+          {[robotGallery1, robotGallery2, robotGallery3, robotGallery4, robotGallery5, robotGallery6].map((image, index) => (
             <Card
               key={index}
               className="overflow-hidden border-border hover:border-primary/50 transition-all duration-300 hover:shadow-glow group"
