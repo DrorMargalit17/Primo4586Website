@@ -4,6 +4,11 @@ import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
 import { Trophy, Award, Star, Users, Target, Lightbulb } from "lucide-react";
 
+//group picturs
+const boeing = "/FLL/Boeing.jpeg"
+const toxicPandas = "/FLL/ToxicPandas.jpeg"
+const comingSoon = "/FLL/comingSoon.png"
+
 const FLLMentorship = () => {
   const fllTeams = [
     {
@@ -13,7 +18,7 @@ const FLLMentorship = () => {
         { icon: Trophy, text: "Qualified For Nation Competition", type: "gold" },
         { icon: Award, text: "First Place Robot Design", type: "blue" },
       ],
-      image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=400&h=250&fit=crop"
+      image: boeing
     },
     {
       name: "Toxic Pandas 506", 
@@ -22,7 +27,7 @@ const FLLMentorship = () => {
         { icon: Lightbulb, text: "Qualified For Nation Competition", type: "gold" },
         { icon: Users, text: "Core Values First Place", type: "green" },
       ],
-      image: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=250&fit=crop"
+      image: toxicPandas
     },
     {
       name: "Hatulego", 
@@ -31,7 +36,7 @@ const FLLMentorship = () => {
         //{ icon: Lightbulb, text: "Qualified For Nation Competition", type: "gold" },
         //{ icon: Users, text: "Core Values First Place", type: "green" },
       ],
-      image: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=250&fit=crop"
+      image: comingSoon
     },
     {
       name: "Ironi G", 
@@ -40,7 +45,7 @@ const FLLMentorship = () => {
         //{ icon: Lightbulb, text: "Qualified For Nation Competition", type: "gold" },
         //{ icon: Users, text: "Core Values First Place", type: "green" },
       ],
-      image: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=250&fit=crop"
+      image: comingSoon
     },
     {
       name: "Shivtei Israel", 
@@ -49,7 +54,7 @@ const FLLMentorship = () => {
         //{ icon: Lightbulb, text: "Qualified For Nation Competition", type: "gold" },
         //{ icon: Users, text: "Core Values First Place", type: "green" },
       ],
-      image: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=250&fit=crop"
+      image: comingSoon
     }
   ];
 
