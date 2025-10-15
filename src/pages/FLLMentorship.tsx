@@ -9,6 +9,26 @@ const boeing = "/FLL/Boeing.jpeg"
 const toxicPandas = "/FLL/ToxicPandas.jpeg"
 const comingSoon = "/FLL/comingSoon.png"
 
+//GalleryPhotos
+const fllGallery1 = "/FLL/fllGallery_1.JPG"
+const fllGallery2 = "/FLL/fllGallery_2.JPG"
+const fllGallery3 = "/FLL/fllGallery_3.JPG"
+const fllGallery4 = "/FLL/fllGallery_4.JPG"
+const fllGallery5 = "/FLL/fllGallery_5.JPG"
+const fllGallery6 = "/FLL/fllGallery_6.JPG"
+
+//Mentors Pictures
+const ShayKalisher = "/TeamProfiles/ShayKalisher.jpg"
+const arielIvri = "/TeamProfiles/ArielIvri.JPG"
+const drorMargalit = "/TeamProfiles/DrorMargalit.png"
+const ofirShafran = "/TeamProfiles/OfirShafran.JPG"
+const arielMevorahLevi = "/TeamProfiles/ArielMevorachLevy.JPG"
+const itamarIvri = "/TeamProfiles/ItamarIvri.JPG"
+const danielLevi = "/TeamProfiles/DanielLevi.JPG"
+const adamDeshevsky = "/TeamProfiles/AdamDashevsky.JPG"
+
+
+
 const FLLMentorship = () => {
   const fllTeams = [
     {
@@ -62,67 +82,60 @@ const FLLMentorship = () => {
     {
       name: "Shay Kalisher",
       role: "Boeing's Mentor",
-      image: "https://images.unsplash.com/photo-1494790108755-2616b612b647?w=300&h=300&fit=crop&crop=face",
+      image: ShayKalisher,
       since: "2023"
     },
     {
       name: "Ariel Ivri",
       role: "Boeing's Mentor",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face",
+      image: arielIvri,
       since: "2023"
     },
     {
       name: "Dror Margalit",
       role: "Toxic Pandas's Mentor",
-      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&h=300&fit=crop&crop=face",
+      image: drorMargalit,
       since: "2024"
     },
     {
       name: "Ofir Shafran",
       role: "Toxic Pandas's Mentor",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
+      image: ofirShafran,
       since: "2024"
     },
     {
       name: "Ariel Mevorach",
       role: "Hatulego's Mentor",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
+      image: arielMevorahLevi,
       since: "2025"
     },
     {
       name: "Itamar Ivri",
       role: "Hatulego's Mentor",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
+      image: itamarIvri,
       since: "2025"
     },
     {
-      name: "Daniel Levy",
+      name: "Daniel Levi",
       role: "Ironi G's Mentor",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
+      image: danielLevi,
       since: "2025"
     },
     {
       name: "Sapir Rosner",
       role: "Ironi G's Mentor",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
+      image: comingSoon,
       since: "2025"
     },
     {
       name: "Adam Dashevsky",
       role: "Shivtei Israel's Mentor",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
+      image: adamDeshevsky,
       since: "2025"
     }
   ];
 
-  const galleryItems = [
-    "https://images.unsplash.com/photo-1518717758536-85ae29035b6d?w=400&h=300&fit=crop",
-    "https://images.unsplash.com/photo-1560472355-536de3962603?w=400&h=300&fit=crop",
-    "https://images.unsplash.com/photo-1551434678-e076c223a692?w=400&h=300&fit=crop",
-    "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=400&h=300&fit=crop",
-    "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=300&fit=crop",
-    "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=300&fit=crop"
-  ];
+  const galleryItems = [fllGallery1, fllGallery2, fllGallery3, fllGallery4, fllGallery5, fllGallery6];
 
   const getBadgeColor = (type: string) => {
     switch(type) {
