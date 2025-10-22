@@ -6,32 +6,32 @@
 
 @layer base {
   :root {
-    /* Background System - Stronger Blue Tone */
-    --background: 215 25% 10%;
+    /* Background System - Deeper Elegant Blue */
+    --background: 215 30% 8%;
     --foreground: 210 40% 98%;
-    --surface: 215 25% 14%;
-    --surface-elevated: 215 25% 18%;
+    --surface: 215 30% 11%;
+    --surface-elevated: 215 30% 14%;
 
     /* Card System */
-    --card: 215 25% 14%;
+    --card: 215 30% 11%;
     --card-foreground: 210 40% 98%;
 
     /* Interactive Elements */
-    --popover: 215 25% 14%;
+    --popover: 215 30% 11%;
     --popover-foreground: 210 40% 98%;
 
-    /* Brand Colors - PRIMO Blue Theme */
-    --primary: 210 100% 56%;
-    --primary-hover: 210 100% 48%;
-    --primary-foreground: 215 25% 10%;
+    /* Brand Colors - PRIMO Orange Theme */
+    --primary: 25 95% 53%;
+    --primary-hover: 25 95% 48%;
+    --primary-foreground: 215 30% 8%;
 
-    --secondary: 215 25% 18%;
+    --secondary: 215 30% 14%;
     --secondary-foreground: 210 40% 98%;
 
-    /* Accent - PRIMO Orange */
-    --accent: 25 95% 55%;
+    /* Accent - Also Orange for consistency */
+    --accent: 25 95% 53%;
     --accent-hover: 25 95% 48%;
-    --accent-foreground: 215 25% 10%;
+    --accent-foreground: 215 30% 8%;
 
     /* Status Colors */
     --success: 142 71% 45%;
@@ -40,23 +40,23 @@
     --destructive-foreground: 210 40% 98%;
 
     /* Muted Elements */
-    --muted: 215 25% 18%;
+    --muted: 215 30% 14%;
     --muted-foreground: 215 15% 65%;
 
     /* Borders & Inputs */
-    --border: 215 25% 22%;
-    --input: 215 25% 18%;
-    --ring: 25 95% 55%;
+    --border: 215 30% 18%;
+    --input: 215 30% 14%;
+    --ring: 25 95% 53%;
 
-    /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(210 100% 56%), hsl(25 95% 55%));
-    --gradient-surface: linear-gradient(135deg, hsl(215 25% 14%), hsl(215 25% 18%));
-    --gradient-hero: linear-gradient(135deg, hsl(215 25% 10%) 0%, hsl(215 25% 14%) 50%, hsl(210 100% 56% / 0.1) 100%);
+    /* Gradients - Pure Orange */
+    --gradient-primary: linear-gradient(135deg, hsl(25 95% 53%), hsl(25 95% 60%));
+    --gradient-surface: linear-gradient(135deg, hsl(215 30% 11%), hsl(215 30% 14%));
+    --gradient-hero: linear-gradient(135deg, hsl(215 30% 8%) 0%, hsl(215 30% 11%) 50%, hsl(215 30% 14%) 100%);
 
     /* Shadows - Orange Glow Effects */
-    --shadow-glow: 0 0 20px hsl(25 95% 55% / 0.3);
-    --shadow-accent-glow: 0 0 30px hsl(25 95% 55% / 0.4);
-    --shadow-elevated: 0 10px 30px -10px hsl(215 25% 10% / 0.5);
+    --shadow-glow: 0 0 20px hsl(25 95% 53% / 0.3);
+    --shadow-accent-glow: 0 0 30px hsl(25 95% 53% / 0.4);
+    --shadow-elevated: 0 10px 30px -10px hsl(215 30% 8% / 0.5);
 
     /* Border Radius */
     --radius: 0.75rem;
@@ -78,14 +78,14 @@
     --sidebar-ring: 217.2 91.2% 59.8%;
     
     /* Light mode overrides for sidebar */
-    --sidebar-background: 215 25% 18%;
+    --sidebar-background: 215 30% 14%;
     --sidebar-foreground: 210 40% 98%;
-    --sidebar-primary: 210 100% 56%;
-    --sidebar-primary-foreground: 215 25% 10%;
-    --sidebar-accent: 215 25% 22%;
+    --sidebar-primary: 25 95% 53%;
+    --sidebar-primary-foreground: 215 30% 8%;
+    --sidebar-accent: 215 30% 18%;
     --sidebar-accent-foreground: 210 40% 98%;
-    --sidebar-border: 215 25% 22%;
-    --sidebar-ring: 25 95% 55%;
+    --sidebar-border: 215 30% 18%;
+    --sidebar-ring: 25 95% 53%;
 
     /* Animations */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
