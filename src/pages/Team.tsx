@@ -423,16 +423,16 @@ const Team = () => {
       </section>
 
       {/* Mentors */}
-      <section className="container mx-auto px-6 mb-32">
+      <section className="container mx-auto px-6 pb-20">
         <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-8 text-center">
           Mentors
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-6 auto-rows-fr">
           {/* Admin Add Button */}
           {isEditMode && (
             <Card 
               onClick={() => handleAddMember('mentors')}
-              className="relative p-3 bg-gradient-surface border-border hover:border-primary/50 transition-all duration-300 hover:shadow-glow group min-h-[260px] cursor-pointer border-dashed border-2 flex items-center justify-center"
+              className="relative p-3 bg-gradient-surface border-border hover:border-accent/50 transition-all duration-300 hover:shadow-glow group cursor-pointer border-dashed border-2 flex items-center justify-center"
             >
               <div className="text-center">
                 <Plus className="h-12 w-12 text-primary mx-auto mb-4" />
@@ -445,7 +445,7 @@ const Team = () => {
             <Card
               key={mentor.id || index}
               onClick={isEditMode ? () => handleEditMember(mentor) : undefined}
-              className={`relative p-3 bg-gradient-surface border-border hover:border-primary/50 transition-all duration-300 hover:shadow-glow group min-h-[260px] ${isEditMode ? 'cursor-pointer' : ''}`}
+              className={`relative p-6 bg-gradient-surface border-border hover:border-accent/50 transition-all duration-300 hover:shadow-glow group flex flex-col ${isEditMode ? 'cursor-pointer' : ''}`}
             >
               {/* Admin Edit Icon */}
               {isEditMode && (
@@ -454,10 +454,10 @@ const Team = () => {
                 </div>
               )}
               
-              <div className="text-center">
+              <div className="text-center flex-1 flex flex-col justify-center">
                 <h3 className="text-lg font-bold text-foreground mb-2">{mentor.name}</h3>
                 <p className="text-primary font-medium mb-2">{mentor.role}</p>
-                <p className="text-muted-foreground text-sm mb-6">Mentor since {mentor.year}</p>
+                <p className="text-muted-foreground text-sm">Mentor since {mentor.year}</p>
               </div>
             </Card>
           ))}
