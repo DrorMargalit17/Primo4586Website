@@ -6,32 +6,32 @@
 
 @layer base {
   :root {
-    /* Background System - Custom Blue #023E8A */
-    --background: 207 97% 28%;
+    /* Background System - Custom Blue #03045E */
+    --background: 239 95% 19%;
     --foreground: 210 40% 98%;
-    --surface: 207 97% 32%;
-    --surface-elevated: 207 97% 36%;
+    --surface: 239 95% 23%;
+    --surface-elevated: 239 95% 27%;
 
     /* Card System */
-    --card: 207 97% 32%;
+    --card: 239 95% 23%;
     --card-foreground: 210 40% 98%;
 
     /* Interactive Elements */
-    --popover: 207 97% 32%;
+    --popover: 239 95% 23%;
     --popover-foreground: 210 40% 98%;
 
     /* Brand Colors - PRIMO Orange Theme */
     --primary: 25 95% 53%;
     --primary-hover: 25 95% 48%;
-    --primary-foreground: 207 97% 28%;
+    --primary-foreground: 239 95% 19%;
 
-    --secondary: 207 97% 36%;
+    --secondary: 239 95% 27%;
     --secondary-foreground: 210 40% 98%;
 
     /* Accent - Also Orange for consistency */
     --accent: 25 95% 53%;
     --accent-hover: 25 95% 48%;
-    --accent-foreground: 207 97% 28%;
+    --accent-foreground: 239 95% 19%;
 
     /* Status Colors */
     --success: 142 71% 45%;
@@ -40,23 +40,23 @@
     --destructive-foreground: 210 40% 98%;
 
     /* Muted Elements */
-    --muted: 207 97% 36%;
-    --muted-foreground: 207 40% 70%;
+    --muted: 239 95% 27%;
+    --muted-foreground: 239 40% 70%;
 
     /* Borders & Inputs */
-    --border: 207 97% 40%;
-    --input: 207 97% 36%;
+    --border: 239 95% 31%;
+    --input: 239 95% 27%;
     --ring: 25 95% 53%;
 
     /* Gradients - Pure Orange */
     --gradient-primary: linear-gradient(135deg, hsl(25 95% 53%), hsl(25 95% 60%));
-    --gradient-surface: linear-gradient(135deg, hsl(207 97% 32%), hsl(207 97% 36%));
-    --gradient-hero: linear-gradient(135deg, hsl(207 97% 28%) 0%, hsl(207 97% 32%) 50%, hsl(207 97% 36%) 100%);
+    --gradient-surface: linear-gradient(135deg, hsl(239 95% 23%), hsl(239 95% 27%));
+    --gradient-hero: linear-gradient(135deg, hsl(239 95% 19%) 0%, hsl(239 95% 23%) 50%, hsl(239 95% 27%) 100%);
 
     /* Shadows - Orange Glow Effects */
     --shadow-glow: 0 0 20px hsl(25 95% 53% / 0.3);
     --shadow-accent-glow: 0 0 30px hsl(25 95% 53% / 0.4);
-    --shadow-elevated: 0 10px 30px -10px hsl(207 97% 20% / 0.5);
+    --shadow-elevated: 0 10px 30px -10px hsl(239 95% 12% / 0.5);
 
     /* Border Radius */
     --radius: 0.75rem;
@@ -78,13 +78,13 @@
     --sidebar-ring: 217.2 91.2% 59.8%;
     
     /* Light mode overrides for sidebar */
-    --sidebar-background: 207 97% 36%;
+    --sidebar-background: 239 95% 27%;
     --sidebar-foreground: 210 40% 98%;
     --sidebar-primary: 25 95% 53%;
-    --sidebar-primary-foreground: 207 97% 28%;
-    --sidebar-accent: 207 97% 40%;
+    --sidebar-primary-foreground: 239 95% 19%;
+    --sidebar-accent: 239 95% 31%;
     --sidebar-accent-foreground: 210 40% 98%;
-    --sidebar-border: 207 97% 40%;
+    --sidebar-border: 239 95% 31%;
     --sidebar-ring: 25 95% 53%;
 
     /* Animations */
