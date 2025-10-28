@@ -77,6 +77,7 @@ export default {
 			boxShadow: {
 				'glow': 'var(--shadow-glow)',
 				'accent-glow': 'var(--shadow-accent-glow)',
+				'vivid-glow': 'var(--shadow-vivid-glow)',
 				'elevated': 'var(--shadow-elevated)',
 			},
 			borderRadius: {
