@@ -33,7 +33,7 @@ const Header = () => {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <header className="sticky top-0 z-50 bg-surface/80 backdrop-blur-lg border-b border-border">
+    <header className="sticky top-0 z-50 backdrop-blur-lg border-b border-border" style={{ backgroundColor: 'hsl(230 96% 9% / 0.8)' }}>
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}

@@ -102,7 +102,7 @@ const ImageCarousel = () => {
   }, []);
 
   return (
-    <div className="w-full max-w-lg mx-auto relative overflow-hidden rounded-xl h-80 md:h-96">
+    <div className="w-full max-w-lg mx-auto relative overflow-hidden rounded-xl h-80 md:h-96 shadow-accent-glow">
       {teamImages.map((src, idx) => (
         <img
           key={idx}
