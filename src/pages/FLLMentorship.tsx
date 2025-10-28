@@ -188,7 +188,7 @@ const FLLMentorship = () => {
                 <img
                   src={team.image}
                   alt={team.name}
-                  className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
+                  className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105 shadow-vivid-glow"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
               </div>
@@ -238,7 +238,7 @@ const FLLMentorship = () => {
               <img
                 src={image}
                 alt={`FLL Gallery image ${index + 1}`}
-                className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
+                className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105 shadow-vivid-glow"
               />
             </Card>
           ))}
@@ -268,7 +268,7 @@ const FLLMentorship = () => {
                   <img
                     src={mentor.image}
                     alt={mentor.name}
-                    className="w-24 h-24 rounded-full mx-auto object-cover border-4 border-primary/20 group-hover:border-primary/50 transition-all duration-300"
+                    className="w-24 h-24 rounded-full mx-auto object-cover border-4 border-primary/20 group-hover:border-primary/50 transition-all duration-300 shadow-vivid-glow"
                   />
                 </div>
                 

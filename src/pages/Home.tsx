@@ -102,13 +102,13 @@ const ImageCarousel = () => {
   }, []);
 
   return (
-    <div className="w-full max-w-lg mx-auto relative overflow-hidden rounded-xl h-80 md:h-96 shadow-accent-glow">
+    <div className="w-full max-w-lg mx-auto relative overflow-hidden rounded-xl h-80 md:h-96 shadow-vivid-glow">
       {teamImages.map((src, idx) => (
         <img
           key={idx}
           src={src}
           alt={`Team ${idx + 1}`}
-          className={`w-full h-full object-cover rounded-xl absolute top-0 left-0 transition-opacity duration-500 ${
+          className={`w-full h-full object-cover rounded-xl absolute top-0 left-0 transition-opacity duration-500 shadow-vivid-glow ${
             idx === currentImageIndex && fade ? "opacity-100 z-10" : "opacity-0 z-0"
           }`}
         />

@@ -64,14 +64,11 @@ const Robot2024 = () => {
               </div>
             </div>
             <div className="relative">
-              <div className="bg-gradient-surface rounded-2xl p-8 border border-border">
-                <img
-                  src={Punk}
-                  alt="Punk Robot 2024"
-                  className="w-full h-auto rounded-lg shadow-elevated"
-                />
-                <div className="absolute inset-0 bg-gradient-primary opacity-10 rounded-2xl"></div>
-              </div>
+              <img
+                src={Punk}
+                alt="Punk Robot 2024"
+                className="w-full h-auto rounded-lg shadow-vivid-glow"
+              />
             </div>
           </div>
         </div>
@@ -139,7 +136,7 @@ const Robot2024 = () => {
               <img
                 src={teamPhoto}
                 alt="Team group photo"
-                className="w-full h-80 object-cover"
+                className="w-full h-80 object-cover shadow-vivid-glow"
               />
             </Card>
           </div>
@@ -230,7 +227,7 @@ const Robot2024 = () => {
               <img
                 src={image}
                 alt={`Robot gallery image ${index + 1}`}
-                className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
+                className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105 shadow-vivid-glow"
               />
             </Card>
           ))}

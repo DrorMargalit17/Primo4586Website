@@ -72,14 +72,11 @@ const Robot2023 = () => {
               </div>
             </div>
             <div className="relative">
-              <div className="bg-gradient-surface rounded-2xl p-8 border border-border">
-                <img
-                  src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=500&h=400&fit=crop"
-                  alt="Genesis Robot 2023"
-                  className="w-full h-auto rounded-lg shadow-elevated"
-                />
-                <div className="absolute inset-0 bg-gradient-primary opacity-10 rounded-2xl"></div>
-              </div>
+              <img
+                src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=500&h=400&fit=crop"
+                alt="Genesis Robot 2023"
+                className="w-full h-auto rounded-lg shadow-vivid-glow"
+              />
             </div>
           </div>
         </div>
@@ -187,7 +184,7 @@ const Robot2023 = () => {
               <img
                 src={image}
                 alt={`Robot gallery image ${index + 1}`}
-                className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
+                className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105 shadow-vivid-glow"
               />
             </Card>
           ))}

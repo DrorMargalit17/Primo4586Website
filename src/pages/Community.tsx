@@ -63,7 +63,7 @@ const AutoCarousel = ({ images }) => {
           key={idx}
           src={src}
           alt={`Image ${idx + 1}`}
-          className={`w-full h-full object-cover rounded-lg absolute top-0 left-0 transition-opacity duration-1000 ${
+          className={`w-full h-full object-cover rounded-lg absolute top-0 left-0 transition-opacity duration-1000 shadow-vivid-glow ${
             idx === currentImg ? "opacity-100 z-10" : "opacity-0 z-0"
           }`}
           style={{ maxHeight: 300 }}
