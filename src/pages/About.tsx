@@ -132,7 +132,7 @@ const About = () => {
                   <p className="text-sm text-muted-foreground">Student Participants</p>
                 </div>
                 <div className="text-center">
-                  <p className="text-3xl font-bold text-primary">6</p>
+                  <p className="text-3xl font-bold text-primary">8</p>
                   <p className="text-sm text-muted-foreground">Week Build Season</p>
                 </div>
                 <div className="text-center">
