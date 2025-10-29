@@ -5,17 +5,17 @@ import { Link } from "react-router-dom";
 import { Trophy, Award, Star, Users, Target, Lightbulb } from "lucide-react";
 
 //group picturs
-const boeing = "/FLL/Boeing.jpeg"
-const toxicPandas = "/FLL/ToxicPandas.jpeg"
-const comingSoon = "/FLL/comingSoon.png"
+const boeing = "/FLL/Boeing.webp"
+const toxicPandas = "/FLL/ToxicPandas.webp"
+const comingSoon = "/FLL/comingSoon.webp"
 
 //GalleryPhotos
-const fllGallery1 = "/FLL/fllGallery_1.JPG"
-const fllGallery2 = "/FLL/fllGallery_2.JPG"
-const fllGallery3 = "/FLL/fllGallery_3.JPG"
-const fllGallery4 = "/FLL/fllGallery_4.JPG"
-const fllGallery5 = "/FLL/fllGallery_5.JPG"
-const fllGallery6 = "/FLL/fllGallery_6.JPG"
+const fllGallery1 = "/FLL/fllGallery_1.webp"
+const fllGallery2 = "/FLL/fllGallery_2.webp"
+const fllGallery3 = "/FLL/fllGallery_3.webp"
+const fllGallery4 = "/FLL/fllGallery_4.webp"
+const fllGallery5 = "/FLL/fllGallery_5.webp"
+const fllGallery6 = "/FLL/fllGallery_6.webp"
 
 //Mentors Pictures
 const ShayKalisher = "/TeamProfiles/ShayKalisher.webp"
