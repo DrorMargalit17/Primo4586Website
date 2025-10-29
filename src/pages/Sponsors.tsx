@@ -137,7 +137,7 @@ const Sponsors = () => {
       {/* Support Us Section */}
       <section className="bg-gradient-hero py-20 px-6">
         <div className="container mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
             {/* Partnership CTA */}
             <div className="text-center lg:text-left">
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
@@ -163,16 +163,13 @@ const Sponsors = () => {
                 Help us continue our robotics journey with a donation. Every
                 contribution makes a difference in our pursuit of excellence.
               </p>
-              <Button variant="outline" size="lg" asChild className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
-                <a 
-                  href="https://www.paypal.com/donate" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2"
-                >
-                  Donate via PayPal
-                  <ExternalLink className="h-4 w-4" />
-                </a>
+              <Button 
+                variant="outline" 
+                size="lg" 
+                disabled 
+                className="border-muted text-muted-foreground cursor-not-allowed opacity-60"
+              >
+                Donate via PayPal – Coming Soon
               </Button>
             </div>
           </div>
