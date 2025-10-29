@@ -245,7 +245,7 @@ const Team = () => {
           Team Leads
         </h2>
         <div className="flex justify-center">
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6 w-full">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6 w-full">
             {/* Admin Add Button */}
             {isEditMode && (
               <Card 
@@ -338,7 +338,7 @@ const Team = () => {
           Team Members
         </h2>
         <div className="flex justify-center">
-          <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-4 max-w-[1000px] w-full">
+          <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-4 max-w-[1000px] w-full">
             {/* Admin Add Button */}
             {isEditMode && (
               <Card 
@@ -356,7 +356,7 @@ const Team = () => {
               <Card
                 key={member.id || index}
                 onClick={isEditMode ? () => handleEditMember(member) : undefined}
-                className={`relative p-6 bg-gradient-surface border-border hover:border-primary/50 transition-all duration-300 hover:shadow-glow group min-h-[220px] ${isEditMode ? 'cursor-pointer' : ''}`}
+                className={`relative p-6 bg-gradient-surface border-border hover:border-primary/50 transition-all duration-300 hover:shadow-glow group min-h-[245px] ${isEditMode ? 'cursor-pointer' : ''}`}
               >
                 {/* Admin Edit Icon */}
                 {isEditMode && (
@@ -370,7 +370,7 @@ const Team = () => {
                     <img
                       src={member.image}
                       alt={member.name}
-                      className="w-23 h-23 rounded-full mx-auto object-cover border-4 border-primary/20 group-hover:border-primary/50 transition-all duration-300 shadow-vivid-glow"
+                      className="w-21 h-21 rounded-full mx-auto object-cover border-4 border-primary/20 group-hover:border-primary/50 transition-all duration-300 shadow-vivid-glow"
                     />
                   </div>
 

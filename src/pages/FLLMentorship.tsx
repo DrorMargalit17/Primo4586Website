@@ -18,14 +18,14 @@ const fllGallery5 = "/FLL/fllGallery_5.JPG"
 const fllGallery6 = "/FLL/fllGallery_6.JPG"
 
 //Mentors Pictures
-const ShayKalisher = "/TeamProfiles/ShayKalisher.jpg"
-const arielIvri = "/TeamProfiles/ArielIvri.JPG"
-const drorMargalit = "/TeamProfiles/DrorMargalit.png"
-const ofirShafran = "/TeamProfiles/OfirShafran.JPG"
-const arielMevorahLevi = "/TeamProfiles/ArielMevorachLevy.JPG"
-const itamarIvri = "/TeamProfiles/ItamarIvri.JPG"
-const danielLevi = "/TeamProfiles/DanielLevi.JPG"
-const adamDeshevsky = "/TeamProfiles/AdamDashevsky.JPG"
+const ShayKalisher = "/TeamProfiles/ShayKalisher.webp"
+const arielIvri = "/TeamProfiles/ArielIvri.webp"
+const drorMargalit = "/TeamProfiles/DrorMargalit.webp"
+const ofirShafran = "/TeamProfiles/OfirShafran.webp"
+const arielMevorahLevi = "/TeamProfiles/ArielMevorachLevy.webp"
+const itamarIvri = "/TeamProfiles/ItamarIvri.webp"
+const danielLevi = "/TeamProfiles/DanielLevi.webp"
+const adamDeshevsky = "/TeamProfiles/AdamDashevsky.webp"
 const blankProfile = "/TeamProfiles/BlankProfile.png"
 
 
