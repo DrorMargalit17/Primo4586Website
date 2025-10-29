@@ -3,17 +3,17 @@ import { Badge } from "@/components/ui/badge";
 import { EditableText } from "@/components/editor/EditableText";
 
 //Pictures
-const sparrow = "/Robot_2025/2025Robot.jpg";
-const SeasonLogo = "/Robot_2025/Reefscape_FRC_Logo.png"
-const teamPhoto = "/Robot_2025/teamPhoto.JPG"
+const sparrow = "/Robot_2025/2025Robot.webp";
+const SeasonLogo = "/Robot_2025/Reefscape_FRC_Logo.webp"
+const teamPhoto = "/Robot_2025/teamPhoto.webp"
 
 //Gallery Pictures
-const robotGallery1 = "/Robot_2025/RobotGallery_1.JPG";
-const robotGallery2 = "/Robot_2025/RobotGallery_2.JPG";
-const robotGallery3 = "/Robot_2025/RobotGallery_3.JPG";
-const robotGallery4 = "/Robot_2025/RobotGallery_4.JPG";
-const robotGallery5 = "/Robot_2025/RobotGallery_5.JPG";
-const robotGallery6 = "/Robot_2025/RobotGallery_6.JPG";
+const robotGallery1 = "/Robot_2025/RobotGallery_1.webp";
+const robotGallery2 = "/Robot_2025/RobotGallery_2.webp";
+const robotGallery3 = "/Robot_2025/RobotGallery_3.webp";
+const robotGallery4 = "/Robot_2025/RobotGallery_4.webp";
+const robotGallery5 = "/Robot_2025/RobotGallery_5.webp";
+const robotGallery6 = "/Robot_2025/RobotGallery_6.webp";
 
 
 const Robot = () => {

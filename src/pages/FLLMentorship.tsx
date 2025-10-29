@@ -26,6 +26,7 @@ const arielMevorahLevi = "/TeamProfiles/ArielMevorachLevy.JPG"
 const itamarIvri = "/TeamProfiles/ItamarIvri.JPG"
 const danielLevi = "/TeamProfiles/DanielLevi.JPG"
 const adamDeshevsky = "/TeamProfiles/AdamDashevsky.JPG"
+const blankProfile = "/TeamProfiles/BlankProfile.png"
 
 
 
@@ -124,7 +125,7 @@ const FLLMentorship = () => {
     {
       name: "Sapir Rosner",
       role: "Ironi G's Mentor",
-      image: comingSoon,
+      image: blankProfile,
       since: "2025"
     },
     {
