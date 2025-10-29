@@ -2,17 +2,17 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
 //Pictures
-const Punk = "/Robot_2024/2024Robot.jpeg";
-const SeasonLogo = "/Robot_2024/Crescendo_FRC_Logo.png";
-const teamPhoto = "/Robot_2024/TeamPhoto.jpg"
+const Punk = "/Robot_2024/2024Robot.webp";
+const SeasonLogo = "/Robot_2024/Crescendo_FRC_Logo.webp";
+const teamPhoto = "/Robot_2024/TeamPhoto.webp"
 
 //Robot Gallery
-const robotGallery1 = "/Robot_2024/RobotGallery_1.jpg";
-const robotGallery2 = "/Robot_2024/RobotGallery_2.jpg";
-const robotGallery3 = "/Robot_2024/RobotGallery_3.jpg";
-const robotGallery4 = "/Robot_2024/RobotGallery_4.jpg";
-const robotGallery5 = "/Robot_2024/RobotGallery_5.jpg";
-const robotGallery6 = "/Robot_2024/RobotGallery_6.jpg";
+const robotGallery1 = "/Robot_2024/RobotGallery_1.webp";
+const robotGallery2 = "/Robot_2024/RobotGallery_2.webp";
+const robotGallery3 = "/Robot_2024/RobotGallery_3.webp";
+const robotGallery4 = "/Robot_2024/RobotGallery_4.webp";
+const robotGallery5 = "/Robot_2024/RobotGallery_5.webp";
+const robotGallery6 = "/Robot_2024/RobotGallery_6.webp";
 
 
 const Robot2024 = () => {
