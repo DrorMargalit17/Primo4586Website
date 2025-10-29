@@ -58,7 +58,7 @@ const Contact = () => {
     {
       icon: MapPin,
       title: "Visit Us",
-      details: ["Modi'in", "ironiB High School", "WorkShop Building"],
+      details: ["Modi'in", "ironiB High School", "Nahal Ayun 1"],
     },
     {
       icon: Phone,

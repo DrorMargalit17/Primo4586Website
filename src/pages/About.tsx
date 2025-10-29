@@ -27,12 +27,13 @@ const About = () => {
   ];
 
   const achievements = [
+    "2017 - Imagery Award In Honor Of Jack Kamen",
+    "2017 - Winners of the Israeli District Championship",
+    "2019 - District #2 EI Award",
+    "Only Israeli Finalist In 2020",
     "2022 - Team Spirit Award",
-    "Only Israeli finalist in 2020",
-    "2019 - District 2 EI award",
-    "2017 - winners of DCMP",
-    "Gracious professionalism award 2024-2025",
-    "2017 - Imagery Award in honor of Jack Kamen",
+    "Gracious Professionalism Award 2024-2025",
+    ,
   ];
 
   return (
@@ -185,7 +186,7 @@ const About = () => {
               {achievements.map((achievement, index) => (
                 <Card
                   key={index}
-                  className="p-4 bg-surface border-border hover:border-primary/50 transition-all duration-300"
+                  className="p-3 bg-surface border-border hover:border-primary/50 transition-all duration-300"
                 >
                   <p className="text-sm font-medium text-foreground">
                     {achievement}

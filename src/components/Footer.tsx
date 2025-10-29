@@ -164,7 +164,7 @@ const Footer = () => {
                 <MapPin className="h-4 w-4" />
                 <EditableText
                   contentKey="footer-contact-address"
-                  defaultContent="Migdal Oz 24, Modiin Maccabim Reut"
+                  defaultContent="Nahal Ayun 1, Modiin Maccabim Reut"
                   contentType="text"
                   tag="span"
                   className="text-sm"
