@@ -60,7 +60,7 @@ const Robot2024 = () => {
                 <Badge className="bg-accent text-accent-foreground">
                   Autonomus
                 </Badge>
-                <Badge className="bg-success text-white">Disassembled</Badge>
+                <Badge className="bg-accent text-accent-foreground">Disassembled</Badge>
               </div>
             </div>
             <div className="relative">
