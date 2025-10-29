@@ -56,7 +56,7 @@ const AutoCarousel = ({ images }) => {
   return (
     <div
       ref={containerRef}
-      className="relative overflow-hidden rounded-lg w-full h-full max-h-[300px]"
+      className="relative overflow-hidden rounded-lg w-full h-full"
     >
       {images.map((src, idx) => (
         <img
@@ -66,7 +66,6 @@ const AutoCarousel = ({ images }) => {
           className={`w-full h-full object-cover rounded-lg absolute top-0 left-0 transition-opacity duration-1000 shadow-vivid-glow ${
             idx === currentImg ? "opacity-100 z-10" : "opacity-0 z-0"
           }`}
-          style={{ maxHeight: 300 }}
         />
       ))}
     </div>
@@ -129,15 +128,15 @@ const Community = () => {
       </section>
 
       {/* New Section: Title and Description for Community Activities */}
-      <section className="text-center max-w-3xl mx-auto space-y-4">
-        <h2 className="text-4xl font-bold text-foreground">Community Activities</h2>
-        <p className="text-lg text-muted-foreground">
+      <section className="text-center max-w-3xl mx-auto space-y-3 sm:space-y-4">
+        <h2 className="text-3xl sm:text-4xl font-bold text-foreground">Community Activities</h2>
+        <p className="text-base sm:text-lg text-muted-foreground px-4">
           Discover the various ways we engage with and inspire our community through hands-on robotics events and workshops.
         </p>
       </section>
 
       {/* Community Activities */}
-      <div className="space-y-8">
+      <div className="space-y-6 sm:space-y-8">
         {loading ? (
           <div className="text-center py-8">Loading activities...</div>
         ) : activities.length === 0 ? (
@@ -146,18 +145,19 @@ const Community = () => {
           activities.map((activity) => (
             <Card
               key={activity.id}
-              className="grid grid-cols-2 gap-6 items-center p-6 relative overflow-hidden"
-              style={{ height: 320 }}
+              className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 p-4 sm:p-6 relative overflow-hidden"
             >
-              <div className="flex flex-col justify-center h-full">
-                <h3 className="text-3xl font-bold text-foreground mb-4">
+              <div className="flex flex-col justify-center">
+                <h3 className="text-2xl sm:text-3xl font-bold text-foreground mb-3 sm:mb-4">
                   {activity.title}
                 </h3>
-                <p className="text-muted-foreground text-lg leading-relaxed">
+                <p className="text-muted-foreground text-base sm:text-lg leading-relaxed">
                   {activity.description}
                 </p>
               </div>
-              <AutoCarousel images={activity.images} />
+              <div className="h-[250px] sm:h-[300px]">
+                <AutoCarousel images={activity.images} />
+              </div>
             </Card>
           ))
         )}

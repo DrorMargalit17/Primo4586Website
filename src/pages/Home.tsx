@@ -143,16 +143,16 @@ const CoreValuePopup = ({ feature, onClose }) => {
   const IconComponent = feature.icon;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
       <div
         ref={popupRef}
-        className="bg-surface rounded-lg p-8 max-w-xl w-full shadow-xl flex flex-col items-center text-center"
+        className="bg-surface rounded-lg p-6 sm:p-8 max-w-xl w-full shadow-xl flex flex-col items-center text-center max-h-[90vh] overflow-y-auto"
       >
-        <div className="bg-gradient-primary p-4 rounded-xl w-fit mb-6 shadow-accent-glow">
-          <IconComponent className="h-10 w-10 text-primary-foreground mx-auto" />
+        <div className="bg-gradient-primary p-3 sm:p-4 rounded-xl w-fit mb-4 sm:mb-6 shadow-accent-glow">
+          <IconComponent className="h-8 w-8 sm:h-10 sm:w-10 text-primary-foreground mx-auto" />
         </div>
-        <h3 className="text-2xl font-bold text-foreground mb-4">{feature.title}</h3>
-        <p className="text-lg text-muted-foreground leading-relaxed">{feature.description}</p>
+        <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-3 sm:mb-4">{feature.title}</h3>
+        <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">{feature.description}</p>
       </div>
     </div>
   );
@@ -202,9 +202,9 @@ const CoreValuesCarousel = () => {
   const IconComponent = features[currentIndex].icon;
 
   return (
-    <div className="max-w-6xl mx-auto relative">
+    <div className="max-w-6xl mx-auto relative px-4">
       <Card
-        className="p-8 md:p-12 bg-gradient-surface border-border text-center h-[400px] flex flex-col justify-center cursor-pointer select-none"
+        className="p-6 sm:p-8 md:p-12 bg-gradient-surface border-border text-center min-h-[350px] sm:min-h-[400px] flex flex-col justify-center cursor-pointer select-none"
         onClick={() => openPopup(currentIndex)}
         role="button"
         tabIndex={0}
@@ -213,17 +213,17 @@ const CoreValuesCarousel = () => {
         }}
         aria-label={`Open details for ${features[currentIndex].title}`}
       >
-        <div className="bg-gradient-primary p-4 rounded-xl w-fit mx-auto mb-6 shadow-accent-glow transition-all duration-500">
-          <IconComponent className="h-8 w-8 text-primary-foreground" />
+        <div className="bg-gradient-primary p-3 sm:p-4 rounded-xl w-fit mx-auto mb-4 sm:mb-6 shadow-accent-glow transition-all duration-500">
+          <IconComponent className="h-6 w-6 sm:h-8 sm:w-8 text-primary-foreground" />
         </div>
-        <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-4 transition-all duration-500">
+        <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground mb-3 sm:mb-4 transition-all duration-500">
           {features[currentIndex].title}
         </h3>
-        <p className="text-lg text-muted-foreground leading-relaxed transition-all duration-500">
+        <p className="text-base sm:text-lg text-muted-foreground leading-relaxed transition-all duration-500 px-2">
           {features[currentIndex].description}
         </p>
 
-        <div className="flex justify-center mt-6 space-x-2">
+        <div className="flex justify-center mt-4 sm:mt-6 space-x-2">
           {features.map((_, idx) => (
             <button
               key={idx}
@@ -231,7 +231,7 @@ const CoreValuesCarousel = () => {
                 e.stopPropagation(); // prevent parent card click
                 setCurrentIndex(idx);
               }}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
+              className={`w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full transition-all duration-300 ${
                 idx === currentIndex
                   ? "bg-primary shadow-glow"
                   : "bg-muted hover:bg-muted-foreground/50"
