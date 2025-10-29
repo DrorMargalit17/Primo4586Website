@@ -1,9 +1,10 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { EditableText } from "@/components/editor/EditableText";
+import useEmblaCarousel from "embla-carousel-react";
 
 import UpcomingEvents from "@/components/UpcomingEvents";
 
@@ -162,20 +163,33 @@ const CoreValuePopup = ({ feature, onClose }) => {
  * CoreValuesCarousel component
  * - Displays core values with auto-rotation every 15 seconds.
  * - Allows manual selection of a value which pauses auto-rotation and shows a popup.
+ * - Supports touch/swipe gestures on mobile.
  * - Entire card area is clickable to open popup.
  * - Pagination dots switch value without opening popup.
- * - NO blue glowing outline on hover over entire card (removed).
  */
 const CoreValuesCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const intervalRef = useRef(null);
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, duration: 20 });
+
+  // Sync embla with currentIndex
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return;
+    setCurrentIndex(emblaApi.selectedScrollSnap());
+  }, [emblaApi]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    emblaApi.on('select', onSelect);
+    onSelect();
+  }, [emblaApi, onSelect]);
 
   // Auto-rotation effect with 15 seconds interval
   useEffect(() => {
-    if (!isPopupOpen) {
+    if (!isPopupOpen && emblaApi) {
       intervalRef.current = setInterval(() => {
-        setCurrentIndex((prev) => (prev + 1) % features.length);
+        emblaApi.scrollNext();
       }, 15000);
     }
     return () => {
@@ -183,7 +197,7 @@ const CoreValuesCarousel = () => {
         clearInterval(intervalRef.current);
       }
     };
-  }, [isPopupOpen]);
+  }, [isPopupOpen, emblaApi]);
 
   // Open popup and pause rotation
   const openPopup = (index) => {
@@ -199,50 +213,64 @@ const CoreValuesCarousel = () => {
     setIsPopupOpen(false);
   };
 
-  const IconComponent = features[currentIndex].icon;
+  // Handle dot click to navigate
+  const scrollTo = useCallback((index) => {
+    if (emblaApi) emblaApi.scrollTo(index);
+  }, [emblaApi]);
 
   return (
     <div className="max-w-6xl mx-auto relative px-4">
-      <Card
-        className="p-6 sm:p-8 md:p-12 bg-gradient-surface border-border text-center min-h-[350px] sm:min-h-[400px] flex flex-col justify-center cursor-pointer select-none"
-        onClick={() => openPopup(currentIndex)}
-        role="button"
-        tabIndex={0}
-        onKeyDown={(e) => {
-          if (e.key === "Enter" || e.key === " ") openPopup(currentIndex);
-        }}
-        aria-label={`Open details for ${features[currentIndex].title}`}
-      >
-        <div className="bg-gradient-primary p-3 sm:p-4 rounded-xl w-fit mx-auto mb-4 sm:mb-6 shadow-accent-glow transition-all duration-500">
-          <IconComponent className="h-6 w-6 sm:h-8 sm:w-8 text-primary-foreground" />
+      <div className="overflow-hidden" ref={emblaRef}>
+        <div className="flex">
+          {features.map((feature, index) => {
+            const IconComponent = feature.icon;
+            return (
+              <div key={index} className="flex-[0_0_100%] min-w-0">
+                <Card
+                  className="p-6 sm:p-8 md:p-12 bg-gradient-surface border-border text-center min-h-[350px] sm:min-h-[400px] flex flex-col justify-center cursor-pointer select-none mx-2"
+                  onClick={() => openPopup(index)}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") openPopup(index);
+                  }}
+                  aria-label={`Open details for ${feature.title}`}
+                >
+                  <div className="bg-gradient-primary p-3 sm:p-4 rounded-xl w-fit mx-auto mb-4 sm:mb-6 shadow-accent-glow transition-all duration-500">
+                    <IconComponent className="h-6 w-6 sm:h-8 sm:w-8 text-primary-foreground" />
+                  </div>
+                  <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground mb-3 sm:mb-4 transition-all duration-500">
+                    {feature.title}
+                  </h3>
+                  <p className="text-base sm:text-lg text-muted-foreground leading-relaxed transition-all duration-500 px-2">
+                    {feature.description}
+                  </p>
+                </Card>
+              </div>
+            );
+          })}
         </div>
-        <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground mb-3 sm:mb-4 transition-all duration-500">
-          {features[currentIndex].title}
-        </h3>
-        <p className="text-base sm:text-lg text-muted-foreground leading-relaxed transition-all duration-500 px-2">
-          {features[currentIndex].description}
-        </p>
+      </div>
 
-        <div className="flex justify-center mt-4 sm:mt-6 space-x-2">
-          {features.map((_, idx) => (
-            <button
-              key={idx}
-              onClick={(e) => {
-                e.stopPropagation(); // prevent parent card click
-                setCurrentIndex(idx);
-              }}
-              className={`w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full transition-all duration-300 ${
-                idx === currentIndex
-                  ? "bg-primary shadow-glow"
-                  : "bg-muted hover:bg-muted-foreground/50"
-              }`}
-              aria-label={`Go to value ${idx + 1}`}
-              disabled={isPopupOpen}
-              type="button"
-            />
-          ))}
-        </div>
-      </Card>
+      <div className="flex justify-center mt-4 sm:mt-6 space-x-2">
+        {features.map((_, idx) => (
+          <button
+            key={idx}
+            onClick={(e) => {
+              e.stopPropagation();
+              scrollTo(idx);
+            }}
+            className={`w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full transition-all duration-300 ${
+              idx === currentIndex
+                ? "bg-primary shadow-glow"
+                : "bg-muted hover:bg-muted-foreground/50"
+            }`}
+            aria-label={`Go to value ${idx + 1}`}
+            disabled={isPopupOpen}
+            type="button"
+          />
+        ))}
+      </div>
 
       {isPopupOpen && (
         <CoreValuePopup feature={features[currentIndex]} onClose={closePopup} />
