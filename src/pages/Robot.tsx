@@ -19,11 +19,11 @@ const robotGallery6 = "/Robot_2025/RobotGallery_6.webp";
 const Robot = () => {
   const systems = [
     { label: "Swerve", value: "Swerve MK4N traffic vehicle" },
-    { label: "Elevator", value: "Consists of 3 floors & built of aluminum" },
+    { label: "Elevator", value: "Continuous Elevator built of aluminum" },
     { label: "Feeder and outtake", value: "Made of polycabronte, two axles & compliant wheels" },
-    { label: "Algae Gripper", value: "TMade of polycarbonate & compliant wheels" },
+    { label: "Algae Gripper", value: "Made of polycarbonate & compliant wheels" },
   ];
-
+  
   const achievements = [
     "District #2 Winners",
     "Gracious Professionalism Award",
