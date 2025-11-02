@@ -1,10 +1,53 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Target, Eye, Heart, ArrowRight } from "lucide-react";
+import { Target, Eye, Heart, ArrowRight, Play, Pause, ChevronLeft, ChevronRight } from "lucide-react";
 import { EditableText } from "@/components/editor/EditableText";
+import { Carousel, CarouselContent, CarouselItem, CarouselApi } from "@/components/ui/carousel";
+import { useEffect, useState, useRef } from "react";
 
 const About = () => {
+  const [api, setApi] = useState<CarouselApi>();
+  const [current, setCurrent] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const autoplayRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    if (!api) return;
+
+    setCurrent(api.selectedScrollSnap());
+
+    api.on("select", () => {
+      setCurrent(api.selectedScrollSnap());
+    });
+  }, [api]);
+
+  useEffect(() => {
+    if (!api || !isPlaying) return;
+
+    const startAutoplay = () => {
+      autoplayRef.current = setInterval(() => {
+        api?.scrollNext();
+      }, 4000);
+    };
+
+    startAutoplay();
+
+    return () => {
+      if (autoplayRef.current) {
+        clearInterval(autoplayRef.current);
+      }
+    };
+  }, [api, isPlaying]);
+
+  const toggleAutoplay = () => {
+    setIsPlaying(!isPlaying);
+    if (autoplayRef.current) {
+      clearInterval(autoplayRef.current);
+      autoplayRef.current = null;
+    }
+  };
+
   const values = [
     {
       icon: Target,
@@ -188,19 +231,74 @@ const About = () => {
             </div>
           </div>
           <div className="space-y-6">
-            <h3 className="text-2xl font-bold text-foreground">
-              Our Achievements
-            </h3>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-              {achievements.map((achievement, index) => (
-                <Card
-                  key={index}
-                  className="p-3 bg-surface border-border hover:border-primary/50 transition-all duration-300"
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-2xl font-bold text-foreground">
+                Our Journey
+              </h3>
+              <div className="flex items-center gap-2">
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onClick={() => api?.scrollPrev()}
+                  className="h-8 w-8"
                 >
-                  <p className="text-sm font-medium text-foreground">
-                    {achievement}
-                  </p>
-                </Card>
+                  <ChevronLeft className="h-4 w-4" />
+                </Button>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onClick={toggleAutoplay}
+                  className="h-8 w-8"
+                >
+                  {isPlaying ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
+                </Button>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onClick={() => api?.scrollNext()}
+                  className="h-8 w-8"
+                >
+                  <ChevronRight className="h-4 w-4" />
+                </Button>
+              </div>
+            </div>
+            
+            <Carousel
+              setApi={setApi}
+              className="w-full"
+            >
+              <CarouselContent>
+                {achievements.map((achievement, index) => (
+                  <CarouselItem key={index}>
+                    <Card className="p-8 bg-gradient-surface border-primary/30 shadow-glow min-h-[200px] flex flex-col justify-center">
+                      <div className="flex items-start gap-4">
+                        <div className="flex-shrink-0">
+                          <div className="w-12 h-12 rounded-full bg-gradient-primary flex items-center justify-center text-primary-foreground font-bold">
+                            {index + 1}
+                          </div>
+                        </div>
+                        <div className="flex-1">
+                          <p className="text-lg font-semibold text-foreground leading-relaxed">
+                            {achievement}
+                          </p>
+                        </div>
+                      </div>
+                    </Card>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+            </Carousel>
+            
+            <div className="flex justify-center gap-2 mt-4">
+              {achievements.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => api?.scrollTo(index)}
+                  className={`h-2 rounded-full transition-all duration-300 ${
+                    current === index ? "w-8 bg-primary" : "w-2 bg-primary/30"
+                  }`}
+                  aria-label={`Go to achievement ${index + 1}`}
+                />
               ))}
             </div>
           </div>
