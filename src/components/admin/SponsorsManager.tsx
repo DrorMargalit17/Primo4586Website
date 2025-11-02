@@ -131,12 +131,15 @@ const SponsorsManager = () => {
           updateData.logo = logoUrl;
         }
 
-        const { error } = await supabase
+        const { data, error } = await supabase
           .from('sponsors')
           .update(updateData)
-          .eq('id', editingId);
+          .eq('id', editingId)
+          .select()
+          .single();
 
         if (error) throw error;
+        if (!data) throw new Error('Update failed: no data returned');
 
         toast({
           title: "Success",

@@ -99,6 +99,11 @@
     @apply border-border;
   }
 
+  /* Force light color scheme to avoid device dark mode alterations */
+  html {
+    color-scheme: light;
+  }
+
   body {
     @apply bg-background text-foreground;
   }
