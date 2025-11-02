@@ -282,28 +282,30 @@ const Team = () => {
                         ref={(el) => (dropdownRefs.current[member.name] = el)}
                         className="absolute bottom-4 left-4"
                       >
-                        <button
-                          onClick={() => toggleDropdown(member.name)}
-                          className="bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-semibold hover:bg-primary/20 transition"
-                          aria-haspopup="true"
-                          aria-expanded={openDropdown === member.name}
-                        >
-                          Teams ▾
-                        </button>
-                        {openDropdown === member.name && (
-                          <div className="absolute left-0 mt-1 w-40 max-h-40 overflow-y-auto bg-surface border border-primary/30 rounded-md shadow-lg z-50 p-2">
-                            {teamOptions
-                              .filter((team) => member.teams.includes(team.value))
-                              .map((team) => (
-                                <div
-                                  key={team.value}
-                                  className="px-2 py-1 rounded cursor-default select-none bg-primary/20 text-primary font-semibold"
-                                >
-                                  <span>{team.label}</span>
-                                </div>
-                              ))}
-                          </div>
-                        )}
+                          <button
+                            onClick={() => toggleDropdown(member.name)}
+                            className="bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-semibold hover:bg-primary/20 transition shadow-sm"
+                            aria-haspopup="true"
+                            aria-expanded={openDropdown === member.name}
+                          >
+                            Teams ▾
+                          </button>
+                          {openDropdown === member.name && (
+                            <div className="absolute left-0 mt-2 w-44 max-h-48 overflow-y-auto bg-card border-2 border-primary/40 rounded-lg shadow-2xl z-50 backdrop-blur-sm">
+                              <div className="p-1.5 space-y-1">
+                                {teamOptions
+                                  .filter((team) => member.teams.includes(team.value))
+                                  .map((team) => (
+                                    <div
+                                      key={team.value}
+                                      className="px-3 py-2 rounded-md cursor-default select-none bg-primary/10 hover:bg-primary/20 text-primary font-medium text-sm transition-colors"
+                                    >
+                                      <span>{team.label}</span>
+                                    </div>
+                                  ))}
+                              </div>
+                            </div>
+                          )}
                       </div>
                     )}
                   </Card>
@@ -374,24 +376,26 @@ const Team = () => {
                         >
                           <button
                             onClick={() => toggleDropdown(member.name)}
-                            className="bg-primary/10 text-primary px-2 py-1 rounded-full text-xs font-semibold hover:bg-primary/20 transition"
+                            className="bg-primary/10 text-primary px-2 py-1 rounded-full text-xs font-semibold hover:bg-primary/20 transition shadow-sm"
                             aria-haspopup="true"
                             aria-expanded={openDropdown === member.name}
                           >
                             Teams ▾
                           </button>
                           {openDropdown === member.name && (
-                            <div className="absolute left-0 mt-1 w-40 max-h-40 overflow-y-auto bg-surface border border-primary/30 rounded-md shadow-lg z-50 p-2">
-                              {teamOptions
-                                .filter((team) => member.teams.includes(team.value))
-                                .map((team) => (
-                                  <div
-                                    key={team.value}
-                                    className="px-2 py-1 rounded cursor-default select-none bg-primary/20 text-primary font-semibold"
-                                  >
-                                    <span>{team.label}</span>
-                                  </div>
-                                ))}
+                            <div className="absolute left-0 mt-2 w-44 max-h-48 overflow-y-auto bg-card border-2 border-primary/40 rounded-lg shadow-2xl z-50 backdrop-blur-sm">
+                              <div className="p-1.5 space-y-1">
+                                {teamOptions
+                                  .filter((team) => member.teams.includes(team.value))
+                                  .map((team) => (
+                                    <div
+                                      key={team.value}
+                                      className="px-3 py-2 rounded-md cursor-default select-none bg-primary/10 hover:bg-primary/20 text-primary font-medium text-sm transition-colors"
+                                    >
+                                      <span>{team.label}</span>
+                                    </div>
+                                  ))}
+                              </div>
                             </div>
                           )}
                         </div>
@@ -464,24 +468,26 @@ const Team = () => {
                         >
                           <button
                             onClick={() => toggleDropdown(member.name)}
-                            className="bg-primary/10 text-primary px-2 py-1 rounded-full text-xs font-semibold hover:bg-primary/20 transition"
+                            className="bg-primary/10 text-primary px-2 py-1 rounded-full text-xs font-semibold hover:bg-primary/20 transition shadow-sm"
                             aria-haspopup="true"
                             aria-expanded={openDropdown === member.name}
                           >
                             Teams ▾
                           </button>
                           {openDropdown === member.name && (
-                            <div className="absolute left-0 mt-1 w-40 max-h-40 overflow-y-auto bg-surface border border-primary/30 rounded-md shadow-lg z-50 p-2">
-                              {teamOptions
-                                .filter((team) => member.teams.includes(team.value))
-                                .map((team) => (
-                                  <div
-                                    key={team.value}
-                                    className="px-2 py-1 rounded cursor-default select-none bg-primary/20 text-primary font-semibold"
-                                  >
-                                    <span>{team.label}</span>
-                                  </div>
-                                ))}
+                            <div className="absolute left-0 mt-2 w-44 max-h-48 overflow-y-auto bg-card border-2 border-primary/40 rounded-lg shadow-2xl z-50 backdrop-blur-sm">
+                              <div className="p-1.5 space-y-1">
+                                {teamOptions
+                                  .filter((team) => member.teams.includes(team.value))
+                                  .map((team) => (
+                                    <div
+                                      key={team.value}
+                                      className="px-3 py-2 rounded-md cursor-default select-none bg-primary/10 hover:bg-primary/20 text-primary font-medium text-sm transition-colors"
+                                    >
+                                      <span>{team.label}</span>
+                                    </div>
+                                  ))}
+                              </div>
                             </div>
                           )}
                         </div>
@@ -506,12 +512,12 @@ const Team = () => {
           onDragEnd={(e) => handleDragEnd(e, 'mentors')}
         >
           <SortableContext items={mentors.map(m => m.id)} strategy={rectSortingStrategy}>
-            <div className="grid grid-cols-1 md:grid-cols-5 gap-6 auto-rows-fr">
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
               {/* Admin Add Button */}
               {isEditMode && (
                 <Card 
                   onClick={() => handleAddMember('mentors')}
-                  className="relative p-3 bg-gradient-surface border-border hover:border-accent/50 transition-all duration-300 hover:shadow-glow group cursor-pointer border-dashed border-2 flex items-center justify-center"
+                  className="relative p-3 bg-gradient-surface border-border hover:border-accent/50 transition-all duration-300 hover:shadow-glow group cursor-pointer border-dashed border-2 flex items-center justify-center min-h-[200px]"
                 >
                   <div className="text-center">
                     <Plus className="h-12 w-12 text-primary mx-auto mb-4" />
@@ -524,7 +530,7 @@ const Team = () => {
                 <SortableTeamCard key={mentor.id} id={mentor.id} isEditMode={isEditMode}>
                   <Card
                     onClick={isEditMode ? () => handleEditMember(mentor) : undefined}
-                    className={`relative p-6 bg-gradient-surface border-border hover:border-accent/50 transition-all duration-300 hover:shadow-glow group flex flex-col ${isEditMode ? 'cursor-pointer' : ''}`}
+                    className={`relative p-6 bg-gradient-surface border-border hover:border-accent/50 transition-all duration-300 hover:shadow-glow group h-full min-h-[200px] flex flex-col ${isEditMode ? 'cursor-pointer' : ''}`}
                   >
                     {/* Admin Edit Icon */}
                     {isEditMode && (
@@ -534,8 +540,8 @@ const Team = () => {
                     )}
                     
                     <div className="text-center flex-1 flex flex-col justify-center">
-                      <h3 className="text-lg font-bold text-foreground mb-2">{mentor.name}</h3>
-                      <p className="text-primary font-medium mb-2">{mentor.role}</p>
+                      <h3 className="text-lg font-bold text-foreground mb-2 line-clamp-2">{mentor.name}</h3>
+                      <p className="text-primary font-medium mb-2 line-clamp-2">{mentor.role}</p>
                       <p className="text-muted-foreground text-sm">Mentor since {mentor.year}</p>
                     </div>
                   </Card>

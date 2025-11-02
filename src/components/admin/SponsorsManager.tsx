@@ -294,6 +294,17 @@ const SponsorsManager = () => {
 
           <div>
             <Label htmlFor="logo">Logo</Label>
+            {editingId && !logoFile && (
+              <div className="mb-2 p-3 bg-muted rounded-lg border border-border">
+                <p className="text-sm text-muted-foreground mb-2">Current logo:</p>
+                <img
+                  src={sponsors.find(s => s.id === editingId)?.logo}
+                  alt="Current logo"
+                  className="h-16 w-auto object-contain"
+                />
+                <p className="text-xs text-muted-foreground mt-2">Upload a new file to change the logo</p>
+              </div>
+            )}
             <div className="flex items-center gap-2">
               <Input
                 id="logo"
