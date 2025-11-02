@@ -27,12 +27,21 @@ const About = () => {
   ];
 
   const achievements = [
-    "2017 - Imagery Award In Honor Of Jack Kamen",
-    "2017 - Winners of the Israeli District Championship",
-    "2019 - District #2 EI Award",
+    "2013 Israel Regional - Rookie All Star Award",
+    "2013 Newton Division - 	Rookie Inspiration Award",
+    "2014 Israel Regional - Judges Award",
+    "2016 Israel Regiona; - 	Creativity Award sponsored by Xerox",
+    "2017 District #1 - Imagery Award In Honor Of Jack Kamen",
+    "2017 DCMP - 	District Championship Winner And Imagery Award in honor of Jack Kamen",
+    "2018 District #3 - 	District Event Winner",
+    "2019 District #2 - District Engineering Inspiration Award",
+    "2019 District #3 - Innovation in Control Award sponsored by Rockwell Automation",
+    "2019 DCMP - 	Creativity Award sponsored by Xerox",
+    "2020 District #1 - Excellence in Engineering Award sponsored by Delphi",
     "Only Israeli Finalist In 2020",
-    "2022 - Team Spirit Award",
-    "Gracious Professionalism Award 2024-2025",
+    "2021 - FIRST Innovation Challenge Semi-Finalist Award",
+    "2022 District #2 - Team Spirit Award",
+    "2025 District #2 - District Event Winner And Gracious Professionalism Award"
     ,
   ];
 
@@ -182,7 +191,7 @@ const About = () => {
             <h3 className="text-2xl font-bold text-foreground">
               Our Achievements
             </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
               {achievements.map((achievement, index) => (
                 <Card
                   key={index}
