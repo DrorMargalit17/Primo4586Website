@@ -141,6 +141,9 @@ const SponsorsManager = () => {
         if (error) throw error;
         if (!data) throw new Error('Update failed: no data returned');
 
+        // Optimistically update local state for immediate UI feedback
+        setSponsors((prev) => prev.map((s) => (s.id === data.id ? { ...s, ...data } : s)));
+
         toast({
           title: "Success",
           description: "Sponsor updated successfully",
@@ -175,11 +178,11 @@ const SponsorsManager = () => {
 
       resetForm();
       fetchSponsors();
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error saving sponsor:', error);
       toast({
         title: "Error",
-        description: "Failed to save sponsor",
+        description: error?.message ? `Failed to save sponsor: ${error.message}` : "Failed to save sponsor",
         variant: "destructive",
       });
     } finally {

@@ -232,9 +232,9 @@ const About = () => {
           </div>
           <div className="space-y-6">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-2xl font-bold text-foreground">
-                Our Journey
-              </h3>
+              <h2 className="text-4xl font-bold text-foreground mb-6">
+                Our Achievements
+              </h2>
               <div className="flex items-center gap-2">
                 <Button
                   variant="outline"
@@ -266,6 +266,7 @@ const About = () => {
             <Carousel
               setApi={setApi}
               className="w-full"
+              opts={{ loop: true }}
             >
               <CarouselContent>
                 {achievements.map((achievement, index) => (
