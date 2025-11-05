@@ -10,6 +10,7 @@ import { useToast } from "@/hooks/use-toast";
 import { DndContext, closestCenter, KeyboardSensor, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
 import { arrayMove, SortableContext, sortableKeyboardCoordinates, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { SortableItem } from './SortableItem';
+import SponsorEditModal from "@/components/admin/SponsorEditModal";
 
 interface Sponsor {
   id: string;
@@ -31,6 +32,9 @@ const SponsorsManager = () => {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [isUploading, setIsUploading] = useState(false);
   const { toast } = useToast();
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [editingSponsor, setEditingSponsor] = useState<Sponsor | null>(null);
+  const [isSavingEdit, setIsSavingEdit] = useState(false);
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -149,11 +153,11 @@ const SponsorsManager = () => {
           description: "Sponsor updated successfully",
         });
       } else {
-        const maxOrderResult = await supabase
-          .from('sponsors')
-          .select('display_order')
-          .order('display_order', { ascending: false })
-          .limit(1);
+         const maxOrderResult = await supabase
+           .from('sponsors')
+           .select('display_order')
+           .order('display_order', { ascending: false })
+           .limit(1);
 
         const nextOrder = maxOrderResult.data?.[0]?.display_order ? maxOrderResult.data[0].display_order + 1 : 1;
 
@@ -219,11 +223,8 @@ const SponsorsManager = () => {
   };
 
   const handleEditSponsor = (sponsor: Sponsor) => {
-    setName(sponsor.name);
-    setWebsite(sponsor.website);
-    setDescription(sponsor.description);
-    setSince(sponsor.since);
-    setEditingId(sponsor.id);
+    setEditingSponsor(sponsor);
+    setIsEditModalOpen(true);
   };
 
   const handleDragEnd = async (event: any) => {
@@ -411,6 +412,14 @@ const SponsorsManager = () => {
           </SortableContext>
         </DndContext>
       </Card>
+
+      <SponsorEditModal
+        open={isEditModalOpen}
+        sponsor={editingSponsor}
+        isSaving={isSavingEdit}
+        onClose={() => { setIsEditModalOpen(false); setEditingSponsor(null); }}
+        onSave={handleSaveSponsorEdit}
+      />
     </div>
   );
 };
