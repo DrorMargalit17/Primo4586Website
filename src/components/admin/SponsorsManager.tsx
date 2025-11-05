@@ -227,6 +227,65 @@ const SponsorsManager = () => {
     setIsEditModalOpen(true);
   };
 
+  const handleSaveSponsorEdit = async (values: { name: string; website: string; description: string; since: string; logoFile?: File | null; }) => {
+    if (!editingSponsor) return;
+    
+    if (!values.name.trim() || !values.website.trim() || !values.description.trim() || !values.since.trim()) {
+      toast({
+        title: "Error",
+        description: "Please fill in all fields",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsSavingEdit(true);
+    try {
+      let logoUrl = editingSponsor.logo;
+      
+      if (values.logoFile) {
+        logoUrl = await uploadLogo(values.logoFile);
+      }
+
+      const updateData: any = {
+        name: values.name.trim(),
+        website: values.website.trim(),
+        description: values.description.trim(),
+        since: values.since.trim(),
+        logo: logoUrl,
+      };
+
+      const { data, error } = await supabase
+        .from('sponsors')
+        .update(updateData)
+        .eq('id', editingSponsor.id)
+        .select()
+        .single();
+
+      if (error) throw error;
+      if (!data) throw new Error('Update failed: no data returned');
+
+      setSponsors((prev) => prev.map((s) => (s.id === data.id ? { ...s, ...data } : s)));
+
+      toast({
+        title: "Success",
+        description: "Sponsor updated successfully",
+      });
+
+      setIsEditModalOpen(false);
+      setEditingSponsor(null);
+    } catch (error: any) {
+      console.error('Error updating sponsor:', error);
+      toast({
+        title: "Error",
+        description: error?.message ? `Failed to update sponsor: ${error.message}` : "Failed to update sponsor",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSavingEdit(false);
+    }
+  };
+
   const handleDragEnd = async (event: any) => {
     const { active, over } = event;
 
