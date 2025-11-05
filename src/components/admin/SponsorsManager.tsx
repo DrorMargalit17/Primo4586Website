@@ -441,23 +441,25 @@ const SponsorsManager = () => {
                       <p className="text-sm text-muted-foreground truncate">{sponsor.description}</p>
                     </div>
                     
-                    <div className="flex gap-2">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => handleEditSponsor(sponsor)}
-                      >
-                        <Edit className="h-4 w-4" />
-                      </Button>
-                      
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => handleDeleteSponsor(sponsor.id)}
-                      >
-                        <Trash2 className="h-4 w-4" />
-                      </Button>
-                    </div>
+                      <div className="flex gap-2">
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onMouseDown={(e) => e.stopPropagation()}
+                          onClick={(e) => { e.stopPropagation(); handleEditSponsor(sponsor); }}
+                        >
+                          <Edit className="h-4 w-4" />
+                        </Button>
+                        
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onMouseDown={(e) => e.stopPropagation()}
+                          onClick={(e) => { e.stopPropagation(); handleDeleteSponsor(sponsor.id); }}
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                      </div>
                   </div>
                 </SortableItem>
               ))}
