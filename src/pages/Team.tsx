@@ -203,21 +203,11 @@ const Team = () => {
     );
   }
 
-  // Ensure main captain (not co-captain) is visually emphasized without changing DB order
+  // Identify main captain (not co-captain) for visual emphasis
   const isMainCaptain = (m: TeamMember) => {
     const role = (m.role || '').toLowerCase();
     return role.includes('captain') && !role.includes('co');
   };
-
-  // For display (non-edit) only, move main captain to first position on mobile/overall
-  const captainsDisplay = isEditMode ? teamCaptains : (() => {
-    const idx = teamCaptains.findIndex(isMainCaptain);
-    if (idx <= 0) return teamCaptains;
-    const arr = [...teamCaptains];
-    const [main] = arr.splice(idx, 1);
-    arr.unshift(main);
-    return arr;
-  })();
 
   return (
     <div className="space-y-20">
@@ -252,7 +242,7 @@ const Team = () => {
           collisionDetection={closestCenter}
           onDragEnd={(e) => handleDragEnd(e, 'captains')}
         >
-          <SortableContext items={captainsDisplay.map(m => m.id)} strategy={rectSortingStrategy}>
+          <SortableContext items={teamCaptains.map(m => m.id)} strategy={rectSortingStrategy}>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {/* Admin Add Button */}
               {isEditMode && (
@@ -267,11 +257,11 @@ const Team = () => {
                 </Card>
               )}
               
-              {captainsDisplay.map((member) => (
+              {teamCaptains.map((member) => (
                 <SortableTeamCard key={member.id} id={member.id} isEditMode={isEditMode}>
                   <Card
                     onClick={isEditMode ? () => handleEditMember(member) : undefined}
-                    className={`relative p-6 bg-gradient-surface border-border hover:border-primary/50 transition-all duration-300 hover:shadow-glow group min-h-[280px] ${isEditMode ? 'cursor-pointer' : ''} ${isMainCaptain(member) ? 'md:-mt-8 md:col-start-2 md:z-10' : ''}`}
+                    className={`relative p-6 bg-gradient-surface border-border hover:border-primary/50 transition-all duration-300 hover:shadow-glow group min-h-[280px] ${isEditMode ? 'cursor-pointer' : ''} ${isMainCaptain(member) ? 'order-first md:order-none md:-mt-8' : ''}`}
                   >
                     {/* Admin Edit Icon */}
                     {isEditMode && (
