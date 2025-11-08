@@ -255,7 +255,7 @@ const Team = () => {
                 <SortableTeamCard key={member.id} id={member.id} isEditMode={isEditMode}>
                   <Card
                     onClick={isEditMode ? () => handleEditMember(member) : undefined}
-                    className={`relative p-6 bg-gradient-surface border-border hover:border-primary/50 transition-all duration-300 hover:shadow-glow group min-h-[280px] ${isEditMode ? 'cursor-pointer' : ''}`}
+                    className={`relative p-6 bg-gradient-surface border-border hover:border-primary/50 transition-all duration-300 hover:shadow-glow group min-h-[280px] ${isEditMode ? 'cursor-pointer' : ''} ${index === 0 ? 'md:-mt-8' : ''}`}
                   >
                     {/* Admin Edit Icon */}
                     {isEditMode && (
