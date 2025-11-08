@@ -53,7 +53,7 @@ const SponsorEditModal = ({ open, sponsor, isSaving, onClose, onSave }: SponsorE
   };
 
   return (
-    <Dialog open={open} onOpenChange={onClose}>
+    <Dialog open={open} onOpenChange={(isOpen) => { if (!isOpen) onClose(); }}>
       <DialogContent className="max-w-2xl">
         <DialogHeader>
           <DialogTitle>Edit Sponsor</DialogTitle>
