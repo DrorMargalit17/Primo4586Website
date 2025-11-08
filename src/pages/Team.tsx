@@ -203,12 +203,6 @@ const Team = () => {
     );
   }
 
-  // Identify main captain (not co-captain) for visual emphasis
-  const isMainCaptain = (m: TeamMember) => {
-    const role = (m.role || '').toLowerCase();
-    return role.includes('captain') && !role.includes('co');
-  };
-
   return (
     <div className="space-y-20">
       {/* Hero Section */}
@@ -257,11 +251,11 @@ const Team = () => {
                 </Card>
               )}
               
-              {teamCaptains.map((member) => (
+              {teamCaptains.map((member, index) => (
                 <SortableTeamCard key={member.id} id={member.id} isEditMode={isEditMode}>
                   <Card
                     onClick={isEditMode ? () => handleEditMember(member) : undefined}
-                    className={`relative p-6 bg-gradient-surface border-border hover:border-primary/50 transition-all duration-300 hover:shadow-glow group min-h-[280px] ${isEditMode ? 'cursor-pointer' : ''} ${isMainCaptain(member) ? 'order-first md:order-none md:-mt-8' : ''}`}
+                    className={`relative p-6 bg-gradient-surface border-border hover:border-primary/50 transition-all duration-300 hover:shadow-glow group min-h-[280px] ${isEditMode ? 'cursor-pointer' : ''}`}
                   >
                     {/* Admin Edit Icon */}
                     {isEditMode && (
