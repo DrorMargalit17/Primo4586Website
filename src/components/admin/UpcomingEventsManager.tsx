@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { eventSchema } from "@/lib/validations";
 
 type Event = {
   id: string;
@@ -56,10 +57,19 @@ export default function UpcomingEventsManager() {
   };
 
   const handleSaveEvent = async () => {
-    if (!title || !date || !time) {
+    // Validate inputs with zod schema
+    const validation = eventSchema.safeParse({
+      title,
+      date,
+      time,
+      location,
+      description
+    });
+
+    if (!validation.success) {
       toast({
-        title: "Error",
-        description: "Please fill in title, date, and time",
+        title: "Validation Error",
+        description: validation.error.errors[0].message,
         variant: "destructive",
       });
       return;
