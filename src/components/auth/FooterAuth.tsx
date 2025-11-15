@@ -8,6 +8,7 @@ import { useAdminMode } from '@/hooks/useAdminMode';
 import { useToast } from '@/hooks/use-toast';
 import { LogIn, LogOut, Eye, EyeOff } from 'lucide-react';
 import { AdminModeSelector } from './AdminModeSelector';
+import { authSchema } from '@/lib/validations';
 
 export const FooterAuth = () => {
   const [open, setOpen] = useState(false);
@@ -23,6 +24,18 @@ export const FooterAuth = () => {
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+
+    // Validate inputs
+    const validation = authSchema.safeParse({ email, password });
+    if (!validation.success) {
+      toast({
+        title: "Validation Error",
+        description: validation.error.errors[0].message,
+        variant: "destructive",
+      });
+      setLoading(false);
+      return;
+    }
 
     const { error } = await signIn(email, password);
 

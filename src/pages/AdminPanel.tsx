@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Navigate } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import SponsorsManager from "@/components/admin/SponsorsManager";
@@ -7,6 +8,7 @@ import CommunityActivitiesManager from "@/components/admin/CommunityActivitiesMa
 import UserManager from "@/components/admin/UserManager";
 import ResourcesManager from "@/components/admin/ResourcesManager";
 import TeamCardsManager from "@/components/admin/TeamCardsManager";
+import { useAuth } from "@/hooks/useAuth";
 
 import { CalendarDays, Users, Hammer, Image, UserCog, FolderOpen } from "lucide-react";
 
@@ -22,7 +24,21 @@ const sections = [
 ] as const;
 
 export default function AdminPanel() {
+  const { isAdmin, loading } = useAuth();
   const [openSection, setOpenSection] = useState<SectionKey>(null);
+
+  // Route protection - redirect non-admin users
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-xl">Loading...</div>
+      </div>
+    );
+  }
+
+  if (!isAdmin) {
+    return <Navigate to="/" replace />;
+  }
 
   const renderSectionContent = () => {
     switch (openSection) {
