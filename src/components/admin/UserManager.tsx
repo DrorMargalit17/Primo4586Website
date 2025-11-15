@@ -6,6 +6,7 @@ import { Card } from "@/components/ui/card";
 import { useToast } from "@/components/ui/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { Eye, EyeOff, RotateCcw, UserCheck, UserX } from "lucide-react";
+import { authSchema } from "@/lib/validations";
 
 interface User {
   id: string;
@@ -70,10 +71,13 @@ const UserManager = () => {
       return;
     }
 
-    if (newPassword.length < 6) {
+    // Validate password with authSchema
+    const validation = authSchema.shape.password.safeParse(newPassword);
+    
+    if (!validation.success) {
       toast({
-        title: "Error",
-        description: "Password must be at least 6 characters long",
+        title: "Validation Error",
+        description: validation.error.errors[0].message,
         variant: "destructive",
       });
       return;
@@ -152,19 +156,16 @@ const UserManager = () => {
   };
 
   const registerAdmin = async () => {
-    if (!adminEmail || !adminPassword) {
-      toast({
-        title: "Error",
-        description: "Please provide both email and password",
-        variant: "destructive",
-      });
-      return;
-    }
+    // Validate inputs with authSchema
+    const validation = authSchema.safeParse({
+      email: adminEmail,
+      password: adminPassword
+    });
 
-    if (adminPassword.length < 6) {
+    if (!validation.success) {
       toast({
-        title: "Error",
-        description: "Password must be at least 6 characters long",
+        title: "Validation Error",
+        description: validation.error.errors[0].message,
         variant: "destructive",
       });
       return;

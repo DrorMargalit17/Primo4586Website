@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import { contactSchema } from "@/lib/validations";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -20,13 +21,25 @@ const Contact = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
+    // Validate inputs with zod schema
+    const validation = contactSchema.safeParse(formData);
+
+    if (!validation.success) {
+      toast({
+        title: "Validation Error",
+        description: validation.error.errors[0].message,
+        variant: "destructive",
+      });
+      return;
+    }
+    
     try {
       const response = await fetch('https://formspree.io/f/mkgbrgva', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(validation.data),
       });
 
       if (response.ok) {

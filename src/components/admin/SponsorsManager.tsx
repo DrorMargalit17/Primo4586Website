@@ -11,6 +11,7 @@ import { DndContext, closestCenter, KeyboardSensor, PointerSensor, useSensor, us
 import { arrayMove, SortableContext, sortableKeyboardCoordinates, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { SortableItem } from './SortableItem';
 import SponsorEditModal from "@/components/admin/SponsorEditModal";
+import { sponsorSchema } from "@/lib/validations";
 
 interface Sponsor {
   id: string;
@@ -98,10 +99,18 @@ const SponsorsManager = () => {
   };
 
   const handleSaveSponsor = async () => {
-    if (!name.trim() || !website.trim() || !description.trim() || !since.trim()) {
+    // Validate inputs with zod schema
+    const validation = sponsorSchema.safeParse({
+      name,
+      website,
+      description,
+      since
+    });
+
+    if (!validation.success) {
       toast({
-        title: "Error",
-        description: "Please fill in all fields",
+        title: "Validation Error",
+        description: validation.error.errors[0].message,
         variant: "destructive",
       });
       return;
