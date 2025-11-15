@@ -282,14 +282,8 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      delete_past_events: {
-        Args: Record<PropertyKey, never>
-        Returns: undefined
-      }
-      get_current_user_admin_status: {
-        Args: Record<PropertyKey, never>
-        Returns: boolean
-      }
+      delete_past_events: { Args: never; Returns: undefined }
+      get_current_user_admin_status: { Args: never; Returns: boolean }
     }
     Enums: {
       content_type: "text" | "heading" | "paragraph"
