@@ -10,6 +10,7 @@ import { useToast } from "@/hooks/use-toast";
 import { DndContext, closestCenter, KeyboardSensor, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
 import { arrayMove, SortableContext, sortableKeyboardCoordinates, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { SortableItem } from './SortableItem';
+import SponsorEditModal from "@/components/admin/SponsorEditModal";
 
 interface Sponsor {
   id: string;
@@ -31,9 +32,14 @@ const SponsorsManager = () => {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [isUploading, setIsUploading] = useState(false);
   const { toast } = useToast();
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [editingSponsor, setEditingSponsor] = useState<Sponsor | null>(null);
+  const [isSavingEdit, setIsSavingEdit] = useState(false);
 
   const sensors = useSensors(
-    useSensor(PointerSensor),
+    useSensor(PointerSensor, {
+      activationConstraint: { distance: 8 }
+    }),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
     })
@@ -141,16 +147,19 @@ const SponsorsManager = () => {
         if (error) throw error;
         if (!data) throw new Error('Update failed: no data returned');
 
+        // Optimistically update local state for immediate UI feedback
+        setSponsors((prev) => prev.map((s) => (s.id === data.id ? { ...s, ...data } : s)));
+
         toast({
           title: "Success",
           description: "Sponsor updated successfully",
         });
       } else {
-        const maxOrderResult = await supabase
-          .from('sponsors')
-          .select('display_order')
-          .order('display_order', { ascending: false })
-          .limit(1);
+         const maxOrderResult = await supabase
+           .from('sponsors')
+           .select('display_order')
+           .order('display_order', { ascending: false })
+           .limit(1);
 
         const nextOrder = maxOrderResult.data?.[0]?.display_order ? maxOrderResult.data[0].display_order + 1 : 1;
 
@@ -175,11 +184,11 @@ const SponsorsManager = () => {
 
       resetForm();
       fetchSponsors();
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error saving sponsor:', error);
       toast({
         title: "Error",
-        description: "Failed to save sponsor",
+        description: error?.message ? `Failed to save sponsor: ${error.message}` : "Failed to save sponsor",
         variant: "destructive",
       });
     } finally {
@@ -216,11 +225,67 @@ const SponsorsManager = () => {
   };
 
   const handleEditSponsor = (sponsor: Sponsor) => {
-    setName(sponsor.name);
-    setWebsite(sponsor.website);
-    setDescription(sponsor.description);
-    setSince(sponsor.since);
-    setEditingId(sponsor.id);
+    setEditingSponsor(sponsor);
+    setIsEditModalOpen(true);
+  };
+
+  const handleSaveSponsorEdit = async (values: { name: string; website: string; description: string; since: string; logoFile?: File | null; }) => {
+    if (!editingSponsor) return;
+    
+    if (!values.name.trim() || !values.website.trim() || !values.description.trim() || !values.since.trim()) {
+      toast({
+        title: "Error",
+        description: "Please fill in all fields",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsSavingEdit(true);
+    try {
+      let logoUrl = editingSponsor.logo;
+      
+      if (values.logoFile) {
+        logoUrl = await uploadLogo(values.logoFile);
+      }
+
+      const updateData: any = {
+        name: values.name.trim(),
+        website: values.website.trim(),
+        description: values.description.trim(),
+        since: values.since.trim(),
+        logo: logoUrl,
+      };
+
+      const { data, error } = await supabase
+        .from('sponsors')
+        .update(updateData)
+        .eq('id', editingSponsor.id)
+        .select()
+        .single();
+
+      if (error) throw error;
+      if (!data) throw new Error('Update failed: no data returned');
+
+      setSponsors((prev) => prev.map((s) => (s.id === data.id ? { ...s, ...data } : s)));
+
+      toast({
+        title: "Success",
+        description: "Sponsor updated successfully",
+      });
+
+      setIsEditModalOpen(false);
+      setEditingSponsor(null);
+    } catch (error: any) {
+      console.error('Error updating sponsor:', error);
+      toast({
+        title: "Error",
+        description: error?.message ? `Failed to update sponsor: ${error.message}` : "Failed to update sponsor",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSavingEdit(false);
+    }
   };
 
   const handleDragEnd = async (event: any) => {
@@ -378,23 +443,25 @@ const SponsorsManager = () => {
                       <p className="text-sm text-muted-foreground truncate">{sponsor.description}</p>
                     </div>
                     
-                    <div className="flex gap-2">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => handleEditSponsor(sponsor)}
-                      >
-                        <Edit className="h-4 w-4" />
-                      </Button>
-                      
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => handleDeleteSponsor(sponsor.id)}
-                      >
-                        <Trash2 className="h-4 w-4" />
-                      </Button>
-                    </div>
+                      <div className="flex gap-2">
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onMouseDown={(e) => e.stopPropagation()}
+                          onClick={(e) => { e.stopPropagation(); handleEditSponsor(sponsor); }}
+                        >
+                          <Edit className="h-4 w-4" />
+                        </Button>
+                        
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onMouseDown={(e) => e.stopPropagation()}
+                          onClick={(e) => { e.stopPropagation(); handleDeleteSponsor(sponsor.id); }}
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                      </div>
                   </div>
                 </SortableItem>
               ))}
@@ -408,6 +475,14 @@ const SponsorsManager = () => {
           </SortableContext>
         </DndContext>
       </Card>
+
+      <SponsorEditModal
+        open={isEditModalOpen}
+        sponsor={editingSponsor}
+        isSaving={isSavingEdit}
+        onClose={() => { setIsEditModalOpen(false); setEditingSponsor(null); }}
+        onSave={handleSaveSponsorEdit}
+      />
     </div>
   );
 };

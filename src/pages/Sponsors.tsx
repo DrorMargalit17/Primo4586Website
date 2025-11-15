@@ -136,43 +136,19 @@ const Sponsors = () => {
 
       {/* Support Us Section */}
       <section className="bg-gradient-hero py-20 px-6">
-        <div className="container mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-            {/* Partnership CTA */}
-            <div className="text-center lg:text-left">
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                Interested in Partnering with Us?
-              </h2>
-              <p className="text-xl text-muted-foreground mb-8">
-                Join our mission to inspire the next generation of engineers and
-                innovators. Let's build the future together.
-              </p>
-              <Button variant="hero" size="lg" asChild>
-                <a href="/contact">
-                  Become a Sponsor
-                </a>
-              </Button>
-            </div>
-
-            {/* Donation Section */}
-            <div className="text-center lg:text-left">
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                Support Our Team
-              </h2>
-              <p className="text-xl text-muted-foreground mb-8">
-                Help us continue our robotics journey with a donation. Every
-                contribution makes a difference in our pursuit of excellence.
-              </p>
-              <Button 
-                variant="outline" 
-                size="lg" 
-                disabled 
-                className="border-muted text-muted-foreground cursor-not-allowed opacity-60"
-              >
-                Donate via PayPal – Coming Soon
-              </Button>
-            </div>
-          </div>
+        <div className="container mx-auto max-w-3xl text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+            Interested in Partnering with Us?
+          </h2>
+          <p className="text-xl text-muted-foreground mb-8">
+            Join our mission to inspire the next generation of engineers and
+            innovators. Let's build the future together.
+          </p>
+          <Button variant="hero" size="lg" asChild>
+            <a href="/contact">
+              Become a Sponsor
+            </a>
+          </Button>
         </div>
       </section>
     </div>

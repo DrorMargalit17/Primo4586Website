@@ -41,6 +41,7 @@ const teamOptions = [
   { label: "Media", value: "media" },
   { label: "Resources", value: "resources" },
   { label: "Community", value: "community" },
+  { label: "Spokesmanship", value: "spokesmanship" },
   { label: "DriveTeam", value: "DriveTeam" },
   { label: "FLL", value: "fll" },
 ];

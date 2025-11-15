@@ -169,6 +169,7 @@ const Team = () => {
     { label: "Media", value: "media" },
     { label: "Resources", value: "resources" },
     { label: "Community", value: "community" },
+    { label: "Spokesmanship", value: "spokesmanship" },
     { label: "DriveTeam", value: "DriveTeam" },
     { label: "FLL", value: "fll" },
   ];
@@ -268,7 +269,7 @@ const Team = () => {
                           <img
                             src={member.image}
                             alt={member.name}
-                            className="w-32 h-32 rounded-full mx-auto object-cover border-4 border-primary/20 group-hover:border-primary/50 transition-all duration-300 shadow-vivid-glow"
+                            className="w-32 h-32 rounded-full mx-auto object-cover border-4 border-primary/20 group-hover:border-primary/50 transition-all duration-300 shadow-glow"
                           />
                         </div>
 
@@ -360,7 +361,7 @@ const Team = () => {
                           <img
                             src={member.image}
                             alt={member.name}
-                            className="w-32 h-32 rounded-full mx-auto object-cover border-4 border-primary/20 group-hover:border-primary/50 transition-all duration-300 shadow-vivid-glow"
+                            className="w-32 h-32 rounded-full mx-auto object-cover border-4 border-primary/20 group-hover:border-primary/50 transition-all duration-300 shadow-glow"
                           />
                         </div>
 
@@ -453,7 +454,7 @@ const Team = () => {
                           <img
                             src={member.image}
                             alt={member.name}
-                            className="w-21 h-21 rounded-full mx-auto object-cover border-4 border-primary/20 group-hover:border-primary/50 transition-all duration-300 shadow-vivid-glow"
+                            className="w-21 h-21 rounded-full mx-auto object-cover border-4 border-primary/20 group-hover:border-primary/50 transition-all duration-300 shadow-glow"
                           />
                         </div>
 
