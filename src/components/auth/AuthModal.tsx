@@ -7,6 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useAuth } from '@/hooks/useAuth';
 import { useToast } from '@/hooks/use-toast';
 import { LogIn, UserPlus } from 'lucide-react';
+import { authSchema } from '@/lib/validations';
 
 interface AuthModalProps {
   children: React.ReactNode;
@@ -23,6 +24,18 @@ export const AuthModal = ({ children }: AuthModalProps) => {
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+
+    // Validate inputs
+    const validation = authSchema.safeParse({ email, password });
+    if (!validation.success) {
+      toast({
+        title: "Validation Error",
+        description: validation.error.errors[0].message,
+        variant: "destructive",
+      });
+      setLoading(false);
+      return;
+    }
 
     const { error } = await signIn(email, password);
 
@@ -47,6 +60,18 @@ export const AuthModal = ({ children }: AuthModalProps) => {
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+
+    // Validate inputs
+    const validation = authSchema.safeParse({ email, password });
+    if (!validation.success) {
+      toast({
+        title: "Validation Error",
+        description: validation.error.errors[0].message,
+        variant: "destructive",
+      });
+      setLoading(false);
+      return;
+    }
 
     const { error } = await signUp(email, password);
 

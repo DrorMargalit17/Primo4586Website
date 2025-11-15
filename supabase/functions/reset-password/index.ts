@@ -12,6 +12,11 @@ interface ResetPasswordRequest {
   newPassword: string;
 }
 
+// Password validation constants
+const PASSWORD_MIN_LENGTH = 12;
+const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{12,}$/;
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 const handler = async (req: Request): Promise<Response> => {
   // Handle CORS preflight requests
   if (req.method === "OPTIONS") {
@@ -50,14 +55,13 @@ const handler = async (req: Request): Promise<Response> => {
       });
     }
 
-    // Check if user is admin
-    const { data: profile, error: profileError } = await supabaseAdmin
-      .from("profiles")
-      .select("is_admin")
-      .eq("user_id", user.id)
-      .single();
+    // Check if user is admin using the has_role function
+    const { data: isAdminData, error: adminError } = await supabaseAdmin.rpc(
+      'has_role',
+      { _user_id: user.id, _role: 'admin' }
+    );
 
-    if (profileError || !profile?.is_admin) {
+    if (adminError || !isAdminData) {
       return new Response(JSON.stringify({ error: "Unauthorized - Admin access required" }), {
         status: 403,
         headers: { "Content-Type": "application/json", ...corsHeaders },
@@ -66,9 +70,46 @@ const handler = async (req: Request): Promise<Response> => {
 
     const { email, newPassword }: ResetPasswordRequest = await req.json();
 
+    // Validate required fields
     if (!email || !newPassword) {
       return new Response(
         JSON.stringify({ error: "Email and new password are required" }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
+    }
+
+    // Validate email format
+    if (!EMAIL_REGEX.test(email)) {
+      return new Response(
+        JSON.stringify({ error: "Invalid email format" }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
+    }
+
+    // Validate password strength
+    if (newPassword.length < PASSWORD_MIN_LENGTH) {
+      return new Response(
+        JSON.stringify({ 
+          error: `Password must be at least ${PASSWORD_MIN_LENGTH} characters long` 
+        }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
+    }
+
+    if (!PASSWORD_REGEX.test(newPassword)) {
+      return new Response(
+        JSON.stringify({ 
+          error: "Password must contain at least one uppercase letter, one lowercase letter, and one number" 
+        }),
         {
           status: 400,
           headers: { "Content-Type": "application/json", ...corsHeaders },
@@ -119,12 +160,12 @@ const handler = async (req: Request): Promise<Response> => {
       );
     }
 
-    console.log("Password reset successful for user:", email);
+    // Log success with minimal information (no sensitive data)
+    console.log("Password reset successful for user ID:", targetUser.id.substring(0, 8));
 
     return new Response(
       JSON.stringify({ 
-        message: "Password reset successfully",
-        user: { id: data.user.id, email: data.user.email }
+        message: "Password reset successfully"
       }),
       {
         status: 200,
