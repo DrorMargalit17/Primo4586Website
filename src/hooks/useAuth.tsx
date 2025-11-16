@@ -6,7 +6,6 @@ interface Profile {
   id: string;
   user_id: string;
   email: string | null;
-  is_admin: boolean;
   created_at: string;
   updated_at: string;
 }
