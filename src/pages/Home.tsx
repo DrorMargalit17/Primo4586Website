@@ -8,19 +8,19 @@ import useEmblaCarousel from "embla-carousel-react";
 
 import UpcomingEvents from "@/components/UpcomingEvents";
 
-const team1 = "/HomePagePictures/team_1.jpg";
-const team2 = "/HomePagePictures/team_2.jpg";
-const team3 = "/HomePagePictures/team_3.jpg";
-const team4 = "/HomePagePictures/team_4.jpg";
-const team5 = "/HomePagePictures/team_5.jpg";
-const team6 = "/HomePagePictures/team_6.JPG";
-const team7 = "/HomePagePictures/team_7.JPG";
-const team8 = "/HomePagePictures/team_8.JPG";
-const team9 = "/HomePagePictures/team_9.JPG";
+const team1 = "/HomePagePictures/team_1.webp";
+const team2 = "/HomePagePictures/team_2.webp";
+const team3 = "/HomePagePictures/team_3.webp";
+const team4 = "/HomePagePictures/team_4.webp";
+const team5 = "/HomePagePictures/team_5.webp";
+const team6 = "/HomePagePictures/team_6.webp";
+const team7 = "/HomePagePictures/team_7.webp";
+const team8 = "/HomePagePictures/team_8.webp";
+const team9 = "/HomePagePictures/team_9.webp";
 const team10 = "/HomePagePictures/team_10.JPG";
 const team11 = "/HomePagePictures/team_11.JPG";
 const team12 = "/HomePagePictures/team_12.JPG";
-const team13 = "/HomePagePictures/team_13.JPG";
+const team13 = "/HomePagePictures/team_13.JPG"; 
 const team14 = "/HomePagePictures/team_14.JPG";
 const team15 = "/HomePagePictures/team_15.JPG";
 
