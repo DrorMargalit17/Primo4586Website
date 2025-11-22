@@ -6,6 +6,7 @@ import { Card } from "@/components/ui/card";
 import { useToast } from "@/components/ui/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { Eye, EyeOff, RotateCcw, UserCheck, UserX } from "lucide-react";
+import { authSchema } from "@/lib/validations";
 
 interface User {
   id: string;
@@ -35,16 +36,26 @@ const UserManager = () => {
     try {
       const { data: profiles, error } = await supabase
         .from("profiles")
-        .select("user_id, email, is_admin, created_at")
+        .select("user_id, email, created_at")
         .order("created_at", { ascending: false });
 
       if (error) throw error;
+
+      // Fetch admin roles from user_roles table
+      const { data: adminRoles, error: rolesError } = await supabase
+        .from("user_roles")
+        .select("user_id")
+        .eq("role", "admin");
+
+      if (rolesError) throw rolesError;
+
+      const adminUserIds = new Set(adminRoles?.map(r => r.user_id));
 
       const userData: User[] = profiles.map(profile => ({
         id: profile.user_id,
         email: profile.email || "",
         created_at: profile.created_at,
-        is_admin: profile.is_admin
+        is_admin: adminUserIds.has(profile.user_id)
       }));
 
       setUsers(userData);
@@ -70,10 +81,13 @@ const UserManager = () => {
       return;
     }
 
-    if (newPassword.length < 6) {
+    // Validate password with authSchema
+    const validation = authSchema.shape.password.safeParse(newPassword);
+    
+    if (!validation.success) {
       toast({
-        title: "Error",
-        description: "Password must be at least 6 characters long",
+        title: "Validation Error",
+        description: validation.error.errors[0].message,
         variant: "destructive",
       });
       return;
@@ -123,12 +137,26 @@ const UserManager = () => {
 
   const toggleAdminStatus = async (userId: string, currentAdminStatus: boolean) => {
     try {
-      const { error } = await supabase
-        .from("profiles")
-        .update({ is_admin: !currentAdminStatus })
-        .eq("user_id", userId);
+      if (!currentAdminStatus) {
+        // Promote to admin - insert into user_roles
+        const { error } = await supabase
+          .from("user_roles")
+          .insert({
+            user_id: userId,
+            role: "admin"
+          });
 
-      if (error) throw error;
+        if (error) throw error;
+      } else {
+        // Demote from admin - delete from user_roles
+        const { error } = await supabase
+          .from("user_roles")
+          .delete()
+          .eq("user_id", userId)
+          .eq("role", "admin");
+
+        if (error) throw error;
+      }
 
       // Update local state
       setUsers(users.map(user => 
@@ -152,19 +180,16 @@ const UserManager = () => {
   };
 
   const registerAdmin = async () => {
-    if (!adminEmail || !adminPassword) {
-      toast({
-        title: "Error",
-        description: "Please provide both email and password",
-        variant: "destructive",
-      });
-      return;
-    }
+    // Validate inputs with authSchema
+    const validation = authSchema.safeParse({
+      email: adminEmail,
+      password: adminPassword
+    });
 
-    if (adminPassword.length < 6) {
+    if (!validation.success) {
       toast({
-        title: "Error",
-        description: "Password must be at least 6 characters long",
+        title: "Validation Error",
+        description: validation.error.errors[0].message,
         variant: "destructive",
       });
       return;
@@ -184,13 +209,15 @@ const UserManager = () => {
       if (error) throw error;
 
       if (data.user) {
-        // Update the user's profile to make them an admin
-        const { error: profileError } = await supabase
-          .from("profiles")
-          .update({ is_admin: true })
-          .eq("user_id", data.user.id);
+        // Insert into user_roles to make them an admin
+        const { error: roleError } = await supabase
+          .from("user_roles")
+          .insert({
+            user_id: data.user.id,
+            role: "admin"
+          });
 
-        if (profileError) throw profileError;
+        if (roleError) throw roleError;
 
         toast({
           title: "Success",

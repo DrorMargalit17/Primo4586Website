@@ -6,7 +6,6 @@ interface Profile {
   id: string;
   user_id: string;
   email: string | null;
-  is_admin: boolean;
   created_at: string;
   updated_at: string;
 }
@@ -40,6 +39,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [profile, setProfile] = useState<Profile | null>(null);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
 
   const fetchProfile = async (userId: string) => {
@@ -74,10 +74,22 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
           setTimeout(async () => {
             const profileData = await fetchProfile(session.user.id);
             setProfile(profileData);
+            
+            // Check admin status using secure has_role function
+            const { data: hasAdminRole, error } = await supabase.rpc('has_role', {
+              _user_id: session.user.id,
+              _role: 'admin'
+            });
+            
+            if (!error) {
+              setIsAdmin(hasAdminRole || false);
+            }
+            
             setLoading(false);
           }, 0);
         } else {
           setProfile(null);
+          setIsAdmin(false);
           setLoading(false);
         }
       }
@@ -92,6 +104,17 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         setTimeout(async () => {
           const profileData = await fetchProfile(session.user.id);
           setProfile(profileData);
+          
+          // Check admin status using secure has_role function
+          const { data: hasAdminRole, error } = await supabase.rpc('has_role', {
+            _user_id: session.user.id,
+            _role: 'admin'
+          });
+          
+          if (!error) {
+            setIsAdmin(hasAdminRole || false);
+          }
+          
           setLoading(false);
         }, 0);
       } else {
@@ -133,10 +156,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     setUser(null);
     setSession(null);
     setProfile(null);
+    setIsAdmin(false);
     setLoading(false);
   };
-
-  const isAdmin = profile?.is_admin ?? false;
 
   const value = {
     user,

@@ -7,6 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Trash2, Plus, ExternalLink, Download } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { resourceSchema } from "@/lib/validations";
 
 interface Resource {
   id: string;
@@ -67,10 +68,18 @@ const ResourcesManager = () => {
   }, []);
 
   const handleAddResource = async () => {
-    if (!newResource.name || !newResource.type || !newResource.link) {
+    // Validate inputs with zod schema
+    const validation = resourceSchema.safeParse({
+      name: newResource.name,
+      link: newResource.link,
+      type: newResource.type,
+      category: selectedCategory
+    });
+
+    if (!validation.success) {
       toast({
-        title: "Error",
-        description: "Please fill in all fields",
+        title: "Validation Error",
+        description: validation.error.errors[0].message,
         variant: "destructive",
       });
       return;

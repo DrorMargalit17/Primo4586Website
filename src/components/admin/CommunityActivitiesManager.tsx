@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { communityActivitySchema } from "@/lib/validations";
 import { 
   DndContext, 
   closestCenter, 
@@ -185,10 +186,16 @@ export default function CommunityActivitiesManager() {
   };
 
   const handleSave = async () => {
-    if (!title || !description) {
+    // Validate inputs with zod schema
+    const validation = communityActivitySchema.safeParse({
+      title,
+      description
+    });
+
+    if (!validation.success) {
       toast({
-        title: "Error",
-        description: "Please fill all fields",
+        title: "Validation Error",
+        description: validation.error.errors[0].message,
         variant: "destructive",
       });
       return;

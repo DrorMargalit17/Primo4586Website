@@ -251,12 +251,16 @@ const Team = () => {
                 </Card>
               )}
               
-              {teamCaptains.map((member, index) => (
-                <SortableTeamCard key={member.id} id={member.id} isEditMode={isEditMode}>
-                  <Card
-                    onClick={isEditMode ? () => handleEditMember(member) : undefined}
-                    className={`relative p-6 bg-gradient-surface border-border hover:border-primary/50 transition-all duration-300 hover:shadow-glow group min-h-[280px] ${isEditMode ? 'cursor-pointer' : ''}`}
-                  >
+              {teamCaptains.map((member, index) => {
+                // Identify main captain (not co-captain) for mobile ordering
+                const isMainCaptain = member.role && !member.role.toLowerCase().includes('co-');
+                
+                return (
+                  <SortableTeamCard key={member.id} id={member.id} isEditMode={isEditMode}>
+                    <Card
+                      onClick={isEditMode ? () => handleEditMember(member) : undefined}
+                      className={`relative p-6 bg-gradient-surface border-border hover:border-primary/50 transition-all duration-300 hover:shadow-glow group min-h-[280px] ${isEditMode ? 'cursor-pointer' : ''} ${!isEditMode && isMainCaptain ? 'order-first md:order-none' : ''}`}
+                    >
                     {/* Admin Edit Icon */}
                     {isEditMode && (
                       <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
@@ -311,7 +315,8 @@ const Team = () => {
                     )}
                   </Card>
                 </SortableTeamCard>
-              ))}
+                );
+              })}
             </div>
           </SortableContext>
         </DndContext>
