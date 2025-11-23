@@ -251,15 +251,22 @@ const Team = () => {
                 </Card>
               )}
               
-              {teamCaptains.map((member, index) => {
-                // Shay Kalisher appears first on mobile, original order on desktop
-                const isShayKalisher = member.name === "Shay Kalisher";
-                
-                return (
+              {teamCaptains
+                .slice()
+                .sort((a, b) => {
+                  // On mobile: Shay Kalisher first, others keep original order
+                  // This sorting only affects visual display, not database order
+                  if (!isEditMode && window.innerWidth < 768) {
+                    if (a.name === "Shay Kalisher") return -1;
+                    if (b.name === "Shay Kalisher") return 1;
+                  }
+                  return 0;
+                })
+                .map((member) => (
                   <SortableTeamCard key={member.id} id={member.id} isEditMode={isEditMode}>
                     <Card
                       onClick={isEditMode ? () => handleEditMember(member) : undefined}
-                      className={`relative p-6 bg-gradient-surface border-border hover:border-primary/50 transition-all duration-300 hover:shadow-glow group min-h-[280px] ${isEditMode ? 'cursor-pointer' : ''} ${!isEditMode && isShayKalisher ? 'order-first md:order-none' : ''}`}
+                      className={`relative p-6 bg-gradient-surface border-border hover:border-primary/50 transition-all duration-300 hover:shadow-glow group min-h-[280px] ${isEditMode ? 'cursor-pointer' : ''}`}
                     >
                     {/* Admin Edit Icon */}
                     {isEditMode && (
@@ -315,8 +322,7 @@ const Team = () => {
                     )}
                   </Card>
                 </SortableTeamCard>
-                );
-              })}
+              ))}
             </div>
           </SortableContext>
         </DndContext>
