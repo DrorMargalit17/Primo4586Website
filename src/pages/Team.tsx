@@ -252,14 +252,14 @@ const Team = () => {
               )}
               
               {teamCaptains.map((member, index) => {
-                // Identify main captain (not co-captain) for mobile ordering
-                const isMainCaptain = member.role && !member.role.toLowerCase().includes('co-');
+                // Shay Kalisher appears first on mobile, original order on desktop
+                const isShayKalisher = member.name === "Shay Kalisher";
                 
                 return (
                   <SortableTeamCard key={member.id} id={member.id} isEditMode={isEditMode}>
                     <Card
                       onClick={isEditMode ? () => handleEditMember(member) : undefined}
-                      className={`relative p-6 bg-gradient-surface border-border hover:border-primary/50 transition-all duration-300 hover:shadow-glow group min-h-[280px] ${isEditMode ? 'cursor-pointer' : ''} ${!isEditMode && isMainCaptain ? 'order-first md:order-none' : ''}`}
+                      className={`relative p-6 bg-gradient-surface border-border hover:border-primary/50 transition-all duration-300 hover:shadow-glow group min-h-[280px] ${isEditMode ? 'cursor-pointer' : ''} ${!isEditMode && isShayKalisher ? 'order-first md:order-none' : ''}`}
                     >
                     {/* Admin Edit Icon */}
                     {isEditMode && (
