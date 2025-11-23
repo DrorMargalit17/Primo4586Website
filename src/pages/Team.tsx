@@ -5,6 +5,7 @@ import { Linkedin, Mail, Plus, Edit, GripVertical } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { EditableText } from "@/components/editor/EditableText";
 import { useAdminMode } from "@/hooks/useAdminMode";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { TeamMemberForm, TeamMember } from "@/components/admin/TeamMemberForm";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
@@ -30,6 +31,7 @@ const Team = () => {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const dropdownRefs = useRef<Record<string, HTMLDivElement | null>>({});
   const { isEditMode } = useAdminMode();
+  const isMobile = useIsMobile();
   
   // Database state
   const [teamCaptains, setTeamCaptains] = useState<TeamMember[]>([]);
@@ -255,8 +257,7 @@ const Team = () => {
                 .slice()
                 .sort((a, b) => {
                   // On mobile: Shay Kalisher first, others keep original order
-                  // This sorting only affects visual display, not database order
-                  if (!isEditMode && window.innerWidth < 768) {
+                  if (!isEditMode && isMobile) {
                     if (a.name === "Shay Kalisher") return -1;
                     if (b.name === "Shay Kalisher") return 1;
                   }
