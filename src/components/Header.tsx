@@ -13,7 +13,7 @@ const Header = () => {
     { name: "Home", path: "/" },
     { name: "About", path: "/about" },
     { name: "Team & Mentors", path: "/team" },
-    { name: "Robot", isDropdown: true }, // placeholder for dropdown
+    { name: "Robot", isDropdown: true }, // placeholder for dropdown  
     { name: "Community", isDropdown: true }, // placeholder for dropdown
     { name: "Resources", path: "/resources" },
     { name: "Sponsors", path: "/sponsors" },
