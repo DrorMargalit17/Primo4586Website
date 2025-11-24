@@ -5,6 +5,7 @@ import { Linkedin, Mail, Plus, Edit, GripVertical } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { EditableText } from "@/components/editor/EditableText";
 import { useAdminMode } from "@/hooks/useAdminMode";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { TeamMemberForm, TeamMember } from "@/components/admin/TeamMemberForm";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
@@ -30,6 +31,7 @@ const Team = () => {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const dropdownRefs = useRef<Record<string, HTMLDivElement | null>>({});
   const { isEditMode } = useAdminMode();
+  const isMobile = useIsMobile();
   
   // Database state
   const [teamCaptains, setTeamCaptains] = useState<TeamMember[]>([]);
@@ -251,15 +253,21 @@ const Team = () => {
                 </Card>
               )}
               
-              {teamCaptains.map((member, index) => {
-                // Identify main captain (not co-captain) for mobile ordering
-                const isMainCaptain = member.role && !member.role.toLowerCase().includes('co-');
-                
-                return (
+              {teamCaptains
+                .slice()
+                .sort((a, b) => {
+                  // On mobile: Shay Kalisher first, others keep original order
+                  if (!isEditMode && isMobile) {
+                    if (a.name === "Shay Kalisher") return -1;
+                    if (b.name === "Shay Kalisher") return 1;
+                  }
+                  return 0;
+                })
+                .map((member) => (
                   <SortableTeamCard key={member.id} id={member.id} isEditMode={isEditMode}>
                     <Card
                       onClick={isEditMode ? () => handleEditMember(member) : undefined}
-                      className={`relative p-6 bg-gradient-surface border-border hover:border-primary/50 transition-all duration-300 hover:shadow-glow group min-h-[280px] ${isEditMode ? 'cursor-pointer' : ''} ${!isEditMode && isMainCaptain ? 'order-first md:order-none' : ''}`}
+                      className={`relative p-6 bg-gradient-surface border-border hover:border-primary/50 transition-all duration-300 hover:shadow-glow group min-h-[280px] ${isEditMode ? 'cursor-pointer' : ''}`}
                     >
                     {/* Admin Edit Icon */}
                     {isEditMode && (
@@ -315,8 +323,7 @@ const Team = () => {
                     )}
                   </Card>
                 </SortableTeamCard>
-                );
-              })}
+              ))}
             </div>
           </SortableContext>
         </DndContext>
