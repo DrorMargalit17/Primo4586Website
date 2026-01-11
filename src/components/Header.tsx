@@ -21,7 +21,6 @@ const Header = () => {
   ];
 
   const robotYears = [
-    { name: "2026 - Coming Soon", path: "/robot2026", comingSoon: true },
     { name: "2025 REEFSCAPE", path: "/robot" },
     { name: "2024 CRESCENDO", path: "/robot2024" },
   ];
@@ -69,20 +68,8 @@ const Header = () => {
                     </DropdownMenuTrigger>
                     <DropdownMenuContent>
                       {robotYears.map((robot) => (
-                        <DropdownMenuItem 
-                          key={robot.path} 
-                          asChild={!robot.comingSoon}
-                          disabled={robot.comingSoon}
-                          className={robot.comingSoon ? "opacity-60 cursor-not-allowed" : ""}
-                        >
-                          {robot.comingSoon ? (
-                            <span className="flex items-center gap-2">
-                              {robot.name}
-                              <span className="text-xs bg-primary/20 text-primary px-1.5 py-0.5 rounded">Soon</span>
-                            </span>
-                          ) : (
-                            <Link to={robot.path}>{robot.name}</Link>
-                          )}
+                        <DropdownMenuItem key={robot.path} asChild>
+                          <Link to={robot.path}>{robot.name}</Link>
                         </DropdownMenuItem>
                       ))}
                     </DropdownMenuContent>
@@ -155,28 +142,18 @@ const Header = () => {
                       <p className="text-muted-foreground mb-1">Robot</p>
                       <div className="pl-2 space-y-1">
                         {robotYears.map((robot) => (
-                          robot.comingSoon ? (
-                            <span
-                              key={robot.path}
-                              className="flex items-center gap-2 px-3 py-2 rounded-md text-muted-foreground opacity-60 cursor-not-allowed"
-                            >
-                              {robot.name}
-                              <span className="text-xs bg-primary/20 text-primary px-1.5 py-0.5 rounded">Soon</span>
-                            </span>
-                          ) : (
-                            <Link
-                              key={robot.path}
-                              to={robot.path}
-                              className={`block px-3 py-2 rounded-md transition-all duration-300 ${
-                                isActive(robot.path)
-                                  ? "bg-primary text-primary-foreground shadow-glow"
-                                  : "text-muted-foreground hover:text-foreground hover:bg-surface-elevated"
-                              }`}
-                              onClick={() => setIsMenuOpen(false)}
-                            >
-                              {robot.name}
-                            </Link>
-                          )
+                          <Link
+                            key={robot.path}
+                            to={robot.path}
+                            className={`block px-3 py-2 rounded-md transition-all duration-300 ${
+                              isActive(robot.path)
+                                ? "bg-primary text-primary-foreground shadow-glow"
+                                : "text-muted-foreground hover:text-foreground hover:bg-surface-elevated"
+                            }`}
+                            onClick={() => setIsMenuOpen(false)}
+                          >
+                            {robot.name}
+                          </Link>
                         ))}
                       </div>
                     </div>
