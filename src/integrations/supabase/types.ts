@@ -300,7 +300,6 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      delete_past_events: { Args: never; Returns: undefined }
       get_current_user_admin_status: { Args: never; Returns: boolean }
       has_role: {
         Args: {
