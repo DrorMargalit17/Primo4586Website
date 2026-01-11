@@ -17,12 +17,12 @@ const team6 = "/HomePagePictures/team_6.webp";
 const team7 = "/HomePagePictures/team_7.webp";
 const team8 = "/HomePagePictures/team_8.webp";
 const team9 = "/HomePagePictures/team_9.webp";
-const team10 = "/HomePagePictures/team_10.JPG";
-const team11 = "/HomePagePictures/team_11.JPG";
-const team12 = "/HomePagePictures/team_12.JPG";
-const team13 = "/HomePagePictures/team_13.JPG"; 
-const team14 = "/HomePagePictures/team_14.JPG";
-const team15 = "/HomePagePictures/team_15.JPG";
+const team10 = "/HomePagePictures/team_10.webp'";
+const team11 = "/HomePagePictures/team_11.webp";
+const team12 = "/HomePagePictures/team_12.webp";
+const team13 = "/HomePagePictures/team_13.webp"; 
+const team14 = "/HomePagePictures/team_14.webp";
+const team15 = "/HomePagePictures/team_15.webp";
 
 
 
