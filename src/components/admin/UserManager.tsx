@@ -269,7 +269,7 @@ const UserManager = () => {
               <Input
                 id="admin-password"
                 type={showAdminPassword ? "text" : "password"}
-                placeholder="Enter password (min 6 characters)"
+                placeholder="Enter password (min 12 characters)"
                 value={adminPassword}
                 onChange={(e) => setAdminPassword(e.target.value)}
                 className="pr-10"
@@ -330,7 +330,7 @@ const UserManager = () => {
               <Input
                 id="new-password"
                 type={showPassword ? "text" : "password"}
-                placeholder="Enter new password (min 6 characters)"
+                placeholder="Enter new password (min 12 characters)"
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
                 className="pr-10"
