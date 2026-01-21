@@ -294,7 +294,7 @@ const Home = () => {
             <div className="text-center lg:text-left animate-slide-in">
               <EditableText
                 contentKey="hero-title" 
-                defaultContent="Welcome to Primo4586"
+                defaultContent="Welcome to Primo 4586"
                 contentType="heading"
                 tag="h1"
                 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent"

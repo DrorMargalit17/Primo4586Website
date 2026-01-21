@@ -74,11 +74,6 @@ const Contact = () => {
       details: ["Modi'in", "ironiB High School", "Nahal Ayun 1"],
     },
     {
-      icon: Phone,
-      title: "Call Us",
-      details: ["+972-58-727-4170"],
-    },
-    {
       icon: Mail,
       title: "Email Us",
       details: ["4586media@gmail.com", "General inquiries and partnerships"],

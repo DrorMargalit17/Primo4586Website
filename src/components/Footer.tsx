@@ -159,16 +159,6 @@ const Footer = () => {
                 />
               </div>
               <div className="flex items-center space-x-3 text-muted-foreground">
-                <Phone className="h-4 w-4" />
-                <EditableText
-                  contentKey="footer-contact-phone"
-                  defaultContent="+972-58-727-4170"
-                  contentType="text"
-                  tag="span"
-                  className="text-sm"
-                />
-              </div>
-              <div className="flex items-center space-x-3 text-muted-foreground">
                 <MapPin className="h-4 w-4" />
                 <EditableText
                   contentKey="footer-contact-address"

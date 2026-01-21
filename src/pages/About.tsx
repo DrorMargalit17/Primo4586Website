@@ -98,7 +98,7 @@ const About = () => {
             tag="h1" 
             className="text-5xl md:text-6xl font-bold mb-6 text-foreground"
           >
-            About <span className="bg-gradient-primary bg-clip-text text-transparent">Primo4586</span>
+            About <span className="bg-gradient-primary bg-clip-text text-transparent">Primo 4586</span>
           </EditableText>
           <EditableText 
             contentKey="about-hero-description" 
