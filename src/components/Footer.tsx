@@ -36,7 +36,15 @@ const Footer = () => {
           <div className="space-y-4">
             <div className="flex items-center space-x-3">
               <div>
-                <img src={logoPng} alt="Primo4586 logo" className="h-14 w-21" />
+                <img 
+                  src={logoPng} 
+                  alt="Primo4586 logo" 
+                  width={88}
+                  height={56}
+                  loading="lazy"
+                  decoding="async"
+                  className="h-14 w-auto" 
+                />
               </div>
               <div>
                 <EditableText

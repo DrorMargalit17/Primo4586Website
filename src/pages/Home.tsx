@@ -109,6 +109,10 @@ const ImageCarousel = () => {
           key={idx}
           src={src}
           alt={`Team ${idx + 1}`}
+          width={840}
+          height={560}
+          loading={idx === 0 ? "eager" : "lazy"}
+          decoding="async"
           className={`w-full h-full object-cover rounded-xl absolute top-0 left-0 transition-opacity duration-500 shadow-vivid-glow ${
             idx === currentImageIndex && fade ? "opacity-100 z-10" : "opacity-0 z-0"
           }`}

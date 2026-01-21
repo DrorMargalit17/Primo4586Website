@@ -39,7 +39,14 @@ const Header = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3 group">
             <div>
-              <img src={logoPng} alt="Primo4586 logo" className="h-20 w-15" />
+              <img 
+                src={logoPng} 
+                alt="Primo4586 logo" 
+                width={123}
+                height={80}
+                decoding="async"
+                className="h-20 w-auto" 
+              />
             </div>
             <div>
               <h1 className="text-xl font-bold text-foreground">Primo4586</h1>
