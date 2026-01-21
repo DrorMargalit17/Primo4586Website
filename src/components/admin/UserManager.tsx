@@ -5,7 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
 import { useToast } from "@/components/ui/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import { Eye, EyeOff, RotateCcw, UserCheck, UserX } from "lucide-react";
+import { Eye, EyeOff, RotateCcw, UserCheck, UserX, RefreshCw } from "lucide-react";
 import { authSchema } from "@/lib/validations";
 
 interface User {
@@ -33,37 +33,31 @@ const UserManager = () => {
   }, []);
 
   const fetchUsers = async () => {
+    setLoading(true);
     try {
-      const { data: profiles, error } = await supabase
-        .from("profiles")
-        .select("user_id, email, created_at")
-        .order("created_at", { ascending: false });
+      const { data: session } = await supabase.auth.getSession();
+      
+      if (!session.session) {
+        throw new Error("Not authenticated");
+      }
+
+      // Call the secure edge function to get users
+      const { data, error } = await supabase.functions.invoke("list-users", {
+        headers: {
+          Authorization: `Bearer ${session.session.access_token}`,
+        },
+      });
 
       if (error) throw error;
 
-      // Fetch admin roles from user_roles table
-      const { data: adminRoles, error: rolesError } = await supabase
-        .from("user_roles")
-        .select("user_id")
-        .eq("role", "admin");
-
-      if (rolesError) throw rolesError;
-
-      const adminUserIds = new Set(adminRoles?.map(r => r.user_id));
-
-      const userData: User[] = profiles.map(profile => ({
-        id: profile.user_id,
-        email: profile.email || "",
-        created_at: profile.created_at,
-        is_admin: adminUserIds.has(profile.user_id)
-      }));
-
-      setUsers(userData);
-    } catch (error) {
+      if (data?.users) {
+        setUsers(data.users);
+      }
+    } catch (error: any) {
       console.error("Error fetching users:", error);
       toast({
         title: "Error",
-        description: "Failed to fetch users",
+        description: error.message || "Failed to fetch users",
         variant: "destructive",
       });
     } finally {
@@ -372,7 +366,18 @@ const UserManager = () => {
 
       {/* Users List */}
       <Card className="p-6 bg-gradient-surface border-border">
-        <h3 className="text-lg font-semibold text-foreground mb-4">Manage Users</h3>
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="text-lg font-semibold text-foreground">Manage Users</h3>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={fetchUsers}
+            disabled={loading}
+          >
+            <RefreshCw className={`h-4 w-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
+            Refresh
+          </Button>
+        </div>
         <div className="space-y-3">
           {users.length === 0 ? (
             <p className="text-muted-foreground text-center py-4">No users found</p>

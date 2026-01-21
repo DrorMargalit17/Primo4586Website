@@ -3,4 +3,7 @@ project_id = "zosufbrphtjldmoimshc"
 [functions]
 
 [functions.reset-password]
-verify_jwt = true
+verify_jwt = false
+
+[functions.list-users]
+verify_jwt = false
