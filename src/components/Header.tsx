@@ -21,6 +21,7 @@ const Header = () => {
   ];
 
   const robotYears = [
+    { name: "2026 REBUILT - COMING SOON" },
     { name: "2025 REEFSCAPE", path: "/robot" },
     { name: "2024 CRESCENDO", path: "/robot2024" },
   ];

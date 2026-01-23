@@ -12,6 +12,7 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Team from "./pages/Team";
 import Robot from "./pages/Robot";
+import Robot2026 from "./pages/Robot2026";
 import Robot2024 from "./pages/Robot2024";
 import Community from "./pages/Community";
 import FLLMentorship from "./pages/FLLMentorship";
@@ -48,6 +49,7 @@ const App = () => (
                 <Route path="/" element={<Home />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/team" element={<Team />} />
+                <Route path="/robot2026" element={<Robot2026 />} />
                 <Route path="/robot" element={<Robot />} />
                 <Route path="/robot2024" element={<Robot2024 />} />
                 <Route path="/community" element={<Community />} />
