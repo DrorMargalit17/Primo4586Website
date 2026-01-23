@@ -64,27 +64,29 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   useEffect(() => {
     // Set up auth state listener
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
+      (event, session) => {
         setSession(session);
         setUser(session?.user ?? null);
         
         if (session?.user) {
           // Fetch profile data separately with setTimeout to avoid deadlock
-          setTimeout(async () => {
-            const profileData = await fetchProfile(session.user.id);
-            setProfile(profileData);
-            
-            // Check admin status using secure has_role function
-            const { data: hasAdminRole, error } = await supabase.rpc('has_role', {
-              _user_id: session.user.id,
-              _role: 'admin'
-            });
-            
-            if (!error) {
-              setIsAdmin(hasAdminRole || false);
-            }
-            
-            setLoading(false);
+          setTimeout(() => {
+            (async () => {
+              const profileData = await fetchProfile(session.user.id);
+              setProfile(profileData);
+
+              // Check admin status using secure has_role function
+              const { data: hasAdminRole, error } = await supabase.rpc('has_role', {
+                _user_id: session.user.id,
+                _role: 'admin'
+              });
+
+              if (!error) {
+                setIsAdmin(hasAdminRole || false);
+              }
+
+              setLoading(false);
+            })();
           }, 0);
         } else {
           setProfile(null);
@@ -100,21 +102,23 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       setUser(session?.user ?? null);
       
       if (session?.user) {
-        setTimeout(async () => {
-          const profileData = await fetchProfile(session.user.id);
-          setProfile(profileData);
-          
-          // Check admin status using secure has_role function
-          const { data: hasAdminRole, error } = await supabase.rpc('has_role', {
-            _user_id: session.user.id,
-            _role: 'admin'
-          });
-          
-          if (!error) {
-            setIsAdmin(hasAdminRole || false);
-          }
-          
-          setLoading(false);
+        setTimeout(() => {
+          (async () => {
+            const profileData = await fetchProfile(session.user.id);
+            setProfile(profileData);
+
+            // Check admin status using secure has_role function
+            const { data: hasAdminRole, error } = await supabase.rpc('has_role', {
+              _user_id: session.user.id,
+              _role: 'admin'
+            });
+
+            if (!error) {
+              setIsAdmin(hasAdminRole || false);
+            }
+
+            setLoading(false);
+          })();
         }, 0);
       } else {
         setLoading(false);

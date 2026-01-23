@@ -15,6 +15,7 @@ import { Shield, Loader2 } from "lucide-react";
  */
 const BootstrapAdmin = () => {
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [key, setKey] = useState("");
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
@@ -22,10 +23,10 @@ const BootstrapAdmin = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!email || !key) {
+    if (!email || !password || !key) {
       toast({
         title: "Error",
-        description: "Email and bootstrap key are required",
+        description: "Email, password and bootstrap key are required",
         variant: "destructive",
       });
       return;
@@ -34,6 +35,32 @@ const BootstrapAdmin = () => {
     setLoading(true);
 
     try {
+      // 1) Ensure the account exists (sign up). If it already exists, this will error and we continue.
+      const redirectUrl = `${window.location.origin}/`;
+      const { error: signUpError } = await supabase.auth.signUp({
+        email,
+        password,
+        options: { emailRedirectTo: redirectUrl },
+      });
+
+      // If email confirmations are enabled, signUp may require email confirmation.
+      // We'll still attempt sign-in below to provide a clear error if confirmation is required.
+      if (signUpError && signUpError.message && !/already registered|already exists/i.test(signUpError.message)) {
+        // Non "already registered" errors should stop.
+        // (e.g. password policy, invalid email, etc.)
+        throw new Error(signUpError.message);
+      }
+
+      // 2) Sign in to establish a session (optional but helpful for the UX)
+      const { error: signInError } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+      if (signInError) {
+        throw new Error(signInError.message);
+      }
+
+      // 3) Grant admin via edge function using the bootstrap key
       const { data, error } = await supabase.functions.invoke("bootstrap-admin", {
         body: { email, key },
       });
@@ -50,10 +77,11 @@ const BootstrapAdmin = () => {
         title: "Success!",
         description: data.already_admin
           ? "User already has admin privileges"
-          : "Admin role granted successfully. Please sign in again.",
+          : "Admin role granted successfully. You can now open /admin.",
       });
 
       setEmail("");
+      setPassword("");
       setKey("");
     } catch (error: any) {
       toast({
@@ -91,6 +119,22 @@ const BootstrapAdmin = () => {
               className="mt-1"
               required
             />
+          </div>
+
+          <div>
+            <Label htmlFor="password">Password</Label>
+            <Input
+              id="password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Choose a strong password"
+              className="mt-1"
+              required
+            />
+            <p className="text-xs text-muted-foreground mt-1">
+              Must match the site policy (min 12 chars, upper/lowercase, number).
+            </p>
           </div>
 
           <div>
