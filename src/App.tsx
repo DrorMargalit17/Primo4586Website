@@ -20,6 +20,7 @@ import Sponsors from "./pages/Sponsors";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import AdminPanel from "./pages/AdminPanel";
+import BootstrapAdmin from "./pages/BootstrapAdmin";
 
 const queryClient = new QueryClient();
 
@@ -55,6 +56,7 @@ const App = () => (
                 <Route path="/sponsors" element={<Sponsors />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/admin" element={<AdminPanel />} />
+                <Route path="/bootstrap-admin" element={<BootstrapAdmin />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Layout>
