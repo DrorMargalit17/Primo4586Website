@@ -35,34 +35,10 @@ const BootstrapAdmin = () => {
     setLoading(true);
 
     try {
-      // 1) Ensure the account exists (sign up). If it already exists, this will error and we continue.
-      const redirectUrl = `${window.location.origin}/`;
-      const { error: signUpError } = await supabase.auth.signUp({
-        email,
-        password,
-        options: { emailRedirectTo: redirectUrl },
-      });
-
-      // If email confirmations are enabled, signUp may require email confirmation.
-      // We'll still attempt sign-in below to provide a clear error if confirmation is required.
-      if (signUpError && signUpError.message && !/already registered|already exists/i.test(signUpError.message)) {
-        // Non "already registered" errors should stop.
-        // (e.g. password policy, invalid email, etc.)
-        throw new Error(signUpError.message);
-      }
-
-      // 2) Sign in to establish a session (optional but helpful for the UX)
-      const { error: signInError } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
-      if (signInError) {
-        throw new Error(signInError.message);
-      }
-
-      // 3) Grant admin via edge function using the bootstrap key
+      // Set/Reset password + grant admin via edge function using the bootstrap key.
+      // This avoids the "user_repeated_signup" case where signup does NOT change the password.
       const { data, error } = await supabase.functions.invoke("bootstrap-admin", {
-        body: { email, key },
+        body: { email, password, key },
       });
 
       if (error) {
@@ -76,8 +52,8 @@ const BootstrapAdmin = () => {
       toast({
         title: "Success!",
         description: data.already_admin
-          ? "User already has admin privileges"
-          : "Admin role granted successfully. You can now open /admin.",
+          ? "Password set; user already has admin privileges. You can now log in."
+          : "Password set and admin role granted. You can now log in and open /admin.",
       });
 
       setEmail("");
