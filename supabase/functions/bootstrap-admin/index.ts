@@ -9,6 +9,7 @@ const corsHeaders = {
 interface BootstrapRequest {
   email: string;
   key: string;
+  password?: string;
 }
 
 serve(async (req: Request) => {
@@ -38,11 +39,11 @@ serve(async (req: Request) => {
 
     // Parse request body
     const body: BootstrapRequest = await req.json();
-    const { email, key } = body;
+    const { email, key, password } = body;
 
     // Validate inputs
-    if (!email || !key) {
-      return new Response(JSON.stringify({ error: "Email and key are required" }), {
+    if (!email || !key || !password) {
+      return new Response(JSON.stringify({ error: "Email, password and key are required" }), {
         status: 400,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
@@ -83,18 +84,43 @@ serve(async (req: Request) => {
       });
     }
 
-    const targetUser = usersData.users.find(
+    const foundUser = usersData.users.find(
       (u) => u.email?.toLowerCase() === email.toLowerCase()
     );
 
+    // Ensure account exists and password is set.
+    // NOTE: A repeated signup in Supabase does NOT update the password, which leads to "Invalid login credentials".
+    let targetUser = foundUser;
+
     if (!targetUser) {
-      return new Response(
-        JSON.stringify({ error: "User not found. Please register first." }),
-        {
-          status: 404,
+      const { data: created, error: createError } = await supabaseAdmin.auth.admin.createUser({
+        email,
+        password,
+        email_confirm: true,
+      });
+
+      if (createError || !created.user) {
+        console.error("Error creating user:", createError);
+        return new Response(JSON.stringify({ error: "Failed to create user" }), {
+          status: 500,
           headers: { ...corsHeaders, "Content-Type": "application/json" },
-        }
-      );
+        });
+      }
+
+      targetUser = created.user;
+    } else {
+      const { error: updateError } = await supabaseAdmin.auth.admin.updateUserById(targetUser.id, {
+        password,
+        email_confirm: true,
+      });
+
+      if (updateError) {
+        console.error("Error updating user password:", updateError);
+        return new Response(JSON.stringify({ error: "Failed to set password" }), {
+          status: 500,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        });
+      }
     }
 
     // Check if user already has admin role
@@ -115,7 +141,7 @@ serve(async (req: Request) => {
 
     if (existingRole) {
       return new Response(
-        JSON.stringify({ message: "User already has admin role", already_admin: true }),
+        JSON.stringify({ message: "Password set; user already has admin role", already_admin: true }),
         {
           status: 200,
           headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -137,9 +163,9 @@ serve(async (req: Request) => {
       });
     }
 
-    console.log("Admin role granted to:", email);
+    console.log("Password set and admin role granted to:", email);
     return new Response(
-      JSON.stringify({ message: "Admin role granted successfully", email }),
+      JSON.stringify({ message: "Password set and admin role granted successfully", email }),
       {
         status: 200,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
