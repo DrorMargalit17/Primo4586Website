@@ -6,20 +6,31 @@ import { Label } from '@/components/ui/label';
 import { useAuth } from '@/hooks/useAuth';
 import { useAdminMode } from '@/hooks/useAdminMode';
 import { useToast } from '@/hooks/use-toast';
-import { LogIn, LogOut, Eye, EyeOff } from 'lucide-react';
+import { LogIn, LogOut, Eye, EyeOff, KeyRound } from 'lucide-react';
 import { AdminModeSelector } from './AdminModeSelector';
 import { authSchema } from '@/lib/validations';
+import { supabase } from '@/integrations/supabase/client';
 
 export const FooterAuth = () => {
   const [open, setOpen] = useState(false);
   const [showModeSelector, setShowModeSelector] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [bootstrapKey, setBootstrapKey] = useState('');
+  const [mode, setMode] = useState<'signin' | 'bootstrap'>('signin');
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const { user, isAdmin, signIn, signOut } = useAuth();
   const { setAdminMode } = useAdminMode();
   const { toast } = useToast();
+
+  const resetForm = () => {
+    setEmail('');
+    setPassword('');
+    setBootstrapKey('');
+    setShowPassword(false);
+    setMode('signin');
+  };
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -51,11 +62,70 @@ export const FooterAuth = () => {
         description: "Successfully signed in!",
       });
       setOpen(false);
-      setEmail('');
-      setPassword('');
+      resetForm();
       setShowModeSelector(true);
     }
     setLoading(false);
+  };
+
+  const handleBootstrap = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+
+    const validation = authSchema.safeParse({ email, password });
+    if (!validation.success) {
+      toast({
+        title: 'Validation Error',
+        description: validation.error.errors[0].message,
+        variant: 'destructive',
+      });
+      setLoading(false);
+      return;
+    }
+
+    if (!bootstrapKey) {
+      toast({
+        title: 'Missing Bootstrap Key',
+        description: 'Enter the bootstrap key to reset your admin password.',
+        variant: 'destructive',
+      });
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const { data, error } = await supabase.functions.invoke('bootstrap-admin', {
+        body: { email, password, key: bootstrapKey },
+      });
+
+      if (error) throw new Error(error.message);
+      if (data?.error) throw new Error(data.error);
+
+      // Immediately sign in with the freshly set password
+      const { error: signInError } = await signIn(email, password);
+      if (signInError) throw signInError;
+
+      toast({
+        title: 'Admin Access Granted',
+        description: 'Password updated and you are now signed in. Redirecting to admin panel…',
+      });
+
+      setOpen(false);
+      resetForm();
+      setShowModeSelector(true);
+      // Navigate user to admin panel after auth state updates.
+      setTimeout(() => {
+        window.location.assign('/admin');
+      }, 300);
+    } catch (err: any) {
+      toast({
+        title: 'Bootstrap Failed',
+        description: err?.message || 'Failed to reset admin access.',
+        variant: 'destructive',
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleSignOut = async () => {
@@ -102,9 +172,35 @@ export const FooterAuth = () => {
         </DialogTrigger>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
-            <DialogTitle>Admin Sign In</DialogTitle>
+            <DialogTitle>{mode === 'signin' ? 'Admin Sign In' : 'Admin Recovery (Bootstrap Key)'}</DialogTitle>
           </DialogHeader>
-          <form onSubmit={handleSignIn} className="space-y-4">
+
+          <div className="flex gap-2">
+            <Button
+              type="button"
+              variant={mode === 'signin' ? 'default' : 'outline'}
+              size="sm"
+              className="flex-1"
+              onClick={() => setMode('signin')}
+              disabled={loading}
+            >
+              <LogIn className="mr-2 h-4 w-4" />
+              Sign In
+            </Button>
+            <Button
+              type="button"
+              variant={mode === 'bootstrap' ? 'default' : 'outline'}
+              size="sm"
+              className="flex-1"
+              onClick={() => setMode('bootstrap')}
+              disabled={loading}
+            >
+              <KeyRound className="mr-2 h-4 w-4" />
+              Recovery
+            </Button>
+          </div>
+
+          <form onSubmit={mode === 'signin' ? handleSignIn : handleBootstrap} className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
               <Input
@@ -142,10 +238,45 @@ export const FooterAuth = () => {
                 </Button>
               </div>
             </div>
+
+            {mode === 'bootstrap' && (
+              <div className="space-y-2">
+                <Label htmlFor="bootstrapKey">Bootstrap Key</Label>
+                <Input
+                  id="bootstrapKey"
+                  type="password"
+                  value={bootstrapKey}
+                  onChange={(e) => setBootstrapKey(e.target.value)}
+                  required
+                />
+                <p className="text-xs text-muted-foreground">
+                  This will set/reset the password and grant the admin role, then sign you in.
+                </p>
+              </div>
+            )}
+
             <Button type="submit" className="w-full" disabled={loading}>
               <LogIn className="mr-2 h-4 w-4" />
-              {loading ? 'Signing In...' : 'Sign In'}
+              {loading
+                ? mode === 'signin'
+                  ? 'Signing In...'
+                  : 'Applying Recovery...'
+                : mode === 'signin'
+                  ? 'Sign In'
+                  : 'Recover & Sign In'}
             </Button>
+
+            {mode === 'signin' && (
+              <Button
+                type="button"
+                variant="link"
+                className="w-full text-muted-foreground"
+                onClick={() => setMode('bootstrap')}
+                disabled={loading}
+              >
+                Still locked out? Use Bootstrap Key Recovery
+              </Button>
+            )}
           </form>
         </DialogContent>
       </Dialog>
